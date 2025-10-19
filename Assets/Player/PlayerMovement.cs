@@ -5,7 +5,8 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerMovement : MonoBehaviour
 {
-    public float moveSpeed = 5.0f;
+    [Header("Movement Settings")]
+    [SerializeField]private float moveSpeed = 5.0f;
 
     private Rigidbody2D rb;
     private Vector2 moveInput;
@@ -51,7 +52,9 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rb.MovePosition(rb.position + moveInput * moveSpeed * Time.fixedDeltaTime);
+
+        Vector2 normalizedMove = moveInput.normalized;
+        rb.MovePosition(rb.position + normalizedMove * moveSpeed * Time.fixedDeltaTime);
     }
 
 }
