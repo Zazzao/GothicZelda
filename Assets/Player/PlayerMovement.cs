@@ -8,22 +8,26 @@ public class PlayerMovement : MonoBehaviour
     [Header("Movement Settings")]
     [SerializeField] private float moveSpeed = 5.0f;
     [SerializeField] private PlayerFacing playerfacing = PlayerFacing.South;
+    [SerializeField] private bool isWalking = false;
 
 
     private Rigidbody2D rb;
     private Vector2 moveInput;
     private PlayerInputActions controls;
 
-    public enum PlayerFacing{North,East,South,West}
+    private PlayerAnimator anim;
 
+    public enum PlayerFacing{North,East,South,West}
 
     private void Awake(){
         rb = GetComponent<Rigidbody2D>();
+        anim = GetComponent<PlayerAnimator>();
+        anim.Initialize();
 
         controls = new PlayerInputActions();
 
-        // Bind the Move action directly
-       // controls.Player.Move.performed += ctx => moveInput = ctx.ReadValue<Vector2>();
+        // Bind the Move action directly (OLD LOGIC - calling functions instead of updating varible)
+        // controls.Player.Move.performed += ctx => moveInput = ctx.ReadValue<Vector2>();
         //controls.Player.Move.canceled += ctx => moveInput = Vector2.zero;
 
         controls.Player.Move.performed += OnMove;
@@ -49,18 +53,58 @@ public class PlayerMovement : MonoBehaviour
         Debug.Log("OnMoveCalled");
         moveInput = context.ReadValue<Vector2>();
         playerfacing = CalcPlayerFacing(moveInput);
+        switch (playerfacing)
+        {
+            case PlayerFacing.North:
+                anim.Play(PlayerAnimator.Animations.WALK_N, false, false);
+                break;
+            case PlayerFacing.East:
+                anim.Play(PlayerAnimator.Animations.WALK_E, false, false);
+                break;
+            case PlayerFacing.South:
+                anim.Play(PlayerAnimator.Animations.WALK_S, false, false);
+                break;
+            case PlayerFacing.West:
+                anim.Play(PlayerAnimator.Animations.WALK_W, false, false);
+                break;
+        }
 
     }
 
     private void OnMoveCancelled(InputAction.CallbackContext context) {
         moveInput = Vector2.zero;
+        switch (playerfacing)
+        {
+            case PlayerFacing.North:
+                anim.Play(PlayerAnimator.Animations.IDLE_N, false, false);
+                break;
+            case PlayerFacing.East:
+                anim.Play(PlayerAnimator.Animations.IDLE_E, false, false);
+                break;
+            case PlayerFacing.South:
+                anim.Play(PlayerAnimator.Animations.IDLE_S, false, false);
+                break;
+             case PlayerFacing.West:
+                anim.Play(PlayerAnimator.Animations.IDLE_W, false, false);
+                break;
+        }
+        
     }
 
 
 
     private void FixedUpdate(){
 
-        Vector2 normalizedMove = moveInput.normalized;
+        //DEV NOTE: this is just for early testing - this is not the way to decide to play walk anim
+        if (moveInput != Vector2.zero)
+        {
+            isWalking = true;
+        }
+        else { 
+            isWalking = false;
+        }
+
+            Vector2 normalizedMove = moveInput.normalized;
         rb.MovePosition(rb.position + normalizedMove * moveSpeed * Time.fixedDeltaTime);
        
 
