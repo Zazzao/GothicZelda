@@ -4924,8 +4924,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1.25, y: 1.6875}
+  m_Offset: {x: 0, y: 0.1}
+  m_Size: {x: 0.9, y: 1.1}
   m_Direction: 0
 --- !u!114 &419969780
 MonoBehaviour:
@@ -5132,6 +5132,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9061820773579531782, guid: 6c29cbe39ed3f5f47804272670718b73, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 441769174045708845, guid: efe2a949ac739cd4a80ae67ea8c34190, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
