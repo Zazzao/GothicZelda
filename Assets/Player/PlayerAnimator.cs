@@ -14,6 +14,10 @@ public class PlayerAnimator : MonoBehaviour
         Animator.StringToHash("Walk_E"),
         Animator.StringToHash("Walk_S"),
         Animator.StringToHash("Walk_W"),
+        Animator.StringToHash("Attack_N"),
+        Animator.StringToHash("Attack_E"),
+        Animator.StringToHash("Attack_S"),
+        Animator.StringToHash("Attack_W"),
         Animator.StringToHash("Dying"),
         Animator.StringToHash("Dead")
 
@@ -33,6 +37,10 @@ public class PlayerAnimator : MonoBehaviour
         WALK_E,
         WALK_S,
         WALK_W,
+        ATTACK_N,
+        ATTACK_E,
+        ATTACK_S,
+        ATTACK_W,
         DYING,
         DEAD,
         NONE
@@ -60,8 +68,19 @@ public class PlayerAnimator : MonoBehaviour
             return;
         }
 
-        if (animationLocked && !bypassLock) return;
+        if (animationLocked && !bypassLock)
+        {
+            Debug.Log("cant play anim");
+            return;
+        }
         animationLocked = isLocked;
+
+        if (bypassLock) {
+            foreach (var item in anim.GetBehaviours<OnExit>()) {
+                item.cancel = true;
+            }
+        }
+
 
         if (currentAnimation == animation) return;
 
