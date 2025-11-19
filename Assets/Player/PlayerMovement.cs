@@ -13,6 +13,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private PlayerFacing playerfacing = PlayerFacing.South;
     [SerializeField] private bool isWalking = false;
     [SerializeField] private bool isAttacking = false;
+    [SerializeField] private bool isFrozen = false;
 
 
     private Rigidbody2D rb;
@@ -22,6 +23,10 @@ public class PlayerMovement : MonoBehaviour
     private PlayerAnimator anim;
 
     public enum PlayerFacing{North,East,South,West}
+
+
+    public bool IsFrozen { set { isFrozen = value; } get { return isFrozen; } }
+
 
     private void Awake(){
         
@@ -58,6 +63,14 @@ public class PlayerMovement : MonoBehaviour
     // This is called automatically by Player Input when using "Send Messages"
     // NOTE: This is not being called 
     public void OnMove(InputAction.CallbackContext context){
+
+        if (isFrozen) {
+            moveInput = Vector2.zero;
+            return;
+        } 
+            
+            
+
         moveInput = context.ReadValue<Vector2>();
         playerfacing = CalcPlayerFacing(moveInput);
         switch (playerfacing)
@@ -121,9 +134,6 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
-
-
-
     private void Update() {
 
         //Debug Animation Testing
@@ -138,11 +148,6 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
-
-
-
-
-
     private void FixedUpdate(){
         
         //DEV NOTE: this is just for early testing - this is not the way to decide to play walk anim
@@ -151,6 +156,7 @@ public class PlayerMovement : MonoBehaviour
         }else { 
             isWalking = false;
         }
+
 
         Vector2 normalizedMove = moveInput.normalized;
         if (isAttacking) normalizedMove = Vector2.zero; //cant move while attacking

@@ -1,3 +1,4 @@
+using System.Linq.Expressions;
 using UnityEngine;
 
 public class CameraFollow : MonoBehaviour
@@ -49,4 +50,13 @@ public class CameraFollow : MonoBehaviour
 
         transform.position = Vector3.SmoothDamp(transform.position, targetPos, ref velecoty, smoothTime);
     }
+
+
+    public void SetCameraBounds(float newMinX, float newMinY, float newMaxX, float newMaxY) { 
+        minX = newMinX;
+        maxX = newMaxX;
+        minY = newMinY;
+        maxY = newMaxY;
+    }
+
 }
