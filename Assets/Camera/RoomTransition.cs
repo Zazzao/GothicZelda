@@ -7,7 +7,12 @@ public class RoomTransition : MonoBehaviour
 
 
     [SerializeField] BoxCollider2D col;
+    [SerializeField] private float newMaxX;
+    [SerializeField] private float newMinX;
+    [SerializeField] private float newMaxY;
+    [SerializeField] private float newMinY;
 
+    [SerializeField] private Vector2 newPlayerOffset = Vector2.zero;
 
     void Awake(){
         col = GetComponent<BoxCollider2D>();
@@ -31,10 +36,20 @@ public class RoomTransition : MonoBehaviour
         Debug.Log("do room tranisition");
 
         //step 01: freeze player
-        playerMovement.IsFrozen = true;
+        //playerMovement.IsFrozen = true;
+
         //step 02: make player invisible
+
         //step 03: pan camera to new location
+        Camera.main.GetComponent<CameraFollow>().SetCameraBounds(newMinX, newMinY, newMaxX, newMaxY);
+
         //step 04: move player to new spot
+        Transform p = playerMovement.gameObject.transform;
+        p.position = new Vector3(p.transform.position.x + newPlayerOffset.x,
+                                    p.transform.position.y + newPlayerOffset.y,
+                                    p.transform.position.z);
+
+
         //step 05: make player visible
         //step 06: unfreeze player
 
