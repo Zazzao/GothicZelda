@@ -5,7 +5,10 @@ using UnityEngine;
 
 public class HeartHealthSystem{
 
+    public const int MAX_FRAGMENT_AMOUNT = 4;
     public event EventHandler OnDamage;
+    public event EventHandler OnHeal;
+    public event EventHandler OnDead;
 
     private List<Heart> heartList;
 
@@ -44,7 +47,35 @@ public class HeartHealthSystem{
         }
 
         if (OnDamage != null) OnDamage(this,EventArgs.Empty); // send event
+        if (IsDead()) {
+            if (OnDead != null) OnDead(this, EventArgs.Empty); // send event
+        }
 
+    }
+
+    public void Heal(int healAmount) {
+
+        for (int i = 0; i < heartList.Count; i++) {
+            Heart heart = heartList[i];
+            int missingFragments = MAX_FRAGMENT_AMOUNT - heart.GetFragmentAmount();
+            if (healAmount > missingFragments) {
+                healAmount -= missingFragments;
+                heart.Heal(missingFragments);
+            }
+            else
+            {
+                heart.Heal(healAmount);
+                break;
+            }
+        }
+
+        if (OnHeal != null) OnHeal(this, EventArgs.Empty); // send event
+
+    }
+
+
+    public bool IsDead() {
+        return heartList[0].GetFragmentAmount() == 0;
     }
 
 
@@ -68,6 +99,17 @@ public class HeartHealthSystem{
             }
             else {
                 fragments -= damageAmount;
+            }
+        }
+
+
+        public void Heal(int healAmount) {
+            if (fragments + healAmount > MAX_FRAGMENT_AMOUNT)
+            {
+                fragments = MAX_FRAGMENT_AMOUNT;
+            }
+            else { 
+                fragments += healAmount;
             }
         }
 
