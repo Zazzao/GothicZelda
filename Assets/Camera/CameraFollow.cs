@@ -28,8 +28,8 @@ public class CameraFollow : MonoBehaviour
         halfHeight = cam.orthographicSize;
         halfWidth = cam.orthographicSize * cam.aspect;
 
-        Debug.Log(halfWidth);
-        Debug.Log(halfHeight);
+        //Debug.Log(halfWidth);
+        //Debug.Log(halfHeight);
 
 
     }

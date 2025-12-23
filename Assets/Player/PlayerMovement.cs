@@ -16,13 +16,13 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private bool isFrozen = false;
 
 
-    private Rigidbody2D rb;
-    private Vector2 moveInput;
-    private PlayerInputActions controls;
+    private Rigidbody2D rb;                 //player motor
+    private Vector2 moveInput;              //player controller
+    private PlayerInputActions controls;    //player controller
 
-    private PlayerAnimator anim;
+    private PlayerAnimator anim;            //player motor should tell player animator
 
-    public enum PlayerFacing{North,East,South,West}
+    public enum PlayerFacing{North,East,South,West} //move to a static helper class (all actors can have a facing/direction)
 
 
     public bool IsFrozen { set { isFrozen = value; } get { return isFrozen; } }
@@ -63,7 +63,7 @@ public class PlayerMovement : MonoBehaviour
     // This is called automatically by Player Input when using "Send Messages"
     // NOTE: This is not being called 
     public void OnMove(InputAction.CallbackContext context){
-
+        Debug.Log("OnMove");
         if (isFrozen) {
             moveInput = Vector2.zero;
             return;
@@ -72,6 +72,7 @@ public class PlayerMovement : MonoBehaviour
             
 
         moveInput = context.ReadValue<Vector2>();
+        moveInput = ClampToCardinal(moveInput);
         playerfacing = CalcPlayerFacing(moveInput);
         switch (playerfacing)
         {
@@ -236,5 +237,22 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    private Vector2 ClampToCardinal(Vector2 input, float deadzone = 0.2f) {
+        if (input.magnitude < deadzone) return Vector2.zero;
+
+        //Get angel in degrees (0 = right)
+        float angle = Mathf.Atan2 (input.y, input.x) * Mathf.Rad2Deg;
+        if (angle < 0) angle += 360;
+
+        //snap angle to nearest 45 degree
+        float snappedAngle = Mathf.Round(angle / 45.0f) * 45.0f;
+
+        //convert back to vector
+        float rad = snappedAngle * Mathf.Deg2Rad;
+        Vector2 snapped = new Vector2(Mathf.Cos(rad), Mathf.Sin(rad));
+
+        return snapped.normalized;
+
+    }
 
 }
