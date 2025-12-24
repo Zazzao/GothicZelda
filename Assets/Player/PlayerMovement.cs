@@ -60,10 +60,9 @@ public class PlayerMovement : MonoBehaviour
 
 
 
-    // This is called automatically by Player Input when using "Send Messages"
-    // NOTE: This is not being called 
+
     public void OnMove(InputAction.CallbackContext context){
-        Debug.Log("OnMove");
+        //Debug.Log("OnMove");
         if (isFrozen) {
             moveInput = Vector2.zero;
             return;
@@ -73,7 +72,7 @@ public class PlayerMovement : MonoBehaviour
 
         moveInput = context.ReadValue<Vector2>();
         moveInput = ClampToCardinal(moveInput);
-        playerfacing = CalcPlayerFacing(moveInput);
+        if (moveInput != Vector2.zero) playerfacing = CalcPlayerFacing(moveInput);
         switch (playerfacing)
         {
             case PlayerFacing.North:
@@ -169,6 +168,7 @@ public class PlayerMovement : MonoBehaviour
 
     private PlayerFacing CalcPlayerFacing(Vector2 vector) {
         
+
         if (Mathf.Abs(vector.x) > Mathf.Abs(vector.y))
         {
             // Vector is more horizontal
@@ -190,7 +190,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void OnAttackEnd() {
         isAttacking = false;
-        playerfacing = CalcPlayerFacing(moveInput);
+        //playerfacing = CalcPlayerFacing(moveInput);
 
         PlayerAnimator target = this.GetComponent<PlayerAnimator>(); // this mean we have to have a specific on exit for each type of 
         target.SetLocked(false);

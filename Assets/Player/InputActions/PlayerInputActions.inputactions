@@ -11,7 +11,7 @@
                     "type": "Value",
                     "id": "b8b27e19-c9d2-4d27-a00b-1e58dff66d60",
                     "expectedControlType": "Vector2",
-                    "processors": "",
+                    "processors": "StickDeadzone(min=0.2)",
                     "interactions": "",
                     "initialStateCheck": true
                 },
@@ -96,6 +96,17 @@
                     "name": "",
                     "id": "b1d5fc1d-6f64-44c5-a831-f7bf08f9ca2e",
                     "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Attack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7e66d5d4-e3ed-42ca-8605-bcccfc0cb047",
+                    "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
