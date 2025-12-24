@@ -102,16 +102,12 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate(){
         
         //DEV NOTE: this is just for early testing - this is not the way to decide to play walk anim
-        if (moveInput != Vector2.zero){
-            isWalking = true;
-        }else { 
-            isWalking = false;
-        }
+      
+        isWalking = moveInput != Vector2.zero;
 
-
-        Vector2 normalizedMove = moveInput.normalized;
-        if (isAttacking) normalizedMove = Vector2.zero; //cant move while attacking
-        rb.MovePosition(rb.position + normalizedMove * moveSpeed * Time.fixedDeltaTime);
+        Vector2 moveDir = moveInput;
+        if (isAttacking) moveDir = Vector2.zero; //cant move while attacking
+        rb.MovePosition(rb.position + moveDir * moveSpeed * Time.fixedDeltaTime);
 
 
     }
