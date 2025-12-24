@@ -1,6 +1,8 @@
 using System;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.Rendering;
+using static PlayerMovement;
 
 public class PlayerAnimator : MonoBehaviour
 {
@@ -95,6 +97,69 @@ public class PlayerAnimator : MonoBehaviour
         //DEV NOTE: this should actually be on the playermovement script as it req knowing direction and inputs
     }
 
+    public void PlayIdleAnimation(PlayerMovement.PlayerFacing facing, bool isLocked, bool bypassLock) {
 
+        Animations a = Animations.IDLE_S;
+        switch (facing)
+        {
+            case PlayerFacing.North:
+                a = Animations.IDLE_N;
+                break;
+            case PlayerFacing.East:
+                a = Animations.IDLE_E;
+                break;
+            case PlayerFacing.South:
+                a = Animations.IDLE_S;
+                break;
+            case PlayerFacing.West:
+                a = Animations.IDLE_W;
+                break;
+        }
+
+        Play(a, isLocked, bypassLock);
+    }
+
+    public void PlayWalkAnimation(PlayerMovement.PlayerFacing facing, bool isLocked, bool bypassLock) {
+
+        Animations a = Animations.WALK_S;
+        switch (facing)
+        {
+
+            case PlayerFacing.North:
+                a = Animations.WALK_N;
+                break;
+            case PlayerFacing.East:
+                a = Animations.WALK_E;
+                break;
+            case PlayerFacing.South:
+                a = Animations.WALK_S;
+                break;
+            case PlayerFacing.West:
+                a = Animations.WALK_W;
+                break;
+        }
+        Play(a, isLocked, bypassLock);
+    }
+
+    public void PlayAttackAnimation(PlayerMovement.PlayerFacing facing, bool isLocked, bool bypassLock) {
+        Animations a = Animations.ATTACK_S;
+        switch (facing)
+        {
+
+            case PlayerFacing.North:
+                a = Animations.ATTACK_N;
+                break;
+            case PlayerFacing.East:
+                a = Animations.ATTACK_E;
+                break;
+            case PlayerFacing.South:
+                a = Animations.ATTACK_S;
+                break;
+            case PlayerFacing.West:
+                a = Animations.ATTACK_W;
+                break;
+        }
+        Play(a, isLocked, bypassLock);
+    }
 
 }

@@ -38,10 +38,6 @@ public class PlayerMovement : MonoBehaviour
 
         controls = new PlayerInputActions();
 
-        // Bind the Move action directly (OLD LOGIC - calling functions instead of updating varible)
-        // controls.Player.Move.performed += ctx => moveInput = ctx.ReadValue<Vector2>();
-        //controls.Player.Move.canceled += ctx => moveInput = Vector2.zero;
-
         controls.Player.Move.performed += OnMove;
         controls.Player.Move.canceled += OnMoveCancelled;
         controls.Player.Attack.performed += OnAttack;
@@ -67,70 +63,25 @@ public class PlayerMovement : MonoBehaviour
             moveInput = Vector2.zero;
             return;
         } 
-            
-            
-
+        
         moveInput = context.ReadValue<Vector2>();
         moveInput = ClampToCardinal(moveInput);
         if (moveInput != Vector2.zero) playerfacing = CalcPlayerFacing(moveInput);
-        switch (playerfacing)
-        {
-            case PlayerFacing.North:
-                anim.Play(PlayerAnimator.Animations.WALK_N, false, false);
-                break;
-            case PlayerFacing.East:
-                anim.Play(PlayerAnimator.Animations.WALK_E, false, false);
-                break;
-            case PlayerFacing.South:
-                anim.Play(PlayerAnimator.Animations.WALK_S, false, false);
-                break;
-            case PlayerFacing.West:
-                anim.Play(PlayerAnimator.Animations.WALK_W, false, false);
-                break;
-        }
+        anim.PlayWalkAnimation(playerfacing,false,false);
 
     }
 
     private void OnMoveCancelled(InputAction.CallbackContext context) {
         moveInput = Vector2.zero;
-        switch (playerfacing)
-        {
-            case PlayerFacing.North:
-                anim.Play(PlayerAnimator.Animations.IDLE_N, false, false);
-                break;
-            case PlayerFacing.East:
-                anim.Play(PlayerAnimator.Animations.IDLE_E, false, false);
-                break;
-            case PlayerFacing.South:
-                anim.Play(PlayerAnimator.Animations.IDLE_S, false, false);
-                break;
-            case PlayerFacing.West:
-                anim.Play(PlayerAnimator.Animations.IDLE_W, false, false);
-                break;
-        }
-        
+        anim.PlayIdleAnimation(playerfacing,false,false);
+   
     }
 
 
     private void OnAttack(InputAction.CallbackContext context) {
         isAttacking = true;
         //do attack animation
-        switch (playerfacing)
-        {
-            case PlayerFacing.North:
-                anim.Play(PlayerAnimator.Animations.ATTACK_N, true, false);
-                break;
-            case PlayerFacing.East:
-                anim.Play(PlayerAnimator.Animations.ATTACK_E, true, false);
-                break;
-            case PlayerFacing.South:
-                anim.Play(PlayerAnimator.Animations.ATTACK_S, true, false);
-                break;
-            case PlayerFacing.West:
-                anim.Play(PlayerAnimator.Animations.ATTACK_W, true, false);
-                break;
-
-        }
+        anim.PlayAttackAnimation(playerfacing,true,false);
 
     }
 
@@ -190,50 +141,15 @@ public class PlayerMovement : MonoBehaviour
 
     public void OnAttackEnd() {
         isAttacking = false;
-        //playerfacing = CalcPlayerFacing(moveInput);
 
         PlayerAnimator target = this.GetComponent<PlayerAnimator>(); // this mean we have to have a specific on exit for each type of 
         target.SetLocked(false);
 
-        if (isWalking)
-        {
-           
-            switch (playerfacing)
-            {
-               
-                case PlayerFacing.North:
-                    anim.Play(PlayerAnimator.Animations.WALK_N, false, false);
-                    break;
-                case PlayerFacing.East:
-                    anim.Play(PlayerAnimator.Animations.WALK_E, false, false);
-                    break;
-                case PlayerFacing.South:
-                    anim.Play(PlayerAnimator.Animations.WALK_S, false, false);
-                    break;
-                case PlayerFacing.West:
-                    anim.Play(PlayerAnimator.Animations.WALK_W, false, false);
-                    break;
-            }
-
+        if (isWalking){
+            anim.PlayWalkAnimation(playerfacing, false, false);
         }
         else {
-            switch (playerfacing)
-            {
-                case PlayerFacing.North:
-                    anim.Play(PlayerAnimator.Animations.IDLE_N, false, false);
-                    break;
-                case PlayerFacing.East:
-                    anim.Play(PlayerAnimator.Animations.IDLE_E, false, false);
-                    break;
-                case PlayerFacing.South:
-                    anim.Play(PlayerAnimator.Animations.IDLE_S, false, false);
-                    break;
-                case PlayerFacing.West:
-                    anim.Play(PlayerAnimator.Animations.IDLE_W, false, false);
-                    break;
-            }
-
-
+            anim.PlayIdleAnimation(playerfacing,false,false);
         }
     }
 
