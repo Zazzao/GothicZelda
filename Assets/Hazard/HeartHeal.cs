@@ -1,19 +1,20 @@
 using UnityEngine;
 
-public class Spikes : MonoBehaviour
+public class HeartHeal : MonoBehaviour
 {
 
-    [SerializeField] private int damage = 5;
 
-
+    [SerializeField] int healAmount;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
             PlayerMovement playerMovement = collision.gameObject.GetComponent<PlayerMovement>();
-            playerMovement.TakeDamage(damage,this.transform.position);
+            playerMovement.Heal(healAmount);
+            GameObject.Destroy(this.gameObject);
             
+
         }
     }
 }

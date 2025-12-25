@@ -15,6 +15,17 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private bool isAttacking = false;
     [SerializeField] private bool isFrozen = false;
 
+    [Header("Knockback")]
+    [SerializeField] private float knockbackForce = 6.0f;
+    [SerializeField] private float knockbackDuration = 0.15f;
+
+    [SerializeField] private float invulnDuration = 0.5f;
+    private bool isInvulnerable = false;
+
+
+
+    private bool isKnockedBack;
+    private Vector2 knockbackVelocity;
 
     private Rigidbody2D rb;                 //player motor
     private Vector2 moveInput;              //player controller
@@ -101,14 +112,23 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate(){
         
-        //DEV NOTE: this is just for early testing - this is not the way to decide to play walk anim
-      
         isWalking = moveInput != Vector2.zero;
 
-        Vector2 moveDir = moveInput;
-        if (isAttacking) moveDir = Vector2.zero; //cant move while attacking
-        rb.MovePosition(rb.position + moveDir * moveSpeed * Time.fixedDeltaTime);
+        Vector2 moveDir;
 
+        if (isKnockedBack)
+        {
+            moveDir = knockbackVelocity;
+            //Debug.DrawRay(transform.position, knockbackVelocity, Color.magenta, 0.2f);
+        }
+        else if (isAttacking)
+        {
+            moveDir = Vector2.zero;
+        }
+        else moveDir = moveInput * moveSpeed;
+        {
+            rb.MovePosition(rb.position + moveDir * Time.fixedDeltaTime);
+        }
 
     }
 
@@ -166,5 +186,53 @@ public class PlayerMovement : MonoBehaviour
         return snapped.normalized;
 
     }
+
+    public void TakeDamage(int damageAmount,Vector2 sourcePosition) {
+
+        if (isKnockedBack) return;
+        if (isInvulnerable) return;
+
+        Vector2 direction = ((Vector2)transform.position - sourcePosition).normalized;
+        ApplyKnockback(direction);
+        HealthDisplay_Hearts.heartHealthSystemStatic.Damage(damageAmount);
+
+        isInvulnerable = true;
+        Invoke(nameof(EndInvulnerability), invulnDuration); //TO-DO: make I frames in the animation and not a "timed" thing
+
+
+    }
+    public void Heal(int healAmount) {
+        HealthDisplay_Hearts.heartHealthSystemStatic.Heal(healAmount);
+    }
+
+    private void ApplyKnockback(Vector2 direction) { 
+        isKnockedBack = true;
+        isAttacking = false;
+        moveInput = Vector2.zero;
+
+        knockbackVelocity = direction * knockbackForce;
+        //anim.playHitAnimation(playerfacing, true, true);
+
+        Invoke(nameof(EndKnockback), knockbackDuration);
+    }
+
+    private void EndKnockback() { 
+        isKnockedBack = false;
+
+        if (isWalking)
+            anim.PlayWalkAnimation(playerfacing,false,false);
+        else
+            anim.PlayIdleAnimation(playerfacing,false,false);
+
+    }
+
+
+    private void EndInvulnerability()
+    {
+        isInvulnerable = false;
+    }
+
+
+
 
 }

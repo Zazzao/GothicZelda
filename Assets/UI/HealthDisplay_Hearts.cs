@@ -5,6 +5,8 @@ using UnityEngine.UI;
 public class HealthDisplay_Hearts : MonoBehaviour
 {
 
+    public static HeartHealthSystem heartHealthSystemStatic;
+
     [SerializeField] private Sprite heartSprite;
     [SerializeField] private Sprite[] heartSprites = new Sprite[5];
 
@@ -71,6 +73,7 @@ public class HealthDisplay_Hearts : MonoBehaviour
 
     public void SetHeartHealthSystem(HeartHealthSystem heartHealthSystem) {
         this.heartHealthSystem = heartHealthSystem;
+        heartHealthSystemStatic = heartHealthSystem;
 
         List<HeartHealthSystem.Heart> heartList = this.heartHealthSystem.GetHeartList();
         //Vector2 heartAnchoredPos = new Vector2 (0, 0);
