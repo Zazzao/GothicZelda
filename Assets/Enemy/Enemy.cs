@@ -14,6 +14,7 @@ public class Enemy : MonoBehaviour{
     [SerializeField] private float knockbackForce = 6.0f;
     [SerializeField] private float knockbackDuration = 0.15f;
 
+    EnemyAnimator anim;
 
     private bool isKnockedBack = false;
     private Vector2 knockbackVelocity = Vector2.zero;
@@ -21,6 +22,7 @@ public class Enemy : MonoBehaviour{
     void Awake(){
         rb = GetComponent<Rigidbody2D>();
         hp = maxHp;
+        anim = GetComponent<EnemyAnimator>();
     }
 
     
@@ -64,7 +66,10 @@ public class Enemy : MonoBehaviour{
     }
 
     private void Die(){
-        Destroy(this.gameObject);
+        //Destroy(this.gameObject);
+        Debug.Log("Enemy died");
+        anim.Play(ActorAnimator.ActorAnimation.Dying,ActorAnimator.FacingDirection.South,true,true);   
+        GetComponent<CapsuleCollider2D>().enabled = false;
     }
 
 

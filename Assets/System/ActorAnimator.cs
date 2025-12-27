@@ -52,8 +52,31 @@ public abstract class ActorAnimator : MonoBehaviour
 
 
     protected int GetAnimationHash(ActorAnimation action, FacingDirection facing){
-        return Animator.StringToHash($"{action}_{FacingToSuffix(facing)}");
+        if (IsDirectional(action))
+            return Animator.StringToHash($"{action}_{FacingToSuffix(facing)}");
+
+        return Animator.StringToHash(action.ToString());
+
     }
+
+
+    protected virtual bool IsDirectional(ActorAnimation action){
+        switch (action){
+            case ActorAnimation.Idle:
+            case ActorAnimation.Walk:
+            case ActorAnimation.Attack:
+                return true;
+
+            case ActorAnimation.Dying:
+            case ActorAnimation.Dead:
+                return false;
+
+            default:
+                return false;
+        }
+    }
+
+
 
     protected string FacingToSuffix(FacingDirection facing){
         return facing switch{

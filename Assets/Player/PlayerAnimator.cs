@@ -7,6 +7,6 @@ using static PlayerMovement;
 public class PlayerAnimator : ActorAnimator
 {
 
-
+ 
 
 }

@@ -132,9 +132,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void OnAttackEnd() {
         isAttacking = false;
-        Debug.Log("adsad");
-        PlayerAnimator target = this.GetComponent<PlayerAnimator>(); // this mean we have to have a specific on exit for each type of 
-        target.Unlock();
+        anim.Unlock();
 
         if (isWalking){
             anim.Play(ActorAnimator.ActorAnimation.Walk, facing, false, false);
@@ -156,7 +154,6 @@ public class PlayerMovement : MonoBehaviour
         isInvulnerable = true;
         Invoke(nameof(EndInvulnerability), invulnDuration); //TO-DO: make I frames in the animation and not a "timed" thing
 
-
     }
     
     public void Heal(int healAmount) {
@@ -169,7 +166,6 @@ public class PlayerMovement : MonoBehaviour
         moveInput = Vector2.zero;
 
         knockbackVelocity = direction * knockbackForce;
-        //anim.playHitAnimation(ActorAnimator.ActorAnimation.Hit, facing, true, true);
 
         Invoke(nameof(EndKnockback), knockbackDuration);
     }
@@ -184,42 +180,35 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
-    private void EndInvulnerability()
-    {
+    private void EndInvulnerability(){
         isInvulnerable = false;
     }
 
 
 
     #region Math Functions
-    private ActorAnimator.FacingDirection CalcPlayerFacing(Vector2 vector)
-    {
+    private ActorAnimator.FacingDirection CalcPlayerFacing(Vector2 vector){
 
 
-        if (Mathf.Abs(vector.x) > Mathf.Abs(vector.y))
-        {
+        if (Mathf.Abs(vector.x) > Mathf.Abs(vector.y)){
             // Vector is more horizontal
-            if (vector.x > 0)
-            {
+            if (vector.x > 0){
                 return ActorAnimator.FacingDirection.East;
             }
-            else
-            {
+            else{
                 return ActorAnimator.FacingDirection.West;
             }
         }
-        else
-        {
+        else{
             // Vector is more vertical
-            if (vector.y > 0)
-            {
+            if (vector.y > 0){
                 return ActorAnimator.FacingDirection.North;
             }
-            else
-            {
+            else{
                 return ActorAnimator.FacingDirection.South;
             }
         }
+
 
     }
 
