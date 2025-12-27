@@ -125,7 +125,7 @@ ScriptedImporter:
   animatedSpriteImportData:
   - name: conceptArt_12.2025_workspace
     originalName: 
-    pivot: {x: 0.54679805, y: -3.2930233}
+    pivot: {x: 0.7737705, y: -3.2930233}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
@@ -133,7 +133,7 @@ ScriptedImporter:
       serializedVersion: 2
       x: 4
       y: 4
-      width: 609
+      width: 1220
       height: 430
     spriteID: 3c8ee68df98ece848a3052351b7a23b9
     spriteBone: []
@@ -162,9 +162,9 @@ ScriptedImporter:
       frameIndex: 0
       additiveSortOrder: 0
       cellRect:
-        x: 1167
+        x: 556
         y: 1416
-        width: 609
+        width: 1220
         height: 430
       spriteId: 3c8ee68df98ece848a3052351b7a23b9
     linkedCells: []
@@ -186,4 +186,4 @@ ScriptedImporter:
   secondarySpriteTextures: []
   spritePackingTag: 
   canvasSize: {x: 3000, y: 3000}
-  previousTextureSize: {x: 1024, y: 512}
+  previousTextureSize: {x: 2048, y: 512}

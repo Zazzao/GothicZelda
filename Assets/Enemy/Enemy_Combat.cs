@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Enemy_Combat : MonoBehaviour
 {
-    [SerializeField] private int collisionDamage = 1;
+    [SerializeField] private int collisionDamage = 2;
 
 
 
@@ -10,8 +10,9 @@ public class Enemy_Combat : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player")) { 
 
-            PlayerHealth playerHealth = collision.gameObject.GetComponent<PlayerHealth>();
-            playerHealth.ChangeHealth(-collisionDamage);
+           
+            PlayerMovement player = collision.gameObject.GetComponent<PlayerMovement>();
+            player.TakeDamage(collisionDamage, this.gameObject.transform.position);
         }
     }
 
