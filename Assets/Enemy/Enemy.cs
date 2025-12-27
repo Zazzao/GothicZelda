@@ -54,7 +54,6 @@ public class Enemy : MonoBehaviour{
 
     private void ApplyKnockback(Vector2 direction) {
         isKnockedBack = true;
-        Debug.Log("asdasda");
         knockbackVelocity = direction * knockbackForce;
         Invoke(nameof(EndKnockback), knockbackDuration);
 

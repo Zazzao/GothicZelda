@@ -10,50 +10,35 @@ public class PlayerMovement : MonoBehaviour
     
     [Header("Movement Settings")]
     [SerializeField] private float moveSpeed = 5.0f;
-    [SerializeField] private PlayerFacing playerfacing = PlayerFacing.South;
-    [SerializeField] private bool isWalking = false;
-    [SerializeField] private bool isAttacking = false;
-    [SerializeField] private bool isFrozen = false;
+    //[SerializeField] private PlayerFacing playerfacing = PlayerFacing.South; //trying to be replaced by facing
+    [SerializeField] private ActorAnimator.FacingDirection facing;
+    private bool isWalking = false;
+    private bool isAttacking = false;
+    private bool isFrozen = false; //not used yet
 
     [Header("Knockback")]
     [SerializeField] private float knockbackForce = 6.0f;
     [SerializeField] private float knockbackDuration = 0.15f;
+    private bool isKnockedBack;
+    private Vector2 knockbackVelocity;
 
+    [Header("I-Frames")]
     [SerializeField] private float invulnDuration = 0.5f;
     private bool isInvulnerable = false;
 
 
+    private Rigidbody2D rb;                 
+    private Vector2 moveInput;              
+    private PlayerInputActions controls;   
+    private PlayerAnimator anim;           
 
-    private bool isKnockedBack;
-    private Vector2 knockbackVelocity;
-
-    private Rigidbody2D rb;                 //player motor
-    private Vector2 moveInput;              //player controller
-    private PlayerInputActions controls;    //player controller
-
-    private PlayerAnimator anim;            //player motor should tell player animator
-
-    public enum PlayerFacing{North,East,South,West} //move to a static helper class (all actors can have a facing/direction)
+    //public enum PlayerFacing{North,East,South,West} //move to a static helper class (all actors can have a facing/direction)
 
 
     public bool IsFrozen { set { isFrozen = value; } get { return isFrozen; } }
 
 
-    private void Awake(){
-        
-        instance = this;
-        
-        rb = GetComponent<Rigidbody2D>();
-        anim = GetComponent<PlayerAnimator>();
-        anim.Initialize();
-
-        controls = new PlayerInputActions();
-
-        controls.Player.Move.performed += OnMove;
-        controls.Player.Move.canceled += OnMoveCancelled;
-        controls.Player.Attack.performed += OnAttack;
-
-    }
+   
 
     #region On Enable/Disable
     private void OnEnable(){
@@ -66,10 +51,9 @@ public class PlayerMovement : MonoBehaviour
     #endregion
 
 
-
-
-    public void OnMove(InputAction.CallbackContext context){
-        //Debug.Log("OnMove");
+    #region Input Functions
+    public void OnMoveInputPerformed(InputAction.CallbackContext context){
+ 
         if (isFrozen) {
             moveInput = Vector2.zero;
             return;
@@ -77,22 +61,37 @@ public class PlayerMovement : MonoBehaviour
         
         moveInput = context.ReadValue<Vector2>();
         moveInput = ClampToCardinal(moveInput);
-        if (moveInput != Vector2.zero) playerfacing = CalcPlayerFacing(moveInput);
-        anim.PlayWalkAnimation(playerfacing,false,false);
+        if (moveInput != Vector2.zero) facing = CalcPlayerFacing(moveInput);
+        anim.Play(ActorAnimator.ActorAnimation.Walk, facing, false, false);
 
     }
 
-    private void OnMoveCancelled(InputAction.CallbackContext context) {
+    private void OnMoveInputCancelled(InputAction.CallbackContext context) {
         moveInput = Vector2.zero;
-        anim.PlayIdleAnimation(playerfacing,false,false);
-   
+        anim.Play(ActorAnimator.ActorAnimation.Idle, facing, false, false);
     }
 
-
-    private void OnAttack(InputAction.CallbackContext context) {
+    private void OnAttackInputPerformed(InputAction.CallbackContext context) {
         isAttacking = true;
-        //do attack animation
-        anim.PlayAttackAnimation(playerfacing,true,false);
+        anim.Play(ActorAnimator.ActorAnimation.Attack, facing, true, false);
+    }
+    #endregion
+
+
+    #region Game Loop Functions
+
+    private void Awake(){
+
+        instance = this;
+
+        rb = GetComponent<Rigidbody2D>();
+        anim = GetComponent<PlayerAnimator>();
+
+        controls = new PlayerInputActions();
+
+        controls.Player.Move.performed += OnMoveInputPerformed;
+        controls.Player.Move.canceled += OnMoveInputCancelled;
+        controls.Player.Attack.performed += OnAttackInputPerformed;
 
     }
 
@@ -102,13 +101,12 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Q))
         {
             //kill player
-            anim.Play(PlayerAnimator.Animations.DYING, true, true);
+            anim.Play(ActorAnimator.ActorAnimation.Dying,ActorAnimator.FacingDirection.South, true, true);
             enabled = false;
         }
 
 
     }
-
 
     private void FixedUpdate(){
         
@@ -116,75 +114,34 @@ public class PlayerMovement : MonoBehaviour
 
         Vector2 moveDir;
 
-        if (isKnockedBack)
-        {
+        if (isKnockedBack){
             moveDir = knockbackVelocity;
             //Debug.DrawRay(transform.position, knockbackVelocity, Color.magenta, 0.2f);
         }
-        else if (isAttacking)
-        {
+        else if (isAttacking){
             moveDir = Vector2.zero;
         }
-        else moveDir = moveInput * moveSpeed;
-        {
-            rb.MovePosition(rb.position + moveDir * Time.fixedDeltaTime);
+        else {
+            moveDir = moveInput * moveSpeed;
         }
-
+        rb.MovePosition(rb.position + moveDir * Time.fixedDeltaTime);
     }
 
+    #endregion
 
-    private PlayerFacing CalcPlayerFacing(Vector2 vector) {
-        
-
-        if (Mathf.Abs(vector.x) > Mathf.Abs(vector.y))
-        {
-            // Vector is more horizontal
-            if (vector.x > 0){
-                return PlayerFacing.East;
-            }else{
-                return PlayerFacing.West;
-            }
-        }else {
-            // Vector is more vertical
-            if (vector.y > 0){
-                return PlayerFacing.North;
-            }else{
-                return PlayerFacing.South;
-            }
-        }
-
-    }
 
     public void OnAttackEnd() {
         isAttacking = false;
-
+        Debug.Log("adsad");
         PlayerAnimator target = this.GetComponent<PlayerAnimator>(); // this mean we have to have a specific on exit for each type of 
-        target.SetLocked(false);
+        target.Unlock();
 
         if (isWalking){
-            anim.PlayWalkAnimation(playerfacing, false, false);
+            anim.Play(ActorAnimator.ActorAnimation.Walk, facing, false, false);
         }
         else {
-            anim.PlayIdleAnimation(playerfacing,false,false);
+            anim.Play(ActorAnimator.ActorAnimation.Idle, facing, false, false); 
         }
-    }
-
-    private Vector2 ClampToCardinal(Vector2 input, float deadzone = 0.2f) {
-        if (input.magnitude < deadzone) return Vector2.zero;
-
-        //Get angel in degrees (0 = right)
-        float angle = Mathf.Atan2 (input.y, input.x) * Mathf.Rad2Deg;
-        if (angle < 0) angle += 360;
-
-        //snap angle to nearest 45 degree
-        float snappedAngle = Mathf.Round(angle / 45.0f) * 45.0f;
-
-        //convert back to vector
-        float rad = snappedAngle * Mathf.Deg2Rad;
-        Vector2 snapped = new Vector2(Mathf.Cos(rad), Mathf.Sin(rad));
-
-        return snapped.normalized;
-
     }
 
     public void TakeDamage(int damageAmount,Vector2 sourcePosition) {
@@ -201,6 +158,7 @@ public class PlayerMovement : MonoBehaviour
 
 
     }
+    
     public void Heal(int healAmount) {
         HealthDisplay_Hearts.heartHealthSystemStatic.Heal(healAmount);
     }
@@ -211,7 +169,7 @@ public class PlayerMovement : MonoBehaviour
         moveInput = Vector2.zero;
 
         knockbackVelocity = direction * knockbackForce;
-        //anim.playHitAnimation(playerfacing, true, true);
+        //anim.playHitAnimation(ActorAnimator.ActorAnimation.Hit, facing, true, true);
 
         Invoke(nameof(EndKnockback), knockbackDuration);
     }
@@ -220,12 +178,11 @@ public class PlayerMovement : MonoBehaviour
         isKnockedBack = false;
 
         if (isWalking)
-            anim.PlayWalkAnimation(playerfacing,false,false);
+            anim.Play(ActorAnimator.ActorAnimation.Walk, facing, false, false);
         else
-            anim.PlayIdleAnimation(playerfacing,false,false);
+            anim.Play(ActorAnimator.ActorAnimation.Idle, facing, false, false);
 
     }
-
 
     private void EndInvulnerability()
     {
@@ -234,5 +191,57 @@ public class PlayerMovement : MonoBehaviour
 
 
 
+    #region Math Functions
+    private ActorAnimator.FacingDirection CalcPlayerFacing(Vector2 vector)
+    {
+
+
+        if (Mathf.Abs(vector.x) > Mathf.Abs(vector.y))
+        {
+            // Vector is more horizontal
+            if (vector.x > 0)
+            {
+                return ActorAnimator.FacingDirection.East;
+            }
+            else
+            {
+                return ActorAnimator.FacingDirection.West;
+            }
+        }
+        else
+        {
+            // Vector is more vertical
+            if (vector.y > 0)
+            {
+                return ActorAnimator.FacingDirection.North;
+            }
+            else
+            {
+                return ActorAnimator.FacingDirection.South;
+            }
+        }
+
+    }
+
+    private Vector2 ClampToCardinal(Vector2 input, float deadzone = 0.2f)
+    {
+        if (input.magnitude < deadzone) return Vector2.zero;
+
+        //Get angel in degrees (0 = right)
+        float angle = Mathf.Atan2(input.y, input.x) * Mathf.Rad2Deg;
+        if (angle < 0) angle += 360;
+
+        //snap angle to nearest 45 degree
+        float snappedAngle = Mathf.Round(angle / 45.0f) * 45.0f;
+
+        //convert back to vector
+        float rad = snappedAngle * Mathf.Deg2Rad;
+        Vector2 snapped = new Vector2(Mathf.Cos(rad), Mathf.Sin(rad));
+
+        return snapped.normalized;
+
+    }
+
+    #endregion
 
 }
