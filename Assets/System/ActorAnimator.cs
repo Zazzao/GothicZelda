@@ -64,9 +64,10 @@ public abstract class ActorAnimator : MonoBehaviour
         switch (action){
             case ActorAnimation.Idle:
             case ActorAnimation.Walk:
-            case ActorAnimation.Attack:
+            case ActorAnimation.Attack: 
                 return true;
 
+            case ActorAnimation.Hit:
             case ActorAnimation.Dying:
             case ActorAnimation.Dead:
                 return false;

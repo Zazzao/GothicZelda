@@ -18,9 +18,6 @@ public class HeartHealthSystem{
             Heart heart = new Heart(4);
             heartList.Add(heart);
         }
-
-     
-
     }
 
     public List<Heart> GetHeartList() { 

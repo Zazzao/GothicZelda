@@ -45,11 +45,13 @@ public class Enemy : MonoBehaviour{
         if (isKnockedBack) return;
 
         Vector2 direction = ((Vector2)transform.position - sourcePosition).normalized;
-        ApplyKnockback(direction);
+        
 
         hp -= damageAmount;
-        if (hp <= 0) Die();
-        
+        if (hp <= 0) 
+            Die();
+        else
+            ApplyKnockback(direction);
     }
 
 
@@ -57,12 +59,15 @@ public class Enemy : MonoBehaviour{
     private void ApplyKnockback(Vector2 direction) {
         isKnockedBack = true;
         knockbackVelocity = direction * knockbackForce;
+        anim.Play(ActorAnimator.ActorAnimation.Hit,ActorAnimator.FacingDirection.South,true,false);
         Invoke(nameof(EndKnockback), knockbackDuration);
-
     }
 
     private void EndKnockback(){
         isKnockedBack = false;
+        anim.Unlock();
+        anim.Play(ActorAnimator.ActorAnimation.Idle, ActorAnimator.FacingDirection.South, false, false);
+
     }
 
     private void Die(){

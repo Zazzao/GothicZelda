@@ -7,7 +7,11 @@ public class PlayerMovement : MonoBehaviour
 {
     
     public static PlayerMovement instance;
-    
+
+    [Header("Player Vitals")]
+    [SerializeField] private int hp = 0;
+    [SerializeField] private int maxHp = 20;
+
     [Header("Movement Settings")]
     [SerializeField] private float moveSpeed = 5.0f;
     //[SerializeField] private PlayerFacing playerfacing = PlayerFacing.South; //trying to be replaced by facing
@@ -93,16 +97,25 @@ public class PlayerMovement : MonoBehaviour
         controls.Player.Move.canceled += OnMoveInputCancelled;
         controls.Player.Attack.performed += OnAttackInputPerformed;
 
+        hp = maxHp;
+        
+
     }
+
+    private void Start()
+    {
+        //setup hearth health system
+        HeartHealthSystem heartHealthSystem = new HeartHealthSystem((int)maxHp/4); //get number of hearts based on hp (4 fragments per heart)
+        GameObject.FindAnyObjectByType<HealthDisplay_Hearts>().SetHeartHealthSystem(heartHealthSystem);
+    }
+
 
     private void Update() {
 
         //Debug Animation Testing
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            //kill player
-            anim.Play(ActorAnimator.ActorAnimation.Dying,ActorAnimator.FacingDirection.South, true, true);
-            enabled = false;
+            OnDeath();  
         }
 
 
@@ -150,6 +163,10 @@ public class PlayerMovement : MonoBehaviour
         Vector2 direction = ((Vector2)transform.position - sourcePosition).normalized;
         ApplyKnockback(direction);
         HealthDisplay_Hearts.heartHealthSystemStatic.Damage(damageAmount);
+        hp -= damageAmount;
+        if (hp <= 0) { 
+           OnDeath();
+        }
 
         isInvulnerable = true;
         Invoke(nameof(EndInvulnerability), invulnDuration); //TO-DO: make I frames in the animation and not a "timed" thing
@@ -178,6 +195,13 @@ public class PlayerMovement : MonoBehaviour
         else
             anim.Play(ActorAnimator.ActorAnimation.Idle, facing, false, false);
 
+    }
+
+    private void OnDeath() {
+        //kill player
+        anim.Play(ActorAnimator.ActorAnimation.Dying, ActorAnimator.FacingDirection.South, true, true);
+        enabled = false;
+        GetComponent<CapsuleCollider2D>().enabled = false;
     }
 
     private void EndInvulnerability(){

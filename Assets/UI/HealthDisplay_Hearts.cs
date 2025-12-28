@@ -25,9 +25,6 @@ public class HealthDisplay_Hearts : MonoBehaviour
 
     void Start() {
 
-        HeartHealthSystem heartHealthSystem = new HeartHealthSystem(18);
-        SetHeartHealthSystem(heartHealthSystem);
-        
         
     }
 
