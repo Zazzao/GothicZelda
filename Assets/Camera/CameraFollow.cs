@@ -1,4 +1,4 @@
-using System.Linq.Expressions;
+using System.Collections;
 using UnityEngine;
 
 public class CameraFollow : MonoBehaviour
@@ -8,7 +8,8 @@ public class CameraFollow : MonoBehaviour
     private float smoothTime = 0.15f;
     private Vector3 velecoty = Vector3.zero;
 
-    [SerializeField] private Transform target;
+    [SerializeField] private Transform playerTransform;
+    [SerializeField] private Vector2 cameraPanTarget = Vector2.zero;
     [SerializeField] private float maxX = 15.0f;
     [SerializeField] private float minX = -15.0f;
     [SerializeField] private float maxY = 15.0f;
@@ -19,44 +20,97 @@ public class CameraFollow : MonoBehaviour
     float halfWidth;
 
 
+    public enum CameraState{
+        Follow,
+        Transition
+    }
+    private CameraState state = CameraState.Follow;
 
-    void Start()
-    {
 
-        Camera cam = GetComponent<Camera>();
 
+
+    private void Awake() {
+        cam = GetComponent<Camera>();
         halfHeight = cam.orthographicSize;
         halfWidth = cam.orthographicSize * cam.aspect;
-
-        //Debug.Log(halfWidth);
-        //Debug.Log(halfHeight);
-
-
     }
 
-  
-    void LateUpdate()
+    private void Start()
     {
-        Vector3 targetPos = target.position + offset;
+        playerTransform = PlayerMovement.instance.transform;
+    }
 
-      
-        //testing to clamp camera into max and min xy
-        if (targetPos.x >  maxX - halfWidth) targetPos.x = maxX - halfWidth;
-        if (targetPos.x < minX + halfWidth) targetPos.x = minX + halfWidth;
-        if (targetPos.y > maxY - halfHeight) targetPos.y = maxY-halfHeight;
-        if (targetPos.y < minY + halfHeight) targetPos.y = minY + halfHeight;
-        //TO-DO: Account for the camera size so the numbers are the edge of frame and not center (camera location)
 
+    void LateUpdate(){
+
+        if (playerTransform == null) return;
+
+        switch (state) { 
+            case CameraState.Follow: OnCamFollow(); break;
+            case CameraState.Transition: OnCamTransition(); break;
+        
+        }
+        
+    }
+
+    private void OnCamFollow() {
+        // follow the player while clamping to room bounds
+        Vector3 targetPos = playerTransform.position + offset;
+        targetPos = CalcClampedCameraPosition(targetPos);
 
         transform.position = Vector3.SmoothDamp(transform.position, targetPos, ref velecoty, smoothTime);
     }
 
+    private void OnCamTransition() {
+        //cam is doing a room transition pan
 
-    public void SetCameraBounds(float newMinX, float newMinY, float newMaxX, float newMaxY) { 
+
+        transform.position = Vector3.SmoothDamp(transform.position, (Vector3)cameraPanTarget + offset,ref velecoty,smoothTime);
+
+        // Stop transitioning when close enough
+        if (Vector3.Distance(transform.position, (Vector3)cameraPanTarget + offset) < 0.05f){
+            transform.position = (Vector3)cameraPanTarget + offset;
+            RoomTransitionManager.instance.EndTransition();
+        }
+
+
+    }
+
+
+    private Vector3 CalcClampedCameraPosition(Vector3 playerPos) { 
+    
+        float clampedX = Mathf.Clamp(playerPos.x, minX+halfWidth, maxX-halfWidth);
+        float clampedY = Mathf.Clamp(playerPos.y, minY+halfHeight, maxY-halfHeight);
+
+        return new Vector3(clampedX, clampedY,offset.z);
+    
+    }
+
+
+    public void SetCameraBounds(float newMinX, float newMaxX, float newMinY, float newMaxY) { 
         minX = newMinX;
         maxX = newMaxX;
         minY = newMinY;
         maxY = newMaxY;
     }
+
+
+    public void SetCameraState(CameraState newState) { 
+        state = newState;
+    }
+
+    public void SetPanTartget(Vector2 newPanPosition) {
+
+        cameraPanTarget = newPanPosition;
+
+        float clampedX = Mathf.Clamp(cameraPanTarget.x, minX + halfWidth, maxX - halfWidth);
+        float clampedY = Mathf.Clamp(cameraPanTarget.y, minY + halfHeight, maxY - halfHeight);
+
+        cameraPanTarget = new Vector2(clampedX, clampedY);
+    }
+
+
+
+
 
 }
