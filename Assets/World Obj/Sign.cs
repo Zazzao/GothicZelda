@@ -10,6 +10,8 @@ public class Sign : MonoBehaviour, IInteractable
     private bool playerInRange;
     private PlayerMovement player;
 
+    private bool isInteracting = false;
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (!collision.CompareTag("Player")) return;
@@ -28,10 +30,27 @@ public class Sign : MonoBehaviour, IInteractable
 
         if (this == Interactable.Current)
             Interactable.Current = null;
+
+        InteractionPromptUI.Instance.Hide();
+    }
+
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (isInteracting) return;
+        
+        if (IsPlayerFacingSign())
+        {
+            InteractionPromptUI.Instance.Show(GetInteractVerb(),(Vector2)this.transform.position + new Vector2(0,1));
+        }
+        else { 
+            InteractionPromptUI.Instance.Hide();
+        }
     }
 
 
 
+    public string GetInteractVerb() => "Read";
 
     public void Interact()
     {
@@ -40,6 +59,7 @@ public class Sign : MonoBehaviour, IInteractable
         // Player must be south of sign and facing north
         if (!IsPlayerFacingSign()) return;
 
+        InteractionPromptUI.Instance.Hide();
         ToggleSign();
     }
 
@@ -58,14 +78,16 @@ public class Sign : MonoBehaviour, IInteractable
 
     private void ToggleSign()
     {
-        Debug.Log("toggle sign");
+        
         if (SignUI.Instance.IsOpen)
         {
+            isInteracting = false;
             SignUI.Instance.Hide();
             player.IsFrozen = false;
         }
         else
         {
+            isInteracting = true;
             player.IsFrozen = true;
             SignUI.Instance.Show(message);
         }//*/

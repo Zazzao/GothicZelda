@@ -12,5 +12,6 @@ public static class Interactable
 
 public interface IInteractable
 {
+    string GetInteractVerb();
     void Interact();
 }

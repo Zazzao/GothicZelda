@@ -33,6 +33,9 @@ public class CameraFollow : MonoBehaviour
         cam = GetComponent<Camera>();
         halfHeight = cam.orthographicSize;
         halfWidth = cam.orthographicSize * cam.aspect;
+
+       // cam.transparencySortMode = TransparencySortMode.Orthographic;
+
     }
 
     private void Start()
