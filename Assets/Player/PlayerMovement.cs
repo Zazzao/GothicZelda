@@ -14,7 +14,6 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Movement Settings")]
     [SerializeField] private float moveSpeed = 5.0f;
-    //[SerializeField] private PlayerFacing playerfacing = PlayerFacing.South; //trying to be replaced by facing
     [SerializeField] private ActorAnimator.FacingDirection facing;
     private bool isWalking = false;
     private bool isAttacking = false;
@@ -41,7 +40,7 @@ public class PlayerMovement : MonoBehaviour
 
     public bool IsFrozen { set { isFrozen = value; } get { return isFrozen; } }
 
-
+    public ActorAnimator.FacingDirection CurrentFacing { get { return facing; } }
    
 
     #region On Enable/Disable
@@ -79,6 +78,12 @@ public class PlayerMovement : MonoBehaviour
         isAttacking = true;
         anim.Play(ActorAnimator.ActorAnimation.Attack, facing, true, false);
     }
+
+    private void OnInteractInputPerformed(InputAction.CallbackContext context) {
+        Debug.Log("Interact button pressed");
+        Interactable.TryInteract();
+    }
+
     #endregion
 
 
@@ -96,6 +101,7 @@ public class PlayerMovement : MonoBehaviour
         controls.Player.Move.performed += OnMoveInputPerformed;
         controls.Player.Move.canceled += OnMoveInputCancelled;
         controls.Player.Attack.performed += OnAttackInputPerformed;
+        controls.Player.Interact.performed += OnInteractInputPerformed;
 
         hp = maxHp;
         
