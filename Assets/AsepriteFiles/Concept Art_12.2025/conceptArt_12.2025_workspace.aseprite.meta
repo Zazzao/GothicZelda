@@ -125,7 +125,7 @@ ScriptedImporter:
   animatedSpriteImportData:
   - name: conceptArt_12.2025_workspace
     originalName: 
-    pivot: {x: 0.64851785, y: -0.44570994}
+    pivot: {x: 0.6298472, y: -0.44570994}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
@@ -133,7 +133,7 @@ ScriptedImporter:
       serializedVersion: 2
       x: 4
       y: 4
-      width: 1653
+      width: 1702
       height: 1317
     spriteID: 3c8ee68df98ece848a3052351b7a23b9
     spriteBone: []
@@ -164,7 +164,7 @@ ScriptedImporter:
       cellRect:
         x: 428
         y: 587
-        width: 1653
+        width: 1702
         height: 1317
       spriteId: 3c8ee68df98ece848a3052351b7a23b9
     linkedCells: []

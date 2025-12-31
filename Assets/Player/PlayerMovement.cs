@@ -75,6 +75,8 @@ public class PlayerMovement : MonoBehaviour
     }
 
     private void OnAttackInputPerformed(InputAction.CallbackContext context) {
+        if (isFrozen) return;
+        
         isAttacking = true;
         anim.Play(ActorAnimator.ActorAnimation.Attack, facing, true, false);
     }
