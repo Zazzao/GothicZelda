@@ -10,8 +10,26 @@ public class NPCDialogue : MonoBehaviour, IInteractable
     
     public void Interact()
     {
-       // DialogueManager.Instance.StartDialogue(dialogue);
+        
+        if (!DialogueManager.Instance.IsDialogueActive)
+        {
+            DialogueManager.Instance.StartDialogue(dialogue);
+        }
+        else{
+            DialogueManager.Instance.AdvanceDialogue();
+        }
+
+
+
+            
     }
+
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Interactable.Current = this;
+    }
+
 
     private void OnTriggerStay2D(Collider2D collision)
     {
@@ -25,6 +43,8 @@ public class NPCDialogue : MonoBehaviour, IInteractable
     {
         if (!collision.CompareTag("Player")) return;
         InteractionPromptUI.Instance.Hide();
+        if (this == Interactable.Current)
+            Interactable.Current = null;
     }
 
 

@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 080ce6056c0a59345b4377ef29aa70e9, type: 3}
+  m_Name: Zivven_0001
+  m_EditorClassIdentifier: 
+  lines:
+  - speakerName: Ziveen
+    title: Fallen Knight
+    portrait: {fileID: 1208040086343421634, guid: e52cf2d822ee5b74bb152473dfca1600, type: 3}
+    message: The apfels here are quite exquisite. Best in the labyrinth and well
+      worth the trip.
+    side: 0
+  - speakerName: Hiro
+    title: Mazewalker
+    portrait: {fileID: 0}
+    message: This is a pretty dangerous expedition to get all the way out here.
+    side: 1
+  - speakerName: Zivven
+    title: Fallen Knight
+    portrait: {fileID: 1208040086343421634, guid: e52cf2d822ee5b74bb152473dfca1600, type: 3}
+    message: Dangerous for you. An inconsequential errand for me.
+    side: 0

@@ -8,13 +8,16 @@ public class DialogueManager : MonoBehaviour
     private int currentIndex;
     private bool isDialogueActive;
 
+
+    public bool IsDialogueActive {  get { return isDialogueActive; } }
+
     private void Awake()
     {
         Instance = this;
     }
 
-    public void StartDialogue(DialogueData dialogue)
-    {
+    public void StartDialogue(DialogueData dialogue){
+        
         if (isDialogueActive) return;
 
         isDialogueActive = true;
@@ -29,9 +32,8 @@ public class DialogueManager : MonoBehaviour
 
     public void AdvanceDialogue()
     {
-        if (DialogueUI.Instance.IsTyping)
-        {
-            DialogueUI.Instance.SkipTyping();
+        if (DialogueUI.Instance.IsTyping){
+            DialogueUI.Instance.SkipTyping(currentDialogue.lines[currentIndex].message);
             return;
         }
 

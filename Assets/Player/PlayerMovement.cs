@@ -82,7 +82,6 @@ public class PlayerMovement : MonoBehaviour
     }
 
     private void OnInteractInputPerformed(InputAction.CallbackContext context) {
-        Debug.Log("Interact button pressed");
         Interactable.TryInteract();
     }
 

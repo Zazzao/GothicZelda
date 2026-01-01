@@ -90,7 +90,7 @@ public class Sign : MonoBehaviour, IInteractable
             isInteracting = true;
             player.IsFrozen = true;
             SignUI.Instance.Show(message);
-        }//*/
+        }
 
 
     }
