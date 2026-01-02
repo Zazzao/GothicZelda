@@ -15,17 +15,17 @@ MonoBehaviour:
   lines:
   - speakerName: Ziveen
     title: Fallen Knight
-    portrait: {fileID: 1208040086343421634, guid: e52cf2d822ee5b74bb152473dfca1600, type: 3}
+    portrait: {fileID: 3032480735965181806, guid: 6006aa3621aaa7a4a94cbcbcc08ea3a0, type: 3}
     message: The apfels here are quite exquisite. Best in the labyrinth and well
       worth the trip.
-    side: 0
+    side: 1
   - speakerName: Hiro
     title: Mazewalker
-    portrait: {fileID: 0}
+    portrait: {fileID: -498296725693117240, guid: 1621706c7bc817a489e4d6a768e0bdf2, type: 3}
     message: This is a pretty dangerous expedition to get all the way out here.
-    side: 1
+    side: 0
   - speakerName: Zivven
     title: Fallen Knight
-    portrait: {fileID: 1208040086343421634, guid: e52cf2d822ee5b74bb152473dfca1600, type: 3}
+    portrait: {fileID: 3032480735965181806, guid: 6006aa3621aaa7a4a94cbcbcc08ea3a0, type: 3}
     message: Dangerous for you. An inconsequential errand for me.
-    side: 0
+    side: 1
