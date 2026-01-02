@@ -39,6 +39,7 @@ public class PlayerMovement : MonoBehaviour
 
 
     public bool IsFrozen { set { isFrozen = value; } get { return isFrozen; } }
+    public bool IsWalking { get { return isWalking;}}
 
     public ActorAnimator.FacingDirection CurrentFacing { get { return facing; } }
    
