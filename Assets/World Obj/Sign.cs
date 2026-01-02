@@ -6,8 +6,6 @@ public class Sign : MonoBehaviour, IInteractable
     [TextArea]
     [SerializeField] private string message;
 
-
-    private bool playerInRange;
     private PlayerMovement player;
 
     private bool isInteracting = false;
@@ -17,7 +15,6 @@ public class Sign : MonoBehaviour, IInteractable
         if (!collision.CompareTag("Player")) return;
 
         player = collision.GetComponent<PlayerMovement>();
-        playerInRange = true;
         Interactable.Current = this;
     }
 
@@ -25,18 +22,15 @@ public class Sign : MonoBehaviour, IInteractable
     {
         if (!collision.CompareTag("Player")) return;
 
-        playerInRange = false;
         player = null;
 
-        if (this == Interactable.Current)
-            Interactable.Current = null;
+        if ((object)this == Interactable.Current) Interactable.Current = null;
 
         InteractionPromptUI.Instance.Hide();
     }
 
 
-    private void OnTriggerStay2D(Collider2D collision)
-    {
+    private void OnTriggerStay2D(Collider2D collision){
         if (isInteracting) return;
         
         if (IsPlayerFacingSign())
@@ -54,7 +48,7 @@ public class Sign : MonoBehaviour, IInteractable
 
     public void Interact()
     {
-        if (!playerInRange) return;
+        //if (!playerInRange) return;
 
         // Player must be south of sign and facing north
         if (!IsPlayerFacingSign()) return;
@@ -76,22 +70,18 @@ public class Sign : MonoBehaviour, IInteractable
         return isBelow && facingNorth;
     }
 
-    private void ToggleSign()
-    {
+    private void ToggleSign(){
         
-        if (SignUI.Instance.IsOpen)
-        {
+        if (SignUI.Instance.IsOpen){
             isInteracting = false;
             SignUI.Instance.Hide();
             player.IsFrozen = false;
         }
-        else
-        {
+        else{
             isInteracting = true;
             player.IsFrozen = true;
             SignUI.Instance.Show(message);
         }
-
 
     }
 
