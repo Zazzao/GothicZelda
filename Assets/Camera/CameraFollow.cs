@@ -41,6 +41,13 @@ public class CameraFollow : MonoBehaviour
     private void Start()
     {
         playerTransform = PlayerMovement.instance.transform;
+
+        Vector3 targetPos = playerTransform.position + offset;
+        targetPos = CalcClampedCameraPosition(targetPos);
+
+        cam.transform.position = targetPos;
+
+
     }
 
 
