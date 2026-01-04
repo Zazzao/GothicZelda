@@ -1,0 +1,1017 @@
+fileFormatVersion: 2
+guid: d460324b0c290ea4882a199a268f0e6c
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -5197262588491008907
+    second: TestPlayer_Roll_0
+  - first:
+      213: 2982587700271692000
+    second: TestPlayer_Roll_1
+  - first:
+      213: 8262860593019751870
+    second: TestPlayer_Roll_2
+  - first:
+      213: 7104401303744098242
+    second: TestPlayer_Roll_3
+  - first:
+      213: -2416657852918696399
+    second: TestPlayer_Roll_4
+  - first:
+      213: 4422316047382649520
+    second: TestPlayer_Roll_5
+  - first:
+      213: 2669644319108630020
+    second: TestPlayer_Roll_6
+  - first:
+      213: -8871571739667575080
+    second: TestPlayer_Roll_7
+  - first:
+      213: -770417902583174159
+    second: TestPlayer_Roll_8
+  - first:
+      213: -2941175592573725218
+    second: TestPlayer_Roll_9
+  - first:
+      213: 6884938881163235249
+    second: TestPlayer_Roll_10
+  - first:
+      213: 2558895943705537216
+    second: TestPlayer_Roll_11
+  - first:
+      213: -1834739606738361286
+    second: TestPlayer_Roll_12
+  - first:
+      213: 4904223223532946112
+    second: TestPlayer_Roll_13
+  - first:
+      213: -7135888832023671982
+    second: TestPlayer_Roll_14
+  - first:
+      213: -2932505118167293893
+    second: TestPlayer_Roll_15
+  - first:
+      213: 7880936425846054714
+    second: TestPlayer_Roll_16
+  - first:
+      213: -6866346706587904467
+    second: TestPlayer_Roll_17
+  - first:
+      213: 8145554524068508225
+    second: TestPlayer_Roll_18
+  - first:
+      213: -6871250290258142889
+    second: TestPlayer_Roll_19
+  - first:
+      213: 8035297386150270197
+    second: TestPlayer_Roll_20
+  - first:
+      213: -6360149786935322849
+    second: TestPlayer_Roll_21
+  - first:
+      213: -84882783367264134
+    second: TestPlayer_Roll_22
+  - first:
+      213: 4592657640445968378
+    second: TestPlayer_Roll_23
+  - first:
+      213: 1096526512444569948
+    second: TestPlayer_Roll_24
+  - first:
+      213: 225724255912180707
+    second: TestPlayer_Roll_25
+  - first:
+      213: -7002755460447485316
+    second: TestPlayer_Roll_26
+  - first:
+      213: 5320095146565099916
+    second: TestPlayer_Roll_27
+  - first:
+      213: -41186190226374714
+    second: TestPlayer_Roll_28
+  - first:
+      213: -3700252259365443634
+    second: TestPlayer_Roll_29
+  - first:
+      213: -8596730113343942333
+    second: TestPlayer_Roll_30
+  - first:
+      213: -8709363733459776143
+    second: TestPlayer_Roll_31
+  - first:
+      213: 4084264588084587664
+    second: TestPlayer_Roll_32
+  - first:
+      213: 2791850602177870248
+    second: TestPlayer_Roll_33
+  - first:
+      213: 7397570210305479796
+    second: TestPlayer_Roll_34
+  - first:
+      213: -944192450260168847
+    second: TestPlayer_Roll_35
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: TestPlayer_Roll_0
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 210
+        width: 20
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 574f098463d9fd7b0800000000000000
+      internalID: -5197262588491008907
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TestPlayer_Roll_1
+      rect:
+        serializedVersion: 2
+        x: 46
+        y: 214
+        width: 20
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0e8b42206b7446920800000000000000
+      internalID: 2982587700271692000
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TestPlayer_Roll_2
+      rect:
+        serializedVersion: 2
+        x: 78
+        y: 212
+        width: 20
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ebd048b4ee39ba270800000000000000
+      internalID: 8262860593019751870
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TestPlayer_Roll_3
+      rect:
+        serializedVersion: 2
+        x: 110
+        y: 211
+        width: 20
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2cf2d735857e79260800000000000000
+      internalID: 7104401303744098242
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TestPlayer_Roll_4
+      rect:
+        serializedVersion: 2
+        x: 143
+        y: 214
+        width: 18
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1367f1d9c7e467ed0800000000000000
+      internalID: -2416657852918696399
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TestPlayer_Roll_5
+      rect:
+        serializedVersion: 2
+        x: 173
+        y: 215
+        width: 21
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0ba90c0c3093f5d30800000000000000
+      internalID: 4422316047382649520
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TestPlayer_Roll_6
+      rect:
+        serializedVersion: 2
+        x: 206
+        y: 210
+        width: 20
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4060c152d5b7c0520800000000000000
+      internalID: 2669644319108630020
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TestPlayer_Roll_7
+      rect:
+        serializedVersion: 2
+        x: 237
+        y: 210
+        width: 21
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8de48b1a188d1e480800000000000000
+      internalID: -8871571739667575080
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TestPlayer_Roll_8
+      rect:
+        serializedVersion: 2
+        x: 270
+        y: 210
+        width: 20
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1fbadebdffcee45f0800000000000000
+      internalID: -770417902583174159
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TestPlayer_Roll_9
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 145
+        width: 21
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ed5189ea168de27d0800000000000000
+      internalID: -2941175592573725218
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TestPlayer_Roll_10
+      rect:
+        serializedVersion: 2
+        x: 46
+        y: 149
+        width: 20
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1bf82083f673c8f50800000000000000
+      internalID: 6884938881163235249
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TestPlayer_Roll_11
+      rect:
+        serializedVersion: 2
+        x: 77
+        y: 151
+        width: 24
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0caa1cd9d46038320800000000000000
+      internalID: 2558895943705537216
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TestPlayer_Roll_12
+      rect:
+        serializedVersion: 2
+        x: 110
+        y: 147
+        width: 22
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a34250d6c02b986e0800000000000000
+      internalID: -1834739606738361286
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TestPlayer_Roll_13
+      rect:
+        serializedVersion: 2
+        x: 146
+        y: 147
+        width: 20
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0c207e1c90d4f0440800000000000000
+      internalID: 4904223223532946112
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TestPlayer_Roll_14
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 151
+        width: 24
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 25b4d823aea38fc90800000000000000
+      internalID: -7135888832023671982
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TestPlayer_Roll_15
+      rect:
+        serializedVersion: 2
+        x: 205
+        y: 150
+        width: 21
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b30af91d126ad47d0800000000000000
+      internalID: -2932505118167293893
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TestPlayer_Roll_16
+      rect:
+        serializedVersion: 2
+        x: 234
+        y: 145
+        width: 22
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a3f9dff9ce5be5d60800000000000000
+      internalID: 7880936425846054714
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TestPlayer_Roll_17
+      rect:
+        serializedVersion: 2
+        x: 268
+        y: 145
+        width: 21
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d269721cc06d5b0a0800000000000000
+      internalID: -6866346706587904467
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TestPlayer_Roll_18
+      rect:
+        serializedVersion: 2
+        x: 13
+        y: 80
+        width: 20
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 142fda1cea2da0170800000000000000
+      internalID: 8145554524068508225
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TestPlayer_Roll_19
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 81
+        width: 20
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7591d56344a64a0a0800000000000000
+      internalID: -6871250290258142889
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TestPlayer_Roll_20
+      rect:
+        serializedVersion: 2
+        x: 78
+        y: 83
+        width: 18
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5f49c1e566c138f60800000000000000
+      internalID: 8035297386150270197
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TestPlayer_Roll_21
+      rect:
+        serializedVersion: 2
+        x: 109
+        y: 79
+        width: 21
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f17917f57753cb7a0800000000000000
+      internalID: -6360149786935322849
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TestPlayer_Roll_22
+      rect:
+        serializedVersion: 2
+        x: 141
+        y: 79
+        width: 20
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a7809d9ee8f62def0800000000000000
+      internalID: -84882783367264134
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TestPlayer_Roll_23
+      rect:
+        serializedVersion: 2
+        x: 173
+        y: 82
+        width: 20
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: afff3c18ac56cbf30800000000000000
+      internalID: 4592657640445968378
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TestPlayer_Roll_24
+      rect:
+        serializedVersion: 2
+        x: 205
+        y: 83
+        width: 20
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c597e0dad05a73f00800000000000000
+      internalID: 1096526512444569948
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TestPlayer_Roll_25
+      rect:
+        serializedVersion: 2
+        x: 237
+        y: 80
+        width: 20
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3ebb5dac30fe12300800000000000000
+      internalID: 225724255912180707
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TestPlayer_Roll_26
+      rect:
+        serializedVersion: 2
+        x: 269
+        y: 80
+        width: 20
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c72c91bc20731de90800000000000000
+      internalID: -7002755460447485316
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TestPlayer_Roll_27
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 17
+        width: 21
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c81ea464956c4d940800000000000000
+      internalID: 5320095146565099916
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TestPlayer_Roll_28
+      rect:
+        serializedVersion: 2
+        x: 45
+        y: 21
+        width: 20
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6cfb7e1d06dad6ff0800000000000000
+      internalID: -41186190226374714
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TestPlayer_Roll_29
+      rect:
+        serializedVersion: 2
+        x: 75
+        y: 23
+        width: 24
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ec7af25cc2016acc0800000000000000
+      internalID: -3700252259365443634
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TestPlayer_Roll_30
+      rect:
+        serializedVersion: 2
+        x: 109
+        y: 19
+        width: 22
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3411b34628742b880800000000000000
+      internalID: -8596730113343942333
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TestPlayer_Roll_31
+      rect:
+        serializedVersion: 2
+        x: 142
+        y: 19
+        width: 20
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 17dc57f14df122780800000000000000
+      internalID: -8709363733459776143
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TestPlayer_Roll_32
+      rect:
+        serializedVersion: 2
+        x: 174
+        y: 23
+        width: 24
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 09c2d75e0093ea830800000000000000
+      internalID: 4084264588084587664
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TestPlayer_Roll_33
+      rect:
+        serializedVersion: 2
+        x: 207
+        y: 22
+        width: 21
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8a9b5c0b455aeb620800000000000000
+      internalID: 2791850602177870248
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TestPlayer_Roll_34
+      rect:
+        serializedVersion: 2
+        x: 238
+        y: 17
+        width: 22
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 474154a89e279a660800000000000000
+      internalID: 7397570210305479796
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TestPlayer_Roll_35
+      rect:
+        serializedVersion: 2
+        x: 271
+        y: 17
+        width: 21
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 17f03a218fd85e2f0800000000000000
+      internalID: -944192450260168847
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable: {}
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

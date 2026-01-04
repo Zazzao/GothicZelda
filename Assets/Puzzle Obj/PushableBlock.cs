@@ -43,7 +43,7 @@ public class PushableBlock : MonoBehaviour
         player = collision.gameObject.GetComponent<PlayerMovement>();
         if (player.IsWalking && IsFacingBlock())
         {
-            Debug.Log("player is moving block");
+            //Debug.Log("player is moving block");
             blockTimer += Time.deltaTime;
 
             if (blockTimer >= blockPushTime) {
@@ -112,7 +112,7 @@ public class PushableBlock : MonoBehaviour
 
     private bool IsFacingBlock(){
 
-        float variance = 0.25f;
+        float variance = 0.35f;
         Vector2 toBlock = (Vector2)transform.position - (Vector2)player.transform.position;
 
         if (Mathf.Abs(toBlock.x) > Mathf.Abs(toBlock.y)){

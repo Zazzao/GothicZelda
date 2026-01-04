@@ -11,6 +11,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Player Vitals")]
     [SerializeField] private int hp = 0;
     [SerializeField] private int maxHp = 20;
+    public Vital Stamina;
 
     [Header("Movement Settings")]
     [SerializeField] private float moveSpeed = 5.0f;
@@ -86,6 +87,13 @@ public class PlayerMovement : MonoBehaviour
         Interactable.TryInteract();
     }
 
+
+    private void OnRollInputPerformed(InputAction.CallbackContext context) {
+        if (isFrozen) return;
+
+        Debug.Log("roll input performed");
+    }
+
     #endregion
 
 
@@ -104,9 +112,11 @@ public class PlayerMovement : MonoBehaviour
         controls.Player.Move.canceled += OnMoveInputCancelled;
         controls.Player.Attack.performed += OnAttackInputPerformed;
         controls.Player.Interact.performed += OnInteractInputPerformed;
+        controls.Player.Roll.performed += OnRollInputPerformed;
 
         hp = maxHp;
-        
+        Stamina = new Vital("Stamina", 100, 15f, 0.75f);
+
 
     }
 
@@ -126,7 +136,7 @@ public class PlayerMovement : MonoBehaviour
             OnDeath();  
         }
 
-
+        Stamina.Tick(Time.deltaTime);
     }
 
     private void FixedUpdate(){
