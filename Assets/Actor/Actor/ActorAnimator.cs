@@ -19,6 +19,7 @@ public abstract class ActorAnimator : MonoBehaviour
         Idle,
         Walk,
         Attack,
+        Roll,
         Hit,
         Knockback,
         Dying,
@@ -64,7 +65,8 @@ public abstract class ActorAnimator : MonoBehaviour
         switch (action){
             case ActorAnimation.Idle:
             case ActorAnimation.Walk:
-            case ActorAnimation.Attack: 
+            case ActorAnimation.Attack:
+            case ActorAnimation.Roll:
                 return true;
 
             case ActorAnimation.Hit:

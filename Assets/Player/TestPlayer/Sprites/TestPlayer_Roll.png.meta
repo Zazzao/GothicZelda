@@ -142,7 +142,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -156,7 +156,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 16
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -179,7 +179,7 @@ TextureImporter:
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
     resizeAlgorithm: 0
-    textureFormat: -1
+    textureFormat: 4
     textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
@@ -1009,7 +1009,43 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      TestPlayer_Roll_0: -5197262588491008907
+      TestPlayer_Roll_1: 2982587700271692000
+      TestPlayer_Roll_10: 6884938881163235249
+      TestPlayer_Roll_11: 2558895943705537216
+      TestPlayer_Roll_12: -1834739606738361286
+      TestPlayer_Roll_13: 4904223223532946112
+      TestPlayer_Roll_14: -7135888832023671982
+      TestPlayer_Roll_15: -2932505118167293893
+      TestPlayer_Roll_16: 7880936425846054714
+      TestPlayer_Roll_17: -6866346706587904467
+      TestPlayer_Roll_18: 8145554524068508225
+      TestPlayer_Roll_19: -6871250290258142889
+      TestPlayer_Roll_2: 8262860593019751870
+      TestPlayer_Roll_20: 8035297386150270197
+      TestPlayer_Roll_21: -6360149786935322849
+      TestPlayer_Roll_22: -84882783367264134
+      TestPlayer_Roll_23: 4592657640445968378
+      TestPlayer_Roll_24: 1096526512444569948
+      TestPlayer_Roll_25: 225724255912180707
+      TestPlayer_Roll_26: -7002755460447485316
+      TestPlayer_Roll_27: 5320095146565099916
+      TestPlayer_Roll_28: -41186190226374714
+      TestPlayer_Roll_29: -3700252259365443634
+      TestPlayer_Roll_3: 7104401303744098242
+      TestPlayer_Roll_30: -8596730113343942333
+      TestPlayer_Roll_31: -8709363733459776143
+      TestPlayer_Roll_32: 4084264588084587664
+      TestPlayer_Roll_33: 2791850602177870248
+      TestPlayer_Roll_34: 7397570210305479796
+      TestPlayer_Roll_35: -944192450260168847
+      TestPlayer_Roll_4: -2416657852918696399
+      TestPlayer_Roll_5: 4422316047382649520
+      TestPlayer_Roll_6: 2669644319108630020
+      TestPlayer_Roll_7: -8871571739667575080
+      TestPlayer_Roll_8: -770417902583174159
+      TestPlayer_Roll_9: -2941175592573725218
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -31,6 +31,15 @@ public class PlayerMovement : MonoBehaviour
     private bool isInvulnerable = false;
 
 
+    [Header("Dodge Roll")]
+    [SerializeField] private float rollSpeed = 8.0f;
+    [SerializeField] private float rollDuration = 0.25f;
+    [SerializeField] private float rollStaminaCost = 25.0f;
+
+    private bool isRolling;
+    private Vector2 rollDirection;
+
+
     private Rigidbody2D rb;                 
     private Vector2 moveInput;              
     private PlayerInputActions controls;   
@@ -77,10 +86,9 @@ public class PlayerMovement : MonoBehaviour
     }
 
     private void OnAttackInputPerformed(InputAction.CallbackContext context) {
-        if (isFrozen) return;
-        
-        isAttacking = true;
-        anim.Play(ActorAnimator.ActorAnimation.Attack, facing, true, false);
+        if (isFrozen || isRolling || isAttacking) return;
+        OnAttackStart();
+       
     }
 
     private void OnInteractInputPerformed(InputAction.CallbackContext context) {
@@ -89,9 +97,15 @@ public class PlayerMovement : MonoBehaviour
 
 
     private void OnRollInputPerformed(InputAction.CallbackContext context) {
-        if (isFrozen) return;
-
+        
         Debug.Log("roll input performed");
+
+        if (isFrozen || isRolling || isAttacking) return;
+        if (Stamina.Current < rollStaminaCost) return;
+
+        Stamina.Spend(rollStaminaCost);
+        OnRollStart();
+
     }
 
     #endregion
@@ -145,12 +159,15 @@ public class PlayerMovement : MonoBehaviour
 
         Vector2 moveDir;
 
-        if (isKnockedBack){
+        if (isKnockedBack) {
             moveDir = knockbackVelocity;
             //Debug.DrawRay(transform.position, knockbackVelocity, Color.magenta, 0.2f);
         }
-        else if (isAttacking){
+        else if (isAttacking) {
             moveDir = Vector2.zero;
+        }
+        else if (isRolling) {
+            moveDir = rollDirection * rollSpeed;
         }
         else {
             moveDir = moveInput * moveSpeed;
@@ -159,6 +176,12 @@ public class PlayerMovement : MonoBehaviour
     }
 
     #endregion
+
+
+    private void OnAttackStart() {
+        isAttacking = true;
+        anim.Play(ActorAnimator.ActorAnimation.Attack, facing, true, false);
+    }
 
 
     public void OnAttackEnd() {
@@ -172,6 +195,31 @@ public class PlayerMovement : MonoBehaviour
             anim.Play(ActorAnimator.ActorAnimation.Idle, facing, false, false); 
         }
     }
+
+    
+    private void OnRollStart(){
+        isRolling = true;
+        isInvulnerable = true;          // might want to handle i-frames in animation
+        rollDirection = moveInput;  // might not need this
+        if (rollDirection == Vector2.zero) return;
+        anim.Play(ActorAnimator.ActorAnimation.Roll, facing, true, false);
+
+    }
+
+
+    public void OnRollEnd(){
+        isRolling = false;
+        isInvulnerable = false;
+        anim.Unlock();
+
+        if (isWalking)
+            anim.Play(ActorAnimator.ActorAnimation.Walk, facing, false, false);
+        else
+            anim.Play(ActorAnimator.ActorAnimation.Idle, facing, false, false);
+    }
+
+
+
 
     public void TakeDamage(int damageAmount,Vector2 sourcePosition) {
 

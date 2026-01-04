@@ -5,7 +5,7 @@ using UnityEngine;
 public class Vital{
     public string Name;
 
-    public float Current { get; private set; }
+    public float Current;
     public float Max { get; private set; }
 
     public float RegenRate { get; private set; }
