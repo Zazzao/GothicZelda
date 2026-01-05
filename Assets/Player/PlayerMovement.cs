@@ -47,9 +47,6 @@ public class PlayerMovement : MonoBehaviour
 
     
 
-    //public enum PlayerFacing{North,East,South,West} //move to a static helper class (all actors can have a facing/direction)
-
-
     public bool IsFrozen { set { isFrozen = value; } get { return isFrozen; } }
     public bool IsWalking { get { return isWalking;}}
 
@@ -166,7 +163,7 @@ public class PlayerMovement : MonoBehaviour
             moveDir = knockbackVelocity;
             //Debug.DrawRay(transform.position, knockbackVelocity, Color.magenta, 0.2f);
         }
-        else if (isAttacking) {
+        else if (isAttacking ||  isFrozen) {
             moveDir = Vector2.zero;
         }
         else if (isRolling) {
