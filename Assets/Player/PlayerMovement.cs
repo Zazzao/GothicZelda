@@ -43,7 +43,9 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rb;                 
     private Vector2 moveInput;              
     private PlayerInputActions controls;   
-    private PlayerAnimator anim;           
+    private PlayerAnimator anim;
+
+    
 
     //public enum PlayerFacing{North,East,South,West} //move to a static helper class (all actors can have a facing/direction)
 

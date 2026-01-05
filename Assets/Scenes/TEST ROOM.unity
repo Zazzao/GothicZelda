@@ -171,6 +171,11 @@ MonoBehaviour:
   maxX: 15
   minY: -12
   maxY: 12
+  go_minX: {fileID: 0}
+  go_minY: {fileID: 0}
+  go_maxX: {fileID: 0}
+  go_maxY: {fileID: 0}
+  camBounds: {fileID: 0}
   roomObjects: []
 --- !u!1 &10158712
 GameObject:
@@ -22288,6 +22293,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1110451717534042752, guid: d319af4148806f849b741c319581516f, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1110451717534042752, guid: d319af4148806f849b741c319581516f, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 20879013
+      objectReference: {fileID: 0}
     - target: {fileID: 5925430783351029766, guid: d319af4148806f849b741c319581516f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 5.5
@@ -23322,6 +23335,11 @@ MonoBehaviour:
   maxX: 15
   minY: 12
   maxY: 32
+  go_minX: {fileID: 0}
+  go_minY: {fileID: 0}
+  go_maxX: {fileID: 0}
+  go_maxY: {fileID: 0}
+  camBounds: {fileID: 0}
   roomObjects: []
 --- !u!1001 &5386323899797566038
 PrefabInstance:
@@ -23471,6 +23489,10 @@ PrefabInstance:
     - target: {fileID: 2404176015933392831, guid: 905ee4f43f48fb442841eac236c2e1be, type: 3}
       propertyPath: m_Name
       value: Canvas_GameHUD
+      objectReference: {fileID: 0}
+    - target: {fileID: 3245800809659493234, guid: 905ee4f43f48fb442841eac236c2e1be, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 120
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

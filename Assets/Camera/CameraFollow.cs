@@ -19,6 +19,7 @@ public class CameraFollow : MonoBehaviour
     float halfHeight;
     float halfWidth;
 
+    public Room startingRoom;
 
     public enum CameraState{
         Follow,
@@ -41,9 +42,11 @@ public class CameraFollow : MonoBehaviour
     private void Start()
     {
         playerTransform = PlayerMovement.instance.transform;
+        SetCameraBounds(startingRoom.minX, startingRoom.maxX, startingRoom.minY, startingRoom.maxY);
 
         Vector3 targetPos = playerTransform.position + offset;
         targetPos = CalcClampedCameraPosition(targetPos);
+
 
         cam.transform.position = targetPos;
 
@@ -89,8 +92,19 @@ public class CameraFollow : MonoBehaviour
 
     private Vector3 CalcClampedCameraPosition(Vector3 playerPos) { 
     
+        
+        
         float clampedX = Mathf.Clamp(playerPos.x, minX+halfWidth, maxX-halfWidth);
         float clampedY = Mathf.Clamp(playerPos.y, minY+halfHeight, maxY-halfHeight);
+
+        if (minY + halfHeight > maxY - halfHeight) {
+            clampedY = (minY + maxY) / 2.0f;
+        }
+        if (minX + halfWidth > maxX - halfWidth)
+        {
+            clampedX = (minX + maxX) / 2.0f;
+        }
+
 
         return new Vector3(clampedX, clampedY,offset.z);
     
@@ -115,6 +129,15 @@ public class CameraFollow : MonoBehaviour
 
         float clampedX = Mathf.Clamp(cameraPanTarget.x, minX + halfWidth, maxX - halfWidth);
         float clampedY = Mathf.Clamp(cameraPanTarget.y, minY + halfHeight, maxY - halfHeight);
+
+        if (minY + halfHeight > maxY - halfHeight)
+        {
+            clampedY = (minY + maxY) / 2.0f;
+        }
+        if (minX + halfWidth > maxX - halfWidth)
+        {
+            clampedX = (minX + maxX) / 2.0f;
+        }
 
         cameraPanTarget = new Vector2(clampedX, clampedY);
     }
