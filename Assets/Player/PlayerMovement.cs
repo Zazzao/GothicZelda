@@ -130,6 +130,7 @@ public class PlayerMovement : MonoBehaviour
 
         hp = maxHp;
         Stamina = new Vital("Stamina", 100, 15f, 0.75f);
+        FindAnyObjectByType<StaminaBarUI>().Bind(Stamina);
 
 
     }
