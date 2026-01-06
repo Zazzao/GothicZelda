@@ -9,7 +9,7 @@ public class StaminaBarUI : MonoBehaviour
 
     private void Awake()
     {
-        staminiaBarIamge.fillAmount = 0.3f;
+        //staminiaBarIamge.fillAmount = 0.3f;
     }
 
     private void OnEnable()

@@ -145,9 +145,20 @@ public class PlayerMovement : MonoBehaviour
     private void Update() {
 
         //Debug Animation Testing
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            OnDeath();  
+        if (Input.GetKeyDown(KeyCode.Q))OnDeath();  
+        
+        //TO-DO: Move this to a Debug Manager
+        if (Input.GetKeyDown(KeyCode.Alpha1)) {
+            int layer = LayerMask.NameToLayer("System Gizmo");
+            int mask = 1 << layer;
+
+            bool isVisible = (Camera.main.cullingMask & mask) != 0;
+
+            if (isVisible)
+                Camera.main.cullingMask &= ~mask; // turn OFF
+            else
+                Camera.main.cullingMask |= mask;  // turn ON
+           
         }
 
         Stamina.Tick(Time.deltaTime);

@@ -14,6 +14,9 @@ public class NPCDialogue : MonoBehaviour, IInteractable
         
         if (!IsFacingNPC()) return;
 
+        InteractionPromptUI.Instance.Hide();
+        isInteracting = true;   
+
         if (!DialogueManager.Instance.IsDialogueActive)
             DialogueManager.Instance.StartDialogue(dialogue);
         else
