@@ -6,6 +6,7 @@ public class DialogueManager : MonoBehaviour
     public static DialogueManager Instance;
 
     private DialogueData currentDialogue;
+    private NPCDialogue currentNpc;
     private int currentIndex;
     private bool isDialogueActive;
 
@@ -17,12 +18,13 @@ public class DialogueManager : MonoBehaviour
         Instance = this;
     }
 
-    public void StartDialogue(DialogueData dialogue){
+    public void StartDialogue(NPCDialogue npc, DialogueData dialogue){
         
         if (isDialogueActive) return;
 
         isDialogueActive = true;
         currentDialogue = dialogue;
+        currentNpc = npc;
         currentIndex = 0;
 
         PlayerMovement.instance.IsFrozen = true;
@@ -59,7 +61,8 @@ public class DialogueManager : MonoBehaviour
         DialogueUI.Instance.Hide();
         PlayerMovement.instance.IsFrozen = false;
 
-        //currentDialogue.GetComponent<NPCDialogue>().
+        currentNpc.IsInteracting = false;
+        
     }
 }
 

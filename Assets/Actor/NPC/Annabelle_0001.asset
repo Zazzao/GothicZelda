@@ -21,6 +21,6 @@ MonoBehaviour:
   - speakerName: Annabelle
     title: The Gravekeeper
     portrait: {fileID: 4545354719701964909, guid: b173cc7eff3c46b4f97a7dd28de4320a, type: 3}
-    message: The plague knight that devour these lands with its rot will not be easy
-      felled either.
+    message: The plague knight that haunts these lands and devoours it with its crimson
+      rot will not be easy felled either.
     side: 1

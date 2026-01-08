@@ -9,7 +9,7 @@ public class NPCDialogue : MonoBehaviour, IInteractable
     private bool isInteracting;
 
 
-    
+    public bool IsInteracting { get { return isInteracting; } set { isInteracting = value; } }
 
     public string GetInteractVerb() => "Talk";
     
@@ -21,7 +21,7 @@ public class NPCDialogue : MonoBehaviour, IInteractable
         isInteracting = true;   
 
         if (!DialogueManager.Instance.IsDialogueActive)
-            DialogueManager.Instance.StartDialogue(dialogue);
+            DialogueManager.Instance.StartDialogue(this,dialogue);
         else
             DialogueManager.Instance.AdvanceDialogue();
             
@@ -39,12 +39,15 @@ public class NPCDialogue : MonoBehaviour, IInteractable
 
     private void OnTriggerStay2D(Collider2D collision){
         if (!collision.CompareTag("Player")) return;
-        if (isInteracting) return;   
+        if (isInteracting) return;
 
         if (IsFacingNPC())
             InteractionPromptUI.Instance.Show(GetInteractVerb(), (Vector2)this.transform.position + new Vector2(0, 1));
         else
+        {
             InteractionPromptUI.Instance.Hide();
+            isInteracting= false;
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -53,17 +56,17 @@ public class NPCDialogue : MonoBehaviour, IInteractable
         InteractionPromptUI.Instance.Hide();
         if ((object)this == Interactable.Current)
             Interactable.Current = null;
+
+        isInteracting = false;
     }
 
 
 
-    private bool IsFacingNPC()
-    {
+    private bool IsFacingNPC(){
 
         Vector2 toNPC = (Vector2)transform.position - (Vector2)player.transform.position;
 
-        if (Mathf.Abs(toNPC.x) > Mathf.Abs(toNPC.y))
-        {
+        if (Mathf.Abs(toNPC.x) > Mathf.Abs(toNPC.y)){
             // Horizontal
             if (toNPC.x > 0)
                 return player.CurrentFacing == ActorAnimator.FacingDirection.East;
@@ -78,12 +81,7 @@ public class NPCDialogue : MonoBehaviour, IInteractable
             else
                 return player.CurrentFacing == ActorAnimator.FacingDirection.South;
         }
-
-
-
        
     }
-
-
     
 }
