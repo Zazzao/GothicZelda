@@ -8,6 +8,9 @@ public class NPCDialogue : MonoBehaviour, IInteractable
     private PlayerMovement player;
     private bool isInteracting;
 
+
+    
+
     public string GetInteractVerb() => "Talk";
     
     public void Interact(){
@@ -25,8 +28,7 @@ public class NPCDialogue : MonoBehaviour, IInteractable
     }
 
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
+    private void OnTriggerEnter2D(Collider2D collision){
         if (!collision.CompareTag("Player")) return;
 
         player = collision.GetComponent<PlayerMovement>();
@@ -36,8 +38,8 @@ public class NPCDialogue : MonoBehaviour, IInteractable
 
 
     private void OnTriggerStay2D(Collider2D collision){
-        if (isInteracting) return;   
         if (!collision.CompareTag("Player")) return;
+        if (isInteracting) return;   
 
         if (IsFacingNPC())
             InteractionPromptUI.Instance.Show(GetInteractVerb(), (Vector2)this.transform.position + new Vector2(0, 1));

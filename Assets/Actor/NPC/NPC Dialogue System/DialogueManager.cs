@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class DialogueManager : MonoBehaviour
@@ -39,12 +40,10 @@ public class DialogueManager : MonoBehaviour
 
         currentIndex++;
 
-        if (currentIndex >= currentDialogue.lines.Length)
-        {
+        if (currentIndex >= currentDialogue.lines.Length){
             EndDialogue();
         }
-        else
-        {
+        else{
             ShowCurrentLine();
         }
     }
@@ -59,6 +58,8 @@ public class DialogueManager : MonoBehaviour
         isDialogueActive = false;
         DialogueUI.Instance.Hide();
         PlayerMovement.instance.IsFrozen = false;
+
+        //currentDialogue.GetComponent<NPCDialogue>().
     }
 }
 

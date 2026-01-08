@@ -46,19 +46,15 @@ public class Sign : MonoBehaviour, IInteractable
 
     public string GetInteractVerb() => "Read";
 
-    public void Interact()
-    {
-        //if (!playerInRange) return;
+    public void Interact(){
 
-        // Player must be south of sign and facing north
         if (!IsPlayerFacingSign()) return;
 
         InteractionPromptUI.Instance.Hide();
         ToggleSign();
     }
 
-    private bool IsPlayerFacingSign()
-    {
+    private bool IsPlayerFacingSign(){
         if (player == null) return false;
 
         Vector2 playerPos = player.transform.position;
