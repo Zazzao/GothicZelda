@@ -161,6 +161,7 @@ public class HealthDisplay_Hearts : MonoBehaviour
         //Set as child of this transform
         heartGameObj.transform.parent = transform;
         heartGameObj.transform.localPosition = Vector3.zero;
+        heartGameObj.transform.localScale = Vector3.one;
 
         //Set Image Size
         heartGameObj.GetComponent<RectTransform>().sizeDelta = new Vector2(32, 32);
