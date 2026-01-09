@@ -146,6 +146,8 @@ public class PlayerMovement : MonoBehaviour
 
         //Debug Animation Testing
         if (Input.GetKeyDown(KeyCode.Q))OnDeath();  
+
+        if (Input.GetKeyDown(KeyCode.Escape)) Application.Quit(); //debug
         
         //TO-DO: Move this to a Debug Manager
         if (Input.GetKeyDown(KeyCode.Alpha1)) {

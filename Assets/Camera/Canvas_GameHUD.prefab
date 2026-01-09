@@ -234,7 +234,7 @@ MonoBehaviour:
     tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
     quis nostrud exercitation
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: bf631482857bad24280b01b85176039d, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 0d5483bce68bf3a449dc1b174f8baa55, type: 2}
   m_sharedMaterial: {fileID: 955684536807653893, guid: bf631482857bad24280b01b85176039d, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -300,7 +300,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &636013989372177845
