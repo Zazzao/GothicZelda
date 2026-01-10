@@ -13,10 +13,27 @@ public class PreAlphaTitleMenu : MonoBehaviour
     [SerializeField] private int menuItemWt = 130;
     [SerializeField] private int menuItemWt_highlighted = 150;
 
+    [Header("Sfx")]
+    [SerializeField] private AudioClip menuNavSfx;
+    private AudioSource audioSource;
 
+    [Header("Menu Panels")]
+    [SerializeField] private GameObject aboutMenuPanel;
 
 
     private PlayerInputActions controls;
+
+    private TitleMenuState state = TitleMenuState.MainMenu;
+
+    public enum TitleMenuState { 
+        Intro,
+        MainMenu,
+        LoadGameMenu,
+        OptionsMenu,
+        AboutMenu
+    
+    }
+
 
     #region On Enable/Disable
     private void OnEnable()
@@ -44,6 +61,8 @@ public class PreAlphaTitleMenu : MonoBehaviour
         controls.Menu.Down.performed += OnDownPerformed;
         controls.Menu.Select.performed += OnSelectPerformed;
 
+        audioSource = GetComponent<AudioSource>();
+
     }
 
     private void Update()
@@ -52,7 +71,10 @@ public class PreAlphaTitleMenu : MonoBehaviour
     }
 
     private void OnUpPerformed(InputAction.CallbackContext context){
-        Debug.Log("menu up pressed");
+
+        if (state != TitleMenuState.MainMenu) return;
+        audioSource.PlayOneShot(menuNavSfx);
+        
         mainMenuIndex--;
         if (mainMenuIndex < 0) {
             mainMenuIndex = 0;
@@ -61,7 +83,9 @@ public class PreAlphaTitleMenu : MonoBehaviour
     }
     private void OnDownPerformed(InputAction.CallbackContext context)
     {
-        Debug.Log("menu down pressed");
+        if (state != TitleMenuState.MainMenu) return;
+        audioSource.PlayOneShot(menuNavSfx);
+       
         mainMenuIndex++;
         if (mainMenuIndex > mainMenuItems.Length-1) { 
             mainMenuIndex = mainMenuItems.Length-1;
@@ -72,26 +96,36 @@ public class PreAlphaTitleMenu : MonoBehaviour
     {
         Debug.Log("menu select pressed");
 
-        switch (mainMenuIndex) { 
-            case 0:
-                Debug.Log("start new game");
-                SceneManager.LoadScene(1);
-                break;
-            case 1:
-                break;
-            case 2:
-                break;
-            case 3:
-                break;
-            case 4:
-                Debug.Log("quit game");
-                Application.Quit();
-                break;
-        
-        
-        
-        }
+        if (state == TitleMenuState.MainMenu)
+        {
 
+            switch (mainMenuIndex)
+            {
+                case 0:
+                    Debug.Log("start new game");
+                    SceneManager.LoadScene(1);
+                    break;
+                case 1:
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    aboutMenuPanel.SetActive(true);
+                    state = TitleMenuState.AboutMenu;
+                    break;
+                case 4:
+                    Debug.Log("quit game");
+                    Application.Quit();
+                    break;
+
+
+
+            }
+        }
+        else if (state == TitleMenuState.AboutMenu) { 
+            aboutMenuPanel.SetActive(false);
+            state = TitleMenuState.MainMenu;
+        }
 
     }
 

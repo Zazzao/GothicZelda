@@ -33,7 +33,7 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Dodge Roll")]
     [SerializeField] private float rollSpeed = 8.0f;
-    [SerializeField] private float rollDuration = 0.25f;
+    [SerializeField] private float rollDuration = 0.25f;    // THIS IS NOT BEING USED (ROLL END AT ANIMATION END)
     [SerializeField] private float rollStaminaCost = 25.0f;
 
     private bool isRolling;
