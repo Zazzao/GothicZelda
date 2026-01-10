@@ -114,7 +114,14 @@ public class PlayerMovement : MonoBehaviour
 
     private void Awake(){
 
+        if (instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
         instance = this;
+        DontDestroyOnLoad(gameObject);
 
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<PlayerAnimator>();
