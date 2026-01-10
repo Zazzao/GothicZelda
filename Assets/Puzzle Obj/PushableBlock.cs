@@ -9,12 +9,21 @@ public class PushableBlock : MonoBehaviour
 {
 
     [SerializeField] private float pushDuration = 0.15f;
+    [SerializeField] private AudioClip pushSfx;
     private bool isMoving;
 
     private PlayerMovement player;
 
     private float blockPushTime = 0.5f;
     private float blockTimer = 0.0f;
+
+    private AudioSource audioSource;
+
+
+    private void Awake()
+    {
+        audioSource = GetComponent<AudioSource> ();
+    }
 
 
     private void Update()
@@ -94,6 +103,7 @@ public class PushableBlock : MonoBehaviour
     private IEnumerator MoveBlock(Vector2 target)
     {
         isMoving = true;
+        audioSource.PlayOneShot(pushSfx);
 
         Vector2 start = transform.position;
         float t = 0f;

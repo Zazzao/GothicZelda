@@ -3,7 +3,10 @@ using UnityEngine;
 public class NPCDialogue : MonoBehaviour, IInteractable
 {
 
-    [SerializeField] private DialogueData dialogue;
+    [SerializeField] private DialogueData[] dialogue;
+    [SerializeField] private GameObject importantInfoIcon;
+
+    private int dialogueIndex = 0;
     
     private PlayerMovement player;
     private bool isInteracting;
@@ -12,16 +15,18 @@ public class NPCDialogue : MonoBehaviour, IInteractable
     public bool IsInteracting { get { return isInteracting; } set { isInteracting = value; } }
 
     public string GetInteractVerb() => "Talk";
-    
-    public void Interact(){
-        
+
+    public void Interact() {
+
         if (!IsFacingNPC()) return;
 
         InteractionPromptUI.Instance.Hide();
-        isInteracting = true;   
+        isInteracting = true;
 
-        if (!DialogueManager.Instance.IsDialogueActive)
-            DialogueManager.Instance.StartDialogue(this,dialogue);
+        if (!DialogueManager.Instance.IsDialogueActive) { 
+            if (importantInfoIcon != null) importantInfoIcon.SetActive(false);
+            DialogueManager.Instance.StartDialogue(this, dialogue[dialogueIndex]); 
+        }
         else
             DialogueManager.Instance.AdvanceDialogue();
             
@@ -42,7 +47,7 @@ public class NPCDialogue : MonoBehaviour, IInteractable
         if (isInteracting) return;
 
         if (IsFacingNPC())
-            InteractionPromptUI.Instance.Show(GetInteractVerb(), (Vector2)this.transform.position + new Vector2(0, 1));
+            InteractionPromptUI.Instance.Show(GetInteractVerb(), (Vector2)this.transform.position + new Vector2(0.5f, 1));
         else
         {
             InteractionPromptUI.Instance.Hide();
@@ -83,5 +88,16 @@ public class NPCDialogue : MonoBehaviour, IInteractable
         }
        
     }
+
+    public void OnDialogueEnd() {
+        isInteracting = false;
+
+        dialogueIndex++;
+        if (dialogueIndex >= dialogue.Length - 1) { 
+            dialogueIndex = dialogue.Length - 1;
+        }
     
+    }
+
+
 }

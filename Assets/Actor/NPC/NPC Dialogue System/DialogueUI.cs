@@ -17,16 +17,28 @@ public class DialogueUI : MonoBehaviour
     [SerializeField] private GameObject leftPanel;
     [SerializeField] private GameObject rightPanel;
 
+    [Header("Text Settings")]
     [SerializeField] private float textTypingSpeed = 0.03f;
+    [SerializeField] private int typingSfxRate = 6;
     private int boxIndex = 0;
 
     private Coroutine typingRoutine;
     public bool IsTyping { get; private set; }
 
+    [Header("Sfx")]
+    [SerializeField] private AudioClip textTypingSfx;
+
+
+    private AudioSource audioSource;
+    private int typingTextCnt = 0;
+
+
+
     private void Awake()
     {
         Instance = this;
         root.SetActive(false);
+        audioSource = GetComponent<AudioSource>();
     }
 
     public void Show() => root.SetActive(true);
@@ -64,6 +76,8 @@ public class DialogueUI : MonoBehaviour
         foreach (char c in wrappedText){
             dialogueText[boxIndex].text += c;
             yield return new WaitForSeconds(textTypingSpeed);
+            typingTextCnt++;
+            if (typingTextCnt >= typingSfxRate) audioSource.PlayOneShot(textTypingSfx); //TO-DO: dont use a specific number here
         }
 
         IsTyping = false;

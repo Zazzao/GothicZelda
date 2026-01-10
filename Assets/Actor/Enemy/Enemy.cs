@@ -8,21 +8,32 @@ public class Enemy : MonoBehaviour{
     [SerializeField] private int maxHp = 3;
     private int hp;
 
-    private Rigidbody2D rb;
 
     [Header("Knockback")]
     [SerializeField] private float knockbackForce = 6.0f;
     [SerializeField] private float knockbackDuration = 0.15f;
 
-    EnemyAnimator anim;
+
+    [Header("Sfx")]
+    [SerializeField] private AudioClip hitSfx;
+
+
+
+    private Rigidbody2D rb;
+    private EnemyAnimator anim;
+    private AudioSource audioSource;
 
     private bool isKnockedBack = false;
     private Vector2 knockbackVelocity = Vector2.zero;
+
+
+
 
     void Awake(){
         rb = GetComponent<Rigidbody2D>();
         hp = maxHp;
         anim = GetComponent<EnemyAnimator>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     
@@ -43,7 +54,7 @@ public class Enemy : MonoBehaviour{
 
     public void TakeDamage(int damageAmount, Vector2 sourcePosition){
         if (isKnockedBack) return;
-
+        audioSource.PlayOneShot(hitSfx);
         Vector2 direction = ((Vector2)transform.position - sourcePosition).normalized;
         
 

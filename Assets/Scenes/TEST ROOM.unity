@@ -19869,7 +19869,6 @@ MonoBehaviour:
   fromRoom: {fileID: 2119490948}
   toRoom: {fileID: 9602173}
   playerOffset: {x: 0, y: -3}
-  newPlayerOffset: {x: 0, y: -3}
 --- !u!61 &216838782
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -20181,7 +20180,6 @@ MonoBehaviour:
   fromRoom: {fileID: 2119490948}
   toRoom: {fileID: 9602173}
   playerOffset: {x: 0, y: -3}
-  newPlayerOffset: {x: 0, y: -3}
 --- !u!61 &493245661
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -21077,7 +21075,6 @@ MonoBehaviour:
   fromRoom: {fileID: 9602173}
   toRoom: {fileID: 2119490948}
   playerOffset: {x: 0, y: 3}
-  newPlayerOffset: {x: 0, y: 3}
 --- !u!61 &1193830913
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -22344,7 +22341,6 @@ MonoBehaviour:
   fromRoom: {fileID: 9602173}
   toRoom: {fileID: 2119490948}
   playerOffset: {x: 0, y: 3}
-  newPlayerOffset: {x: 0, y: 3}
 --- !u!61 &1844481064
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -23832,10 +23828,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: TestEnemy
       objectReference: {fileID: 0}
-    - target: {fileID: 8081635705193838637, guid: 846e0446042533c4eb8e272e3990e1d7, type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: 06ffb2339386e8b4db68f87e9a1b8845, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

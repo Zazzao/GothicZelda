@@ -10,6 +10,7 @@ public class DialogueManager : MonoBehaviour
     private int currentIndex;
     private bool isDialogueActive;
 
+    
 
     public bool IsDialogueActive {  get { return isDialogueActive; } }
 
@@ -61,7 +62,8 @@ public class DialogueManager : MonoBehaviour
         DialogueUI.Instance.Hide();
         PlayerMovement.instance.IsFrozen = false;
 
-        currentNpc.IsInteracting = false;
+        //currentNpc.IsInteracting = false;
+        currentNpc.OnDialogueEnd();
         
     }
 }

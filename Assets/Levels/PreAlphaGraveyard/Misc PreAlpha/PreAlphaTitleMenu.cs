@@ -19,6 +19,7 @@ public class PreAlphaTitleMenu : MonoBehaviour
     [SerializeField] private AudioClip menuBgm;
     [SerializeField] private AudioClip crowSfx;
     [SerializeField] private AudioClip menuNavSfx;
+    [SerializeField] private AudioClip menuSelectSfx;
     private AudioSource audioSource;
 
     [Header("Menu Panels")]
@@ -37,6 +38,7 @@ public class PreAlphaTitleMenu : MonoBehaviour
     public enum TitleMenuState { 
         Intro,
         MainMenu,
+        StartNewGame,
         LoadGameMenu,
         OptionsMenu,
         AboutMenu
@@ -45,21 +47,16 @@ public class PreAlphaTitleMenu : MonoBehaviour
 
 
     #region On Enable/Disable
-    private void OnEnable()
-    {
+    private void OnEnable(){
         controls.Enable();
     }
 
-    private void OnDisable()
-    {
+    private void OnDisable(){
         controls.Disable();
     }
     #endregion
 
-    void Awake()
-    {
-
-        //Screen.SetResolution(640, 360,true);
+    void Awake(){
 
         mainMenuIndex = 0;  
         UpdateMainMenu();
@@ -74,21 +71,12 @@ public class PreAlphaTitleMenu : MonoBehaviour
 
     }
 
-    private void Start()
-    {
+    private void Start(){
         StartCoroutine(MenuIntro());
     }
 
-
-
-    private void Update()
-    {
+    private void Update(){
         if (Input.GetKeyDown(KeyCode.Escape)) Application.Quit(); //debug
-
-
-
-        
-
     }
 
     private void OnUpPerformed(InputAction.CallbackContext context){
@@ -113,24 +101,24 @@ public class PreAlphaTitleMenu : MonoBehaviour
         }
         UpdateMainMenu();
     }
-    private void OnSelectPerformed(InputAction.CallbackContext context)
-    {
+    private void OnSelectPerformed(InputAction.CallbackContext context){
         Debug.Log("menu select pressed");
+        audioSource.PlayOneShot(menuSelectSfx);
+        if (state == TitleMenuState.MainMenu){
 
-        if (state == TitleMenuState.MainMenu)
-        {
-
-            switch (mainMenuIndex)
-            {
+            switch (mainMenuIndex){
                 case 0:
                     Debug.Log("start new game");
-                    SceneManager.LoadScene(1);
+                    StartCoroutine(StartNewGame());
                     break;
                 case 1:
+                    Debug.Log("load game");
                     break;
                 case 2:
+                    Debug.Log("Options");
                     break;
                 case 3:
+                    Debug.Log("about Menu");
                     aboutMenuPanel.SetActive(true);
                     state = TitleMenuState.AboutMenu;
                     break;
@@ -139,11 +127,8 @@ public class PreAlphaTitleMenu : MonoBehaviour
                     Application.Quit();
                     break;
 
-
-
             }
-        }
-        else if (state == TitleMenuState.AboutMenu) { 
+        }else if (state == TitleMenuState.AboutMenu) { 
             aboutMenuPanel.SetActive(false);
             state = TitleMenuState.MainMenu;
         }
@@ -195,12 +180,20 @@ public class PreAlphaTitleMenu : MonoBehaviour
         yield return new WaitForSeconds(2.0f);
         yield return StartCoroutine(Fade(fadeOutCanvasGroup,0.0f)); // fade in
         yield return new WaitForSeconds(1.0f);
+
         Debug.Log("Intro Over");
         state = TitleMenuState.MainMenu;
         mainMenuPanel.SetActive(true);
     
     }
 
+    private IEnumerator StartNewGame(){
+        state = TitleMenuState.StartNewGame;
+        yield return StartCoroutine(Fade(fadeOutCanvasGroup, 1.0f)); // fade out
+        yield return new WaitForSeconds(2.0f);
+        SceneManager.LoadScene(1);
+
+    }
 
 
 }

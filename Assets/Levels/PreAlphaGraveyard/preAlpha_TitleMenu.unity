@@ -783,6 +783,7 @@ MonoBehaviour:
   menuBgm: {fileID: 8300000, guid: 0b12a9e76e575e84db8c627018724f69, type: 3}
   crowSfx: {fileID: 8300000, guid: 7484e354be9a63b41a23d2590973db03, type: 3}
   menuNavSfx: {fileID: 8300000, guid: 4a6f96b8b10d6274790ef5f65c5f2cbf, type: 3}
+  menuSelectSfx: {fileID: 8300000, guid: 7d919ea70cba2414fb285cf0fc6d7a5d, type: 3}
   mainMenuPanel: {fileID: 716952525}
   aboutMenuPanel: {fileID: 519281333}
   fadeOutCanvasGroup: {fileID: 2069729863}
@@ -1905,7 +1906,7 @@ GameObject:
   - component: {fileID: 1520298931}
   - component: {fileID: 1520298930}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: bgm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3055,8 +3056,8 @@ CanvasRenderer:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 463827808}
   - {fileID: 1510704579}
   - {fileID: 735502671}
   - {fileID: 2001235742}
-  - {fileID: 463827808}
   - {fileID: 1520298931}

@@ -36,6 +36,14 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float rollDuration = 0.25f;    // THIS IS NOT BEING USED (ROLL END AT ANIMATION END)
     [SerializeField] private float rollStaminaCost = 25.0f;
 
+    [Header("Sfx")]
+    [SerializeField] private AudioClip attackSfx;
+    [SerializeField] private AudioClip hitSfx;
+    [SerializeField] private AudioClip rollSfx;
+
+    private AudioSource audioSource;
+
+
     private bool isRolling;
     private Vector2 rollDirection;
 
@@ -125,6 +133,7 @@ public class PlayerMovement : MonoBehaviour
 
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<PlayerAnimator>();
+        audioSource = GetComponent<AudioSource>();
 
         controls = new PlayerInputActions();
 
@@ -200,6 +209,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnAttackStart() {
         isAttacking = true;
+        audioSource.PlayOneShot(attackSfx);
         anim.Play(ActorAnimator.ActorAnimation.Attack, facing, true, false);
     }
 
@@ -220,7 +230,8 @@ public class PlayerMovement : MonoBehaviour
     private void OnRollStart(){
         isRolling = true;
         isInvulnerable = true;          // might want to handle i-frames in animation
-        rollDirection = moveInput;  // might not need this
+        rollDirection = moveInput;      // might not need this
+        audioSource.PlayOneShot(rollSfx);   
         if (rollDirection == Vector2.zero) return;
         anim.Play(ActorAnimator.ActorAnimation.Roll, facing, true, false);
 
@@ -245,6 +256,9 @@ public class PlayerMovement : MonoBehaviour
 
         if (isKnockedBack) return;
         if (isInvulnerable) return;
+
+        audioSource.PlayOneShot(hitSfx);
+
 
         Vector2 direction = ((Vector2)transform.position - sourcePosition).normalized;
         ApplyKnockback(direction);
