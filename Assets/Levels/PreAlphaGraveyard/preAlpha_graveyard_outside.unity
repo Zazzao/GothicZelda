@@ -308,10 +308,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas_GameHUD
       objectReference: {fileID: 0}
-    - target: {fileID: 6257046566396532148, guid: 905ee4f43f48fb442841eac236c2e1be, type: 3}
-      propertyPath: m_PixelsPerUnitMultiplier
-      value: 0.01
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
