@@ -155,6 +155,9 @@ public class PlayerMovement : MonoBehaviour
         //setup hearth health system
         HeartHealthSystem heartHealthSystem = new HeartHealthSystem((int)maxHp/4); //get number of hearts based on hp (4 fragments per heart)
         GameObject.FindAnyObjectByType<HealthDisplay_Hearts>().SetHeartHealthSystem(heartHealthSystem);
+
+
+
     }
 
 

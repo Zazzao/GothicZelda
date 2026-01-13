@@ -16,6 +16,7 @@ public class Enemy : MonoBehaviour{
 
     [Header("Sfx")]
     [SerializeField] private AudioClip hitSfx;
+    [SerializeField] private AudioClip dieSfx;
 
 
 
@@ -84,6 +85,7 @@ public class Enemy : MonoBehaviour{
     private void Die(){
         //Destroy(this.gameObject);
         Debug.Log("Enemy died");
+        audioSource.PlayOneShot(dieSfx);
         anim.Play(ActorAnimator.ActorAnimation.Dying,ActorAnimator.FacingDirection.South,true,true);   
         GetComponent<CapsuleCollider2D>().enabled = false;
     }

@@ -61,6 +61,8 @@ public class PreAlphaTitleMenu : MonoBehaviour
         mainMenuIndex = 0;  
         UpdateMainMenu();
 
+        Cursor.visible = false;
+
         controls = new PlayerInputActions();
 
         controls.Menu.Up.performed += OnUpPerformed;

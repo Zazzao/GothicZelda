@@ -187,6 +187,7 @@ MonoBehaviour:
   knockbackForce: 6
   knockbackDuration: 0.15
   hitSfx: {fileID: 8300000, guid: 6b4c8d3d0aed83c45b425635467289be, type: 3}
+  dieSfx: {fileID: 8300000, guid: a1ce16f43e8c9d441a055913791a3ed3, type: 3}
 --- !u!114 &5223562687443672206
 MonoBehaviour:
   m_ObjectHideFlags: 0
