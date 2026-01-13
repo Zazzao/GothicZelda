@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using DensetsuEngine.Utils;
 using UnityEngine;
+using UnityEngine.AI;
 
 
 namespace DensetsuEngine.GOAP {
@@ -93,7 +94,7 @@ namespace DensetsuEngine.GOAP {
                 .Build());
 
             actions.Add(new AgentAction.Builder("Wander Around")
-                .WithStrategy(new WanderStrategy(Vector2, 10))
+                .WithStrategy(new WanderStrategy(new NavMeshAgent(), 10))
                 .AddEffect(beliefs["AgentMoving"])
                 .Build());
 

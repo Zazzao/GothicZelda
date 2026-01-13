@@ -614,7 +614,7 @@ GameObject:
   - component: {fileID: 181962746}
   - component: {fileID: 181962747}
   m_Layer: 0
-  m_Name: Docks_Area 02
+  m_Name: 'Docks_Room 02 [Dockhouse]'
   m_TagString: Untagged
   m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -18034,7 +18034,7 @@ GameObject:
   - component: {fileID: 1022123461}
   - component: {fileID: 1022123460}
   m_Layer: 0
-  m_Name: Docks_Area 03
+  m_Name: Docks_Room 03
   m_TagString: Untagged
   m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -22951,7 +22951,7 @@ GameObject:
   - component: {fileID: 1241239028}
   - component: {fileID: 1241239030}
   m_Layer: 0
-  m_Name: Docks_Area 01
+  m_Name: Docks_Room 01
   m_TagString: Untagged
   m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
