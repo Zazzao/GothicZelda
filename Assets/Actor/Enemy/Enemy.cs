@@ -1,5 +1,5 @@
 using UnityEngine;
-
+using Pathfinding;
 
 
 
@@ -27,6 +27,16 @@ public class Enemy : MonoBehaviour{
     private bool isKnockedBack = false;
     private Vector2 knockbackVelocity = Vector2.zero;
 
+    //A* Pathfinding [may want to move this in future
+    [Header("Pathfinding")]
+    public Transform target;
+    public float moveSpeed = 2.0f;
+    public float nextWaypointDistancce = 1.2f;
+
+    private Path path;
+    private int currentWaypoint = 0;
+    private bool reachEndOfPath = false;
+    private Seeker seeker;
 
 
 
@@ -35,21 +45,51 @@ public class Enemy : MonoBehaviour{
         hp = maxHp;
         anim = GetComponent<EnemyAnimator>();
         audioSource = GetComponent<AudioSource>();
+
+        seeker = GetComponent<Seeker>();
     }
 
+    void Start() {
+        InvokeRepeating("UpdatePath", 0.0f, 0.5f);
+        
+    }
     
+
     void FixedUpdate(){
 
-        Vector2 moveDir;
+        Vector2 moveDir = Vector2.zero;
 
-        if (isKnockedBack){
+        if (isKnockedBack)
+        {
             moveDir = knockbackVelocity;
         }
-        else {
+        else if (path != null) {
+            if (currentWaypoint >= path.vectorPath.Count)
+            {
+                reachEndOfPath = true;
+                moveDir = Vector2.zero;
+            }
+            else { 
+                reachEndOfPath=false;
+                moveDir = ((Vector2)path.vectorPath[currentWaypoint] - rb.position).normalized;
+            }
+        }
+        else
+        {
             moveDir = Vector2.zero;
         }
 
         rb.MovePosition(rb.position + moveDir * Time.fixedDeltaTime);
+
+        if (!reachEndOfPath)
+        {
+            //check if at next waypoint
+            float distance = Vector2.Distance(rb.position, path.vectorPath[currentWaypoint]);
+            if (distance < nextWaypointDistancce)
+            {
+                currentWaypoint++;
+            }
+        }
 
     }
 
@@ -91,8 +131,20 @@ public class Enemy : MonoBehaviour{
     }
 
 
+    private void OnPathComplete(Path p) {
 
+        if (!p.error)
+        {
+            path = p;
+            currentWaypoint = 0;
 
+        }
 
+    }
+
+    private void UpdatePath() {
+        if (!seeker.IsDone()) return;
+        seeker.StartPath(rb.position, target.position, OnPathComplete);
+    }
 
 }
