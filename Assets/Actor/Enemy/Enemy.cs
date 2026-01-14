@@ -35,7 +35,7 @@ public class Enemy : MonoBehaviour{
 
     private Path path;
     private int currentWaypoint = 0;
-    private bool reachEndOfPath = false;
+    private bool reachEndOfPath = true;
     private Seeker seeker;
 
 
@@ -53,7 +53,31 @@ public class Enemy : MonoBehaviour{
         InvokeRepeating("UpdatePath", 0.0f, 0.5f);
         
     }
+
+    void Update() {
+
+        //for debug testing 
+        if (Input.GetKeyDown(KeyCode.P)) {
+            if (target == null)
+            {
+                target = FindObjectOfType<PlayerMovement>().gameObject.transform;
+            }
+            else {
+                target = null;
+                path.path.Clear();
+                path.
+                path = null;
+                reachEndOfPath = true;
+
+               
+            }
+        
+        }
     
+    
+    }
+
+
 
     void FixedUpdate(){
 
@@ -64,8 +88,7 @@ public class Enemy : MonoBehaviour{
             moveDir = knockbackVelocity;
         }
         else if (path != null) {
-            if (currentWaypoint >= path.vectorPath.Count)
-            {
+            if (currentWaypoint >= path.vectorPath.Count){
                 reachEndOfPath = true;
                 moveDir = Vector2.zero;
             }
@@ -144,7 +167,11 @@ public class Enemy : MonoBehaviour{
 
     private void UpdatePath() {
         if (!seeker.IsDone()) return;
-        seeker.StartPath(rb.position, target.position, OnPathComplete);
+        if (target != null)
+            seeker.StartPath(rb.position, target.position, OnPathComplete);
+        else
+            seeker.StartPath(rb.position, rb.position, OnPathComplete);
+       
     }
 
 }

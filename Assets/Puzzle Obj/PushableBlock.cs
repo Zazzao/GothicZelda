@@ -26,17 +26,6 @@ public class PushableBlock : MonoBehaviour
     }
 
 
-    private void Update()
-    {
-       //debug testing
-        if (Input.GetKeyUp(KeyCode.P)) {
-
-            Vector2 dir = new Vector2(0, 1);
-            TryPush(dir);
-        
-        }
-    }
-
 
 
     private void OnCollisionEnter2D(Collision2D collision)
