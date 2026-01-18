@@ -1,0 +1,521 @@
+fileFormatVersion: 2
+guid: 3439205c1b22c564f9b848631b2a2cfc
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 2111461001170816345
+    second: TestEnemy_Walk_0
+  - first:
+      213: -7570758266310373937
+    second: TestEnemy_Walk_1
+  - first:
+      213: 4843309132468115034
+    second: TestEnemy_Walk_2
+  - first:
+      213: 122816907303297397
+    second: TestEnemy_Walk_3
+  - first:
+      213: 3144221592639435167
+    second: TestEnemy_Walk_4
+  - first:
+      213: -7351964264890897062
+    second: TestEnemy_Walk_5
+  - first:
+      213: -5009060696297324781
+    second: TestEnemy_Walk_6
+  - first:
+      213: 6847385697696653865
+    second: TestEnemy_Walk_7
+  - first:
+      213: -9186598647768514740
+    second: TestEnemy_Walk_8
+  - first:
+      213: 265947159556201348
+    second: TestEnemy_Walk_9
+  - first:
+      213: 5052581929219237302
+    second: TestEnemy_Walk_10
+  - first:
+      213: 1722019395344188701
+    second: TestEnemy_Walk_11
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 16
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: 4
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: TestEnemy_Walk_0
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 102
+        width: 36
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 95d80e3f79a6d4d10800000000000000
+      internalID: 2111461001170816345
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TestEnemy_Walk_1
+      rect:
+        serializedVersion: 2
+        x: 58
+        y: 102
+        width: 36
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fcdc738e7734fe690800000000000000
+      internalID: -7570758266310373937
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TestEnemy_Walk_2
+      rect:
+        serializedVersion: 2
+        x: 107
+        y: 101
+        width: 27
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a56da2abef3e63340800000000000000
+      internalID: 4843309132468115034
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TestEnemy_Walk_3
+      rect:
+        serializedVersion: 2
+        x: 155
+        y: 103
+        width: 36
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 571a934935554b100800000000000000
+      internalID: 122816907303297397
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TestEnemy_Walk_4
+      rect:
+        serializedVersion: 2
+        x: 13
+        y: 68
+        width: 24
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f91f26431e482ab20800000000000000
+      internalID: 3144221592639435167
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TestEnemy_Walk_5
+      rect:
+        serializedVersion: 2
+        x: 60
+        y: 68
+        width: 22
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a5defc5147398f990800000000000000
+      internalID: -7351964264890897062
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TestEnemy_Walk_6
+      rect:
+        serializedVersion: 2
+        x: 109
+        y: 70
+        width: 22
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 31fb3daf5dd3c7ab0800000000000000
+      internalID: -5009060696297324781
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TestEnemy_Walk_7
+      rect:
+        serializedVersion: 2
+        x: 156
+        y: 70
+        width: 23
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 922ac47530dc60f50800000000000000
+      internalID: 6847385697696653865
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TestEnemy_Walk_8
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 36
+        width: 24
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c4f7ca9d335a28080800000000000000
+      internalID: -9186598647768514740
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TestEnemy_Walk_9
+      rect:
+        serializedVersion: 2
+        x: 63
+        y: 37
+        width: 22
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 48b1f565885d0b300800000000000000
+      internalID: 265947159556201348
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TestEnemy_Walk_10
+      rect:
+        serializedVersion: 2
+        x: 111
+        y: 37
+        width: 22
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6b5aba1be706e1640800000000000000
+      internalID: 5052581929219237302
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TestEnemy_Walk_11
+      rect:
+        serializedVersion: 2
+        x: 157
+        y: 37
+        width: 23
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d15c2d33487d5e710800000000000000
+      internalID: 1722019395344188701
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TestEnemy_Walk_12
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 5
+        width: 27
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 07b06316fc264ef48890f042a62f33f3
+      internalID: 1859360725
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TestEnemy_Walk_13
+      rect:
+        serializedVersion: 2
+        x: 56
+        y: 4
+        width: 30
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 39226f3a227172540bf4780921c8591d
+      internalID: -1918398465
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TestEnemy_Walk_14
+      rect:
+        serializedVersion: 2
+        x: 103
+        y: 2
+        width: 30
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7932b83412605374fb733b254b60c2c0
+      internalID: 1594908973
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TestEnemy_Walk_15
+      rect:
+        serializedVersion: 2
+        x: 152
+        y: 2
+        width: 30
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7036523a6778cd141a01960a21b9286e
+      internalID: -1527659814
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: a4a41877e0786c841851d023bf919722
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      TestEnemy_Walk_0: 2111461001170816345
+      TestEnemy_Walk_1: -7570758266310373937
+      TestEnemy_Walk_10: 5052581929219237302
+      TestEnemy_Walk_11: 1722019395344188701
+      TestEnemy_Walk_12: 1859360725
+      TestEnemy_Walk_13: -1918398465
+      TestEnemy_Walk_14: 1594908973
+      TestEnemy_Walk_15: -1527659814
+      TestEnemy_Walk_2: 4843309132468115034
+      TestEnemy_Walk_3: 122816907303297397
+      TestEnemy_Walk_4: 3144221592639435167
+      TestEnemy_Walk_5: -7351964264890897062
+      TestEnemy_Walk_6: -5009060696297324781
+      TestEnemy_Walk_7: 6847385697696653865
+      TestEnemy_Walk_8: -9186598647768514740
+      TestEnemy_Walk_9: 265947159556201348
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

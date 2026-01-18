@@ -1,8 +1,10 @@
 
 using System.Collections.Generic;
+using System.Linq;
 using DensetsuEngine.Utils;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Rendering;
 
 
 namespace DensetsuEngine.GOAP {
@@ -23,9 +25,6 @@ namespace DensetsuEngine.GOAP {
         [SerializeField] Transform patrolPosOne;
         [SerializeField] Transform patrolPosTwo;
 
-        // nav mesh
-        // anim
-        // rb
 
         //JUST TO TEST THE AGENT
         [Header("Stats")]
@@ -34,20 +33,24 @@ namespace DensetsuEngine.GOAP {
         CountdownTimer statsTimer;
 
         //testing
-        public bool IsMoving = false;
-
+        public bool IsMoving => enemy.HasPath; //to-do: this is not getting set so its always false
+        Enemy enemy;
 
         private GameObject target;
         private Vector2 destination;
 
         private AgentGoal lastGoal; // to make sure were not picking same goal over and over
         public AgentGoal currentGoal;
-        //public ActionPlan actionPlan;
+        public ActionPlan actionPlan;
         public AgentAction currentAction;
 
         public Dictionary<string, AgentBelief> beliefs;
         public HashSet<AgentAction> actions;
         public HashSet<AgentGoal> goals;
+
+        IGoapPlanner gPlanner;
+
+
 
         private bool InRangeOf(Vector2 pos, float range) => Vector2.Distance(transform.position, pos) < range;
 
@@ -65,6 +68,11 @@ namespace DensetsuEngine.GOAP {
         {
             // get ref to all of the components 
             // we are NOT going to do this here
+           
+            gPlanner = new GoapPlanner();
+            enemy = GetComponent<Enemy>();
+
+
         }
 
         private void Start()
@@ -94,7 +102,7 @@ namespace DensetsuEngine.GOAP {
                 .Build());
 
             actions.Add(new AgentAction.Builder("Wander Around")
-                .WithStrategy(new WanderStrategy(new NavMeshAgent(), 10))
+                .WithStrategy(new WanderStrategy(GetComponent<Enemy>(), 4))
                 .AddEffect(beliefs["AgentMoving"])
                 .Build());
 
@@ -145,6 +153,73 @@ namespace DensetsuEngine.GOAP {
             currentAction = null;
             currentGoal = null;
         }
+
+
+        private void Update()
+        {
+            statsTimer.Tick(Time.deltaTime);
+
+            //udate the plan and current action if there is one
+            if (currentAction == null) {
+                Debug.Log("calculating a potenial new plan");
+                CalculatePlan();
+
+                if (actionPlan != null && actionPlan.Actions.Count > 0) { 
+                    //reset nav mesh
+                    
+                    currentGoal = actionPlan.AgentGoal;
+                    currentAction = actionPlan.Actions.Pop();
+                    currentAction.Start();
+
+                    Debug.Log($"Goal: {currentGoal.Name} with {actionPlan.Actions.Count} actions in plan");
+                    Debug.Log($"Popped action:{currentAction.Name}");
+
+                }
+            }
+
+            // If we have a current action, execute it
+            if (actionPlan != null && currentAction != null) { 
+                currentAction.Update(Time.deltaTime);
+
+                if (currentAction.Complete) {
+                    Debug.Log($"{currentAction.Name} complete");
+                    currentAction.Stop();
+                    currentAction = null;
+
+                    if (actionPlan.Actions.Count == 0)
+                    {
+                        Debug.Log("Plan Complete");
+                        lastGoal = currentGoal;
+                        currentGoal = null;
+                    }
+
+                }
+
+            }
+
+        }
+
+      
+
+
+        private void CalculatePlan() {
+            var priorityLevel = currentGoal?.Priority ?? 0;
+
+            HashSet<AgentGoal> goalsToCheck = goals;
+
+            // If we have a current goal, we only want to check goals with higher priority
+            if (currentGoal != null) {
+                Debug.Log("Current goal exist, checking goals with higher priority");
+                goalsToCheck = new HashSet<AgentGoal>(goals.Where(g => g.Priority > priorityLevel));
+            }
+
+            var potentialPlan = gPlanner.Plan(this, goalsToCheck, lastGoal);
+            if (potentialPlan != null) { 
+                actionPlan = potentialPlan;
+            }
+
+        }
+
 
     }
 }
