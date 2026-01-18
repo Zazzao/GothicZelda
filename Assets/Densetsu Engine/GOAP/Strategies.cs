@@ -61,27 +61,22 @@ namespace DensetsuEngine.GOAP {
             //this.agent = agent;
             this.enemy = enemy;
             this.wanderRadius = wanderRadius;
+            
         }
 
         public void Start() {
 
             Vector2 randomDirection = (UnityEngine.Random.insideUnitCircle * wanderRadius);       
             enemy.SetPath((Vector2)enemy.transform.position + randomDirection);
-            //TO-DO: this should prob have some kind of "back out timer" in case it cant reach the target pos
+            
+           
 
-            // Code From tutorial that uses nav mesh
-            /*
-            for (int i = 0; i < 5; i++) {
-                Vector2 randomDirection = (UnityEngine.Random.insideUnitCircle * wanderRadius);
-                NavMeshHit hit;
 
-                if (NavMesh.SamplePosition((Vector2)agent.transform.position + randomDirection, out hit, wanderRadius, 1)) {
-                    agent.SetDestination(hit.position);
-                    return;
-                }
+        }
 
-            }
-            //*/
+        public void Stop() { 
+            //enemy.ReachEndOfPath = false;
+            Debug.Log("wander stop()");
         }
 
     }

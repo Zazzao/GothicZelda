@@ -36,7 +36,7 @@ public class Enemy : MonoBehaviour{
 
     private Path path;
     private int currentWaypoint = 0;
-    public bool ReachEndOfPath { get; private set; }
+    [SerializeField] public bool ReachEndOfPath; //{ get; set; }
     private Seeker seeker;
 
 
@@ -58,45 +58,35 @@ public class Enemy : MonoBehaviour{
  
     void FixedUpdate(){
 
-        Vector2 moveDir = Vector2.zero;
+        Vector2 moveDir;
 
         if (isKnockedBack){
             moveDir = knockbackVelocity;
         }
-        else if (path != null) {
-            if (currentWaypoint >= path.vectorPath.Count){
-                ReachEndOfPath = true;
-                moveDir = Vector2.zero;
-                //make enemy idle
-                anim.Play(ActorAnimator.ActorAnimation.Idle, ActorAnimator.FacingDirection.South, false, false);
-            }
-            else { 
-                ReachEndOfPath=false;
-                moveDir = ((Vector2)path.vectorPath[currentWaypoint] - rb.position).normalized;
-                //make enemy walking
-                anim.Play(ActorAnimator.ActorAnimation.Walk, ActorAnimator.FacingDirection.East, false, false);
-            }
+        else if (path != null && currentWaypoint < path.vectorPath.Count) {
+            moveDir = ((Vector2)path.vectorPath[currentWaypoint] - rb.position).normalized;
+            anim.Play(ActorAnimator.ActorAnimation.Walk, ActorAnimator.FacingDirection.East, false, false);  
         }
         else{
             moveDir = Vector2.zero;
-            //make enemy idle
             anim.Play(ActorAnimator.ActorAnimation.Idle, ActorAnimator.FacingDirection.South, false, false);
         }
 
         rb.MovePosition(rb.position + moveDir * Time.fixedDeltaTime);
         
-
-        if (!ReachEndOfPath && path != null){
+        if (path != null){
             //check if at next waypoint
             float distance = Vector2.Distance(rb.position, path.vectorPath[currentWaypoint]);
-            if (distance < nextWaypointDistancce)
+            if (distance < nextWaypointDistancce)currentWaypoint++;
+
+            if (currentWaypoint >= path.vectorPath.Count)
             {
-                currentWaypoint++;
-            }
-            else {
                 ReachEndOfPath = true;
+                path = null;
             }
+
         }
+
 
     }
 
@@ -142,6 +132,7 @@ public class Enemy : MonoBehaviour{
     public void SetPath(Vector2 pos) {
         if (!seeker.IsDone()) return;
         seeker.StartPath(rb.position, pos, OnPathComplete);
+        ReachEndOfPath = false;
     }
 
     private void OnPathComplete(Path p) {

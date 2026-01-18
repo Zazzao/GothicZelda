@@ -102,7 +102,7 @@ namespace DensetsuEngine.GOAP {
                 .Build());
 
             actions.Add(new AgentAction.Builder("Wander Around")
-                .WithStrategy(new WanderStrategy(GetComponent<Enemy>(), 4))
+                .WithStrategy(new WanderStrategy(GetComponent<Enemy>(), 8))
                 .AddEffect(beliefs["AgentMoving"])
                 .Build());
 
@@ -148,7 +148,7 @@ namespace DensetsuEngine.GOAP {
         }
 
         private void HandleTargetChanged() {
-            Debug.Log("Target changed, clearing current action and goal");
+            //Debug.Log("Target changed, clearing current action and goal");
             //force planner to re-evaluate the plan
             currentAction = null;
             currentGoal = null;
@@ -182,13 +182,13 @@ namespace DensetsuEngine.GOAP {
                 currentAction.Update(Time.deltaTime);
 
                 if (currentAction.Complete) {
-                    Debug.Log($"{currentAction.Name} complete");
+                    //Debug.Log($"{currentAction.Name} complete");
                     currentAction.Stop();
                     currentAction = null;
 
                     if (actionPlan.Actions.Count == 0)
                     {
-                        Debug.Log("Plan Complete");
+                        //Debug.Log("Plan Complete");
                         lastGoal = currentGoal;
                         currentGoal = null;
                     }
@@ -209,7 +209,7 @@ namespace DensetsuEngine.GOAP {
 
             // If we have a current goal, we only want to check goals with higher priority
             if (currentGoal != null) {
-                Debug.Log("Current goal exist, checking goals with higher priority");
+                //Debug.Log("Current goal exist, checking goals with higher priority");
                 goalsToCheck = new HashSet<AgentGoal>(goals.Where(g => g.Priority > priorityLevel));
             }
 
