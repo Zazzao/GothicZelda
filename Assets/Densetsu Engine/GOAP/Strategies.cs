@@ -76,7 +76,7 @@ namespace DensetsuEngine.GOAP {
 
         public void Stop() { 
             //enemy.ReachEndOfPath = false;
-            Debug.Log("wander stop()");
+            //Debug.Log("wander stop()");
         }
 
     }

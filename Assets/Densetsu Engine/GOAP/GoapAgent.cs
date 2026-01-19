@@ -64,14 +64,10 @@ namespace DensetsuEngine.GOAP {
             chaseSensor.OnTargetChanged -= HandleTargetChanged;
         }
 
-        private void Awake()
-        {
-            // get ref to all of the components 
-            // we are NOT going to do this here
-           
+        private void Awake(){
+            
             gPlanner = new GoapPlanner();
             enemy = GetComponent<Enemy>();
-
 
         }
 
@@ -171,8 +167,8 @@ namespace DensetsuEngine.GOAP {
                     currentAction = actionPlan.Actions.Pop();
                     currentAction.Start();
 
-                    Debug.Log($"Goal: {currentGoal.Name} with {actionPlan.Actions.Count} actions in plan");
-                    Debug.Log($"Popped action:{currentAction.Name}");
+                    //Debug.Log($"Goal: {currentGoal.Name} with {actionPlan.Actions.Count} actions in plan");
+                    //Debug.Log($"Popped action:{currentAction.Name}");
 
                 }
             }
