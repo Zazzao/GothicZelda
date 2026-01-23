@@ -1,7 +1,8 @@
+using System;
+//using System.Numerics;
 using DensetsuEngine.Utils;
-using Pathfinding;
 using UnityEngine;
-using UnityEngine.AI;
+
 
 
 
@@ -45,6 +46,27 @@ namespace DensetsuEngine.GOAP {
         public void Update(float deltaTime) => timer.Tick(deltaTime);
     }
 
+
+    public class MoveStrategy : IActionStrategy
+    {
+        readonly Enemy enemy;
+        readonly Vector2 destination;
+        public bool CanPerform => !Complete;
+        public bool Complete => enemy.ReachEndOfPath;
+
+        public MoveStrategy(Enemy enemy, Vector2 destination)
+        {
+            this.enemy = enemy;
+            this.destination = destination;
+        }
+
+        public void Start() => enemy.SetPath(destination);
+       // public void Stop() => enemy.SetPath = null;
+
+    }
+
+
+
     public class WanderStrategy : IActionStrategy {
         
         //i dont have pathfind added yet
@@ -81,6 +103,29 @@ namespace DensetsuEngine.GOAP {
 
     }
 
+
+    public class AttackStrategy : IActionStrategy { 
+        public bool CanPerform => true; //agent can always attack
+        public bool Complete {  get; private set; }
+
+        readonly CountdownTimer timer;
+
+        public AttackStrategy() {
+            //needs to tell the enemy to do the attack and base timer off of the animtion length
+
+            timer = new CountdownTimer(1.0f);
+            timer.OnTimerStart += () => Complete = false;
+            timer.OnTimerStop += () => Complete = true; 
+        }
+
+        public void Start() {
+            Debug.Log("Enemy attacking player");
+            timer.Start();
+        }
+
+        public void Update(float deltaTime) => timer.Tick(deltaTime);
+
+    }
 
 }
 

@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using DensetsuEngine.Utils;
 using UnityEngine;
-using UnityEngine.AI;
-using UnityEngine.Rendering;
+
 
 
 namespace DensetsuEngine.GOAP {
@@ -86,6 +85,19 @@ namespace DensetsuEngine.GOAP {
             factory.AddBelief("Nothing", () => false);
             factory.AddBelief("AgentIdle", () => !IsMoving);
             factory.AddBelief("AgentMoving", () => IsMoving);
+            factory.AddBelief("AgentHealthLow", () => health < 30);
+            factory.AddBelief("AgentIsHealthy", () => health >= 50);
+            factory.AddBelief("AgentStaminaLow", () => stamina < 10);
+            factory.AddBelief("AgentIsRested", () => stamina >= 50);
+
+            factory.AddLocationBelief("AgentAtPatrolPosOne", 3.0f, patrolPosOne);
+            factory.AddLocationBelief("AgentAtPatrolPosTwo", 3.0f, patrolPosTwo);
+            factory.AddLocationBelief("AgentAtRestingPos", 3.0f, restingPosition);
+            factory.AddLocationBelief("AgentAtFoodPile", 3.0f,foodPile);
+            
+            factory.AddSensorBelief("PlayerInChaseRange", chaseSensor);
+            factory.AddSensorBelief("PlayerInAttackRange", attackSensor);
+            factory.AddBelief("AttackingPlayer", ()=> false); //Player can always be attacked, this will never become true
 
         }
 
@@ -100,6 +112,58 @@ namespace DensetsuEngine.GOAP {
             actions.Add(new AgentAction.Builder("Wander Around")
                 .WithStrategy(new WanderStrategy(GetComponent<Enemy>(), 8))
                 .AddEffect(beliefs["AgentMoving"])
+                .Build());
+
+            actions.Add(new AgentAction.Builder("MoveToEatingPosition")
+                .WithStrategy(new MoveStrategy(GetComponent<Enemy>(),(Vector2)foodPile.position))
+                .AddEffect(beliefs["AgentAtFoodPile"])
+                .Build());
+
+            actions.Add(new AgentAction.Builder("Eat")
+                .WithStrategy(new IdleStrategy(5)) //later replace with a command
+                .AddPrecondition(beliefs["AgentAtFoodPile"])
+                .AddEffect(beliefs["AgentIsHealthy"])
+                .Build());
+
+            actions.Add(new AgentAction.Builder("MoveToPatrolPosOne")
+                .WithStrategy(new MoveStrategy(enemy,(Vector2)patrolPosOne.position))
+                .AddEffect(beliefs["AgentAtPatrolPosOne"])
+                .Build());
+
+            actions.Add(new AgentAction.Builder("MoveToPatrolPosTwo")
+                .WithStrategy(new MoveStrategy(enemy, (Vector2)patrolPosTwo.position))
+                .AddEffect(beliefs["AgentAtPatrolPosTwo"])
+                .Build());
+
+            actions.Add(new AgentAction.Builder("MoveFromPatrolPosOneToRestArea")
+                .WithStrategy(new MoveStrategy(enemy,(Vector2)restingPosition.position))
+                .AddPrecondition(beliefs["AgentAtPatrolPosOne"])
+                .AddEffect(beliefs["AgentAtRestingPos"])
+                .Build());
+
+            actions.Add(new AgentAction.Builder("MoveFromPatrolPosTwoToRestArea")
+                .WithStrategy(new MoveStrategy(enemy, (Vector2)restingPosition.position))
+                .WithCost(2)
+                .AddPrecondition(beliefs["AgentAtPatrolPosTwo"])
+                .AddEffect(beliefs["AgentAtRestingPos"])
+                .Build());
+
+            actions.Add(new AgentAction.Builder("Rest")
+                .WithStrategy(new IdleStrategy(5))
+                .AddPrecondition(beliefs["AgentAtRestingPos"])
+                .AddEffect(beliefs["AgentIsRested"])
+                .Build());
+
+            actions.Add(new AgentAction.Builder("ChasePlayer")
+                .WithStrategy(new MoveStrategy(enemy, beliefs["PlayerInChaseRange"].Location))
+                .AddPrecondition(beliefs["PlayerInChaseRange"])
+                .AddEffect(beliefs["PlayerInAttackRange"])
+                .Build());
+
+            actions.Add(new AgentAction.Builder("AttackPlayer")
+                .WithStrategy(new AttackStrategy())
+                .AddPrecondition(beliefs["PlayerInAttackRange"])
+                .AddEffect(beliefs["AttackingPlayer"])
                 .Build());
 
         }
@@ -118,6 +182,20 @@ namespace DensetsuEngine.GOAP {
                 .WithDesiredEffect(beliefs["AgentMoving"])
                 .Build());  
 
+            goals.Add(new AgentGoal.Builder("KeepHealthUp")
+                .WithPriority(2)
+                .WithDesiredEffect(beliefs["AgentIsHealthy"])
+                .Build());
+
+            goals.Add(new AgentGoal.Builder("KeepStaminaUp")
+                .WithPriority(2)
+                .WithDesiredEffect(beliefs["AgentIsRested"])
+                .Build());
+
+            goals.Add(new AgentGoal.Builder("SeekAndDestroy")
+                .WithPriority(3)
+                .WithDesiredEffect(beliefs["AttackingPlayer"])
+                .Build());  
 
         }
 
@@ -164,11 +242,26 @@ namespace DensetsuEngine.GOAP {
                     //reset nav mesh
                     
                     currentGoal = actionPlan.AgentGoal;
-                    currentAction = actionPlan.Actions.Pop();
-                    currentAction.Start();
-
                     //Debug.Log($"Goal: {currentGoal.Name} with {actionPlan.Actions.Count} actions in plan");
+                    currentAction = actionPlan.Actions.Pop();
                     //Debug.Log($"Popped action:{currentAction.Name}");
+
+                    //verify all precondition effects are true
+
+                    if (currentAction.Preconditions.All(b => b.Evaluate()))
+                    {
+                        currentAction.Start();
+                    }
+                    else {
+                        Debug.Log("Preconditions not met, clearing current action and goal");
+                        currentAction = null;
+                        currentGoal = null ;
+                    }
+
+                    
+
+                   
+                    
 
                 }
             }
