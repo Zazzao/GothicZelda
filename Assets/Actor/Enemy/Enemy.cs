@@ -39,6 +39,8 @@ public class Enemy : MonoBehaviour{
     [SerializeField] public bool ReachEndOfPath; //{ get; set; }
     private Seeker seeker;
 
+    private ActorAnimator.FacingDirection facing = ActorAnimator.FacingDirection.South;
+
 
     public bool HasPath => path != null;
 
@@ -65,11 +67,12 @@ public class Enemy : MonoBehaviour{
         }
         else if (path != null && currentWaypoint < path.vectorPath.Count) {
             moveDir = ((Vector2)path.vectorPath[currentWaypoint] - rb.position).normalized;
-            anim.Play(ActorAnimator.ActorAnimation.Walk, ActorAnimator.FacingDirection.East, false, false);  
+            facing = CalcEnemyFacing(moveDir);
+            anim.Play(ActorAnimator.ActorAnimation.Walk, facing, false, false);  
         }
         else{
             moveDir = Vector2.zero;
-            anim.Play(ActorAnimator.ActorAnimation.Idle, ActorAnimator.FacingDirection.South, false, false);
+            anim.Play(ActorAnimator.ActorAnimation.Idle, facing, false, false);
         }
 
         rb.MovePosition(rb.position + moveDir * Time.fixedDeltaTime);
@@ -170,6 +173,43 @@ public class Enemy : MonoBehaviour{
             player.TakeDamage(collisionDamage, this.gameObject.transform.position);
         }
     }
+
+
+    //#region Math Functions
+    private ActorAnimator.FacingDirection CalcEnemyFacing(Vector2 vector)
+    {
+
+
+        if (Mathf.Abs(vector.x) > Mathf.Abs(vector.y))
+        {
+            // Vector is more horizontal
+            if (vector.x > 0)
+            {
+                return ActorAnimator.FacingDirection.East;
+            }
+            else
+            {
+                return ActorAnimator.FacingDirection.West;
+            }
+        }
+        else
+        {
+            // Vector is more vertical
+            if (vector.y > 0)
+            {
+                return ActorAnimator.FacingDirection.North;
+            }
+            else
+            {
+                return ActorAnimator.FacingDirection.South;
+            }
+        }
+
+
+    }
+
+
+
 
 
 
