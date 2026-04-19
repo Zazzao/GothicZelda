@@ -23559,6 +23559,10 @@ PrefabInstance:
       propertyPath: rollDuration
       value: 0.1
       objectReference: {fileID: 0}
+    - target: {fileID: 7410829764975936035, guid: 6c29cbe39ed3f5f47804272670718b73, type: 3}
+      propertyPath: attackLungeForce
+      value: 16
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -27803,6 +27807,37 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1575493452
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1575493453}
+  m_Layer: 0
+  m_Name: Manager_PersistencyKeys
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1575493453
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1575493452}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 6.149202, y: 1.9377662, z: -0.0651875}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1592026587
 GameObject:
   m_ObjectHideFlags: 0
@@ -29396,6 +29431,7 @@ SceneRoots:
   - {fileID: 639002384}
   - {fileID: 428970099}
   - {fileID: 119980982}
+  - {fileID: 1575493453}
   - {fileID: 1771201408}
   - {fileID: 759743725}
   - {fileID: 91861259}

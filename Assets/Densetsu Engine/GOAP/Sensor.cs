@@ -15,43 +15,35 @@ public class Sensor : MonoBehaviour{
     public Vector2 TargetPosition => target ? target.transform.position : Vector2.zero;
     public bool IsTargetInRange => TargetPosition != Vector2.zero;
 
-    private GameObject target;
+    [SerializeField] private GameObject target;
     private Vector2 lastKnownPosition;
     CountdownTimer timer;
 
-    private void Awake()
-    {
+    private void Awake(){
         detectionRange = GetComponent<CircleCollider2D>();
         detectionRange.isTrigger = true;
         detectionRange.radius = detectionRadius;
-
-
     }
 
-    private void Start()
-    {
+    private void Start(){
         timer = new CountdownTimer(timerInterval);
-        timer.OnTimerStop += () =>
-        {
-            UpdateTargetPosition(target); // need to add thier externtion for .OrNull()
+        timer.OnTimerStop += () =>{
+            UpdateTargetPosition(target.OrNull()); 
             timer.Start();
         };
         timer.Start();
     }
 
-    private void Update()
-    {
+    private void Update(){
         timer.Tick(Time.deltaTime);
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
-    {
+    private void OnTriggerEnter2D(Collider2D other){
         if (!other.CompareTag("Player")) return;
         UpdateTargetPosition(other.gameObject);
     }
 
-    private void OnTriggerExit2D(Collider2D other)
-    {
+    private void OnTriggerExit2D(Collider2D other){
         if(!other.CompareTag("Player")) return;
         UpdateTargetPosition();
     }
@@ -66,8 +58,7 @@ public class Sensor : MonoBehaviour{
     }
 
 
-    private void OnDrawGizmos()
-    {
+    private void OnDrawGizmos(){
         Gizmos.color = IsTargetInRange ? Color.red : Color.green;
         Gizmos.DrawWireSphere(transform.position, detectionRadius);
     }

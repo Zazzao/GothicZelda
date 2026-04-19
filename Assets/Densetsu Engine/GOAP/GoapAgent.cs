@@ -53,13 +53,11 @@ namespace DensetsuEngine.GOAP {
 
         private bool InRangeOf(Vector2 pos, float range) => Vector2.Distance(transform.position, pos) < range;
 
-        private void OnEnable()
-        {
+        private void OnEnable(){
             chaseSensor.OnTargetChanged += HandleTargetChanged;
         }
 
-        private void OnDisable()
-        {
+        private void OnDisable(){
             chaseSensor.OnTargetChanged -= HandleTargetChanged;
         }
 
@@ -104,27 +102,32 @@ namespace DensetsuEngine.GOAP {
         private void SetupActions() { 
             actions = new HashSet<AgentAction>();
 
+            // Action: Relax
             actions.Add(new AgentAction.Builder("Relax")
                 .WithStrategy(new IdleStrategy(5))
                 .AddEffect(beliefs["Nothing"])
                 .Build());
 
+            // Action: Wander Around
             actions.Add(new AgentAction.Builder("Wander Around")
                 .WithStrategy(new WanderStrategy(GetComponent<Enemy>(), 8))
                 .AddEffect(beliefs["AgentMoving"])
                 .Build());
 
+            //Action: MoveToEatingPosition
             actions.Add(new AgentAction.Builder("MoveToEatingPosition")
                 .WithStrategy(new MoveStrategy(GetComponent<Enemy>(),(Vector2)foodPile.position))
                 .AddEffect(beliefs["AgentAtFoodPile"])
                 .Build());
 
+            //Action: Eat
             actions.Add(new AgentAction.Builder("Eat")
                 .WithStrategy(new IdleStrategy(5)) //later replace with a command
                 .AddPrecondition(beliefs["AgentAtFoodPile"])
                 .AddEffect(beliefs["AgentIsHealthy"])
                 .Build());
 
+            //Action: MoveToPatrolPosOne
             actions.Add(new AgentAction.Builder("MoveToPatrolPosOne")
                 .WithStrategy(new MoveStrategy(enemy,(Vector2)patrolPosOne.position))
                 .AddEffect(beliefs["AgentAtPatrolPosOne"])
@@ -212,10 +215,11 @@ namespace DensetsuEngine.GOAP {
         
         }
 
+        //TO-DO: this is NOT where stats are- this is just for testing 
         void UpdateStats() {
             //the is just for testing
-            stamina += InRangeOf(restingPosition.position, 2.0f) ? 20 : -10;
-            health += InRangeOf(foodPile.position, 2.0f) ? 20 : -5;
+            stamina += InRangeOf(restingPosition.position, 2.0f) ? 20 : -10;    // get sp if in rest area
+            health += InRangeOf(foodPile.position, 2.0f) ? 20 : -5;             // get hp if near food ple otherwise take damage
             stamina = Mathf.Clamp(stamina, 0, 100);
             health = Mathf.Clamp(health, 0, 100);
 

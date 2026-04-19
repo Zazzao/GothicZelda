@@ -26,6 +26,12 @@ public class PlayerMovement : MonoBehaviour
     private bool isKnockedBack;
     private Vector2 knockbackVelocity;
 
+
+    [Header("Attack Movement")]
+    [SerializeField] private float attackLungeForce = 3.0f;
+    private bool isLunging = false;
+    private Vector2 attackDir;
+
     [Header("I-Frames")]
     [SerializeField] private float invulnDuration = 0.5f;
     private bool isInvulnerable = false;
@@ -191,17 +197,31 @@ public class PlayerMovement : MonoBehaviour
 
         Vector2 moveDir;
 
-        if (isKnockedBack) {
+       
+        if (isKnockedBack)
+        {
             moveDir = knockbackVelocity;
             //Debug.DrawRay(transform.position, knockbackVelocity, Color.magenta, 0.2f);
         }
-        else if (isAttacking ||  isFrozen) {
+        else if (isAttacking || isFrozen)
+        {
+            if (isLunging)
+            {
+                moveDir = attackDir * attackLungeForce;
+            }
+            else {
+                moveDir = Vector2.zero;
+            }
+        }
+        else if (isFrozen) {
             moveDir = Vector2.zero;
         }
-        else if (isRolling) {
+        else if (isRolling)
+        {
             moveDir = rollDirection * rollSpeed;
         }
-        else {
+        else
+        {
             moveDir = moveInput * moveSpeed;
         }
         rb.MovePosition(rb.position + moveDir * Time.fixedDeltaTime);
@@ -227,9 +247,35 @@ public class PlayerMovement : MonoBehaviour
         else {
             anim.Play(ActorAnimator.ActorAnimation.Idle, facing, false, false); 
         }
+        
     }
 
-    
+    //this is called by the animator and add the "lunge" movement to the player
+    public void OnAttackLunge() {
+        isLunging = true;
+        attackDir = FacingToVector(CurrentFacing);
+       
+    }
+
+    public void OnAttackLungeEnd() {
+        isLunging = false;
+    }
+
+
+    private Vector2 FacingToVector(ActorAnimator.FacingDirection facing)
+    {
+        return facing switch
+        {
+            ActorAnimator.FacingDirection.North => Vector2.up,
+            ActorAnimator.FacingDirection.South => Vector2.down,
+            ActorAnimator.FacingDirection.East => Vector2.right,
+            ActorAnimator.FacingDirection.West => Vector2.left,
+            _ => Vector2.zero
+        };
+    }
+
+
+
     private void OnRollStart(){
         isRolling = true;
         isInvulnerable = true;          // might want to handle i-frames in animation

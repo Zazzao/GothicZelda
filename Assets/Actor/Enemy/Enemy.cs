@@ -1,5 +1,6 @@
 using UnityEngine;
 using Pathfinding;
+using DensetsuEngine.GOAP;
 
 
 
@@ -128,6 +129,8 @@ public class Enemy : MonoBehaviour{
         audioSource.PlayOneShot(dieSfx);
         anim.Play(ActorAnimator.ActorAnimation.Dying,ActorAnimator.FacingDirection.South,true,true);   
         GetComponent<CapsuleCollider2D>().enabled = false;
+        
+        GetComponent<GoapAgent>().enabled = false;  //this only stops the plan does not stop movement
     }
 
 

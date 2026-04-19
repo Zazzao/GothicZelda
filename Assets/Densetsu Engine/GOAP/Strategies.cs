@@ -13,14 +13,17 @@ namespace DensetsuEngine.GOAP {
         bool CanPerform {  get; }
         bool Complete { get; }
 
+        // when we start the strataegy
         void Start() { 
             //noop
         }
 
+        // when we need to update the strategy each frame
         void Update(float deltaTime) { 
             //noop
         }
 
+        // when the startegy is finished 
         void Stop() { 
             //noop
         }

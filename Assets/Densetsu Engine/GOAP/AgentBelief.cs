@@ -28,8 +28,7 @@ namespace DensetsuEngine.GOAP {
                 .Build());
         }
 
-        public void AddLocationBelief(string key, float distance, Transform locationCondition)
-        {
+        public void AddLocationBelief(string key, float distance, Transform locationCondition){
             AddLocationBelief(key, distance, locationCondition.position);
         }
 
@@ -40,15 +39,13 @@ namespace DensetsuEngine.GOAP {
                 .Build());
         }
 
-
         bool InRangeOf(Vector2 pos, float range) => Vector2.Distance(agent.transform.position, pos) < range;
     
     }
 
 
 
-    public class AgentBelief 
-    {
+    public class AgentBelief {
         public string Name { get; }
 
         Func<bool> condition = () => false;
