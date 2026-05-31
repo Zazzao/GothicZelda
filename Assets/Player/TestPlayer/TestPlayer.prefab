@@ -108,6 +108,7 @@ GameObject:
   - component: {fileID: 7410829764975936035}
   - component: {fileID: 2302593698568883917}
   - component: {fileID: 3087905770230548560}
+  - component: {fileID: 605157486847614561}
   m_Layer: 0
   m_Name: TestPlayer
   m_TagString: Player
@@ -266,11 +267,19 @@ MonoBehaviour:
   maxHp: 48
   Stamina:
     Name: 
+    Current: 0
   moveSpeed: 5
   facing: 0
   knockbackForce: 10
   knockbackDuration: 0.2
+  attackLungeForce: 3
   invulnDuration: 0.5
+  rollSpeed: 8
+  rollDuration: 0.25
+  rollStaminaCost: 25
+  attackSfx: {fileID: 0}
+  hitSfx: {fileID: 0}
+  rollSfx: {fileID: 0}
 --- !u!114 &2302593698568883917
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -305,3 +314,16 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &605157486847614561
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2372439348258555611}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b64154c0f8fe02841bbe0c3f03153cfa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  items: []
