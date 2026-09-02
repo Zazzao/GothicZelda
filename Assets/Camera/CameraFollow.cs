@@ -41,7 +41,7 @@ public class CameraFollow : MonoBehaviour
 
     private void Start()
     {
-        playerTransform = PlayerMovement.instance.transform;
+        playerTransform = PlayerMotor.Instance.transform;
         SetCameraBounds(startingRoom.minX, startingRoom.maxX, startingRoom.minY, startingRoom.maxY);
 
         Vector3 targetPos = playerTransform.position + offset;

@@ -12,7 +12,7 @@ public class PushableBlock : MonoBehaviour
     [SerializeField] private AudioClip pushSfx;
     private bool isMoving;
 
-    private PlayerMovement player;
+   
 
     private float blockPushTime = 0.5f;
     private float blockTimer = 0.0f;
@@ -38,8 +38,8 @@ public class PushableBlock : MonoBehaviour
     {
         if (!collision.gameObject.CompareTag("Player")) return;
 
-        player = collision.gameObject.GetComponent<PlayerMovement>();
-        if (player.IsWalking && IsFacingBlock())
+        
+        if (PlayerMotor.Instance.GetMovementState() == PlayerMotor.MovementState.Walking && IsFacingBlock())
         {
             //Debug.Log("player is moving block");
             blockTimer += Time.deltaTime;
@@ -59,7 +59,7 @@ public class PushableBlock : MonoBehaviour
     private void OnCollisionExit2D(Collision2D collision)
     {
         if (!collision.gameObject.CompareTag("Player")) return;
-        player = null;
+        //player = null;
     }
 
 
@@ -112,7 +112,7 @@ public class PushableBlock : MonoBehaviour
     private bool IsFacingBlock(){
 
         float variance = 0.35f;
-        Vector2 toBlock = (Vector2)transform.position - (Vector2)player.transform.position;
+        Vector2 toBlock = (Vector2)transform.position - (Vector2)PlayerMotor.Instance.transform.position;
 
         if (Mathf.Abs(toBlock.x) > Mathf.Abs(toBlock.y)){
 
@@ -121,9 +121,9 @@ public class PushableBlock : MonoBehaviour
 
             // Horizontal
             if (toBlock.x > 0)
-                return player.CurrentFacing == ActorAnimator.FacingDirection.East;
+                return PlayerMotor.Instance.GetFacing() == ActorAnimator.FacingDirection.East;
             else
-                return player.CurrentFacing == ActorAnimator.FacingDirection.West;
+                return PlayerMotor.Instance.GetFacing() == ActorAnimator.FacingDirection.West;
         }
         else
         {
@@ -132,9 +132,9 @@ public class PushableBlock : MonoBehaviour
 
             // Vertical
             if (toBlock.y > 0)
-                return player.CurrentFacing == ActorAnimator.FacingDirection.North;
+                return PlayerMotor.Instance.GetFacing() == ActorAnimator.FacingDirection.North;
             else
-                return player.CurrentFacing == ActorAnimator.FacingDirection.South;
+                return PlayerMotor.Instance.GetFacing() == ActorAnimator.FacingDirection.South;
         }
 
 
@@ -144,7 +144,7 @@ public class PushableBlock : MonoBehaviour
 
         Vector2 vector = Vector2.zero;
         
-        switch (player.CurrentFacing) { 
+        switch (PlayerMotor.Instance.GetFacing()) { 
             case ActorAnimator.FacingDirection.North:
                 vector = new Vector2(0,1);
                 break;

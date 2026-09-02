@@ -8,19 +8,16 @@ public class ItemDataEditor : Editor
     SerializedProperty iconProp;
     SerializedProperty descriptionProp;
     SerializedProperty isStackableProp;
-    //SerializedProperty valueProp;
-    //SerializedProperty stackableProp;
-
+    SerializedProperty maxStackSizeProp;
+    
     private void OnEnable()
     {
         itemNameProp = serializedObject.FindProperty("itemName");
         iconProp = serializedObject.FindProperty("icon");
         descriptionProp = serializedObject.FindProperty("description");
         isStackableProp = serializedObject.FindProperty("isStackable");
-        
-        
-        //valueProp = serializedObject.FindProperty("value");
-        //stackableProp = serializedObject.FindProperty("stackable");
+        maxStackSizeProp = serializedObject.FindProperty("maxStackSize");
+
     }
 
     public override void OnInspectorGUI()
@@ -31,8 +28,7 @@ public class ItemDataEditor : Editor
         EditorGUILayout.PropertyField(iconProp);
         EditorGUILayout.PropertyField (descriptionProp);
         EditorGUILayout.PropertyField(isStackableProp);
-        //EditorGUILayout.PropertyField(valueProp);
-        //EditorGUILayout.PropertyField(stackableProp);
+        EditorGUILayout.PropertyField(maxStackSizeProp);
 
         GUILayout.Space(10);
 

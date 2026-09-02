@@ -8,7 +8,7 @@ public class NPCDialogue : MonoBehaviour, IInteractable
 
     private int dialogueIndex = 0;
     
-    private PlayerMovement player;
+    
     private bool isInteracting;
 
 
@@ -36,7 +36,6 @@ public class NPCDialogue : MonoBehaviour, IInteractable
     private void OnTriggerEnter2D(Collider2D collision){
         if (!collision.CompareTag("Player")) return;
 
-        player = collision.GetComponent<PlayerMovement>();
         Interactable.Current = this;
 
     }
@@ -69,22 +68,22 @@ public class NPCDialogue : MonoBehaviour, IInteractable
 
     private bool IsFacingNPC(){
 
-        Vector2 toNPC = (Vector2)transform.position - (Vector2)player.transform.position;
+        Vector2 toNPC = (Vector2)transform.position - (Vector2)PlayerMotor.Instance.transform.position;
 
         if (Mathf.Abs(toNPC.x) > Mathf.Abs(toNPC.y)){
             // Horizontal
             if (toNPC.x > 0)
-                return player.CurrentFacing == ActorAnimator.FacingDirection.East;
+                return PlayerMotor.Instance.CurrentFacing == ActorAnimator.FacingDirection.East;
             else
-                return player.CurrentFacing == ActorAnimator.FacingDirection.West;
+                return PlayerMotor.Instance.CurrentFacing == ActorAnimator.FacingDirection.West;
         }
         else
         {
             // Vertical
             if (toNPC.y > 0)
-                return player.CurrentFacing == ActorAnimator.FacingDirection.North;
+                return PlayerMotor.Instance.CurrentFacing == ActorAnimator.FacingDirection.North;
             else
-                return player.CurrentFacing == ActorAnimator.FacingDirection.South;
+                return PlayerMotor.Instance.CurrentFacing == ActorAnimator.FacingDirection.South;
         }
        
     }

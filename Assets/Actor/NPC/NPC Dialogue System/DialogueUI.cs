@@ -2,7 +2,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using System.Collections;
-using System.Text;
+
 
 public class DialogueUI : MonoBehaviour
 {
@@ -19,7 +19,7 @@ public class DialogueUI : MonoBehaviour
 
     [Header("Text Settings")]
     [SerializeField] private float textTypingSpeed = 0.03f;
-    [SerializeField] private int typingSfxRate = 6;
+    [SerializeField] private int typingSfxRate = 4;
     private int boxIndex = 0;
 
     private Coroutine typingRoutine;
@@ -27,11 +27,11 @@ public class DialogueUI : MonoBehaviour
 
     [Header("Sfx")]
     [SerializeField] private AudioClip textTypingSfx;
+    [SerializeField] private AudioClip textSkipSfx;
 
 
     private AudioSource audioSource;
-    private int typingTextCnt = 0;
-
+   
 
 
     private void Awake()
@@ -53,8 +53,6 @@ public class DialogueUI : MonoBehaviour
         else
             boxIndex = 1;
 
-
-
         nameText[boxIndex].text = line.speakerName;
         titleText[boxIndex].text = line.title;
         portraitImage[boxIndex].sprite = line.portrait;
@@ -62,22 +60,22 @@ public class DialogueUI : MonoBehaviour
         leftPanel.SetActive(line.side == DialogueSide.Left);
         rightPanel.SetActive(line.side == DialogueSide.Right);
 
-       
-
-            typingRoutine = StartCoroutine(TypeText(line.message));
+        typingRoutine = StartCoroutine(TypeText(line.message));
     }
 
     private IEnumerator TypeText(string message){
         IsTyping = true;
-        dialogueText[boxIndex].text = "";
+        var text = dialogueText[boxIndex];
 
-        string wrappedText = PreWrapText(message,dialogueText[boxIndex], dialogueText[boxIndex].rectTransform.rect.width);
+        text.text = message;
+        text.maxVisibleCharacters = 0;
 
-        foreach (char c in wrappedText){
-            dialogueText[boxIndex].text += c;
+        for (int i = 0; i <= message.Length; i++){
+            text.maxVisibleCharacters = i;
+
+            if (i % typingSfxRate == 0) audioSource.PlayOneShot(textTypingSfx);
+
             yield return new WaitForSeconds(textTypingSpeed);
-            typingTextCnt++;
-            if (typingTextCnt >= typingSfxRate) audioSource.PlayOneShot(textTypingSfx); //TO-DO: dont use a specific number here
         }
 
         IsTyping = false;
@@ -86,57 +84,11 @@ public class DialogueUI : MonoBehaviour
     public void SkipTyping(string message){
         if (!IsTyping) return;
 
+        audioSource.PlayOneShot(textSkipSfx);
         StopCoroutine(typingRoutine);
-        dialogueText[boxIndex].text = message;
+        dialogueText[boxIndex].maxVisibleCharacters = dialogueText[boxIndex].text.Length;
         IsTyping = false;
     }
-
-
-    private string PreWrapText(string rawText, TextMeshProUGUI tmpText, float maxLineWidth)
-    {
-        //tmpText.enableWordWrapping = false;
-
-        string[] words = rawText.Split(' ');
-        StringBuilder result = new StringBuilder();
-
-        string currentLine = "";
-
-        foreach (string word in words)
-        {
-            string testLine = string.IsNullOrEmpty(currentLine)
-                ? word
-                : currentLine + " " + word;
-
-            tmpText.text = testLine;
-            tmpText.ForceMeshUpdate();
-
-            float textWidth = tmpText.preferredWidth;
-
-            if (textWidth > maxLineWidth)
-            {
-                // Commit the current line and start a new one
-                result.Append(currentLine);
-                result.Append('\n');
-                currentLine = word;
-            }
-            else
-            {
-                currentLine = testLine;
-            }
-        }
-
-        // Append last line
-        result.Append(currentLine);
-        tmpText.text = "";
-
-        return result.ToString();
-    }
-
-
-
-
-
-
 
 
 }

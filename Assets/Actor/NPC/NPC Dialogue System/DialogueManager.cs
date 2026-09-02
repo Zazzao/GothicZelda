@@ -1,8 +1,8 @@
-using Unity.VisualScripting;
+
 using UnityEngine;
 
-public class DialogueManager : MonoBehaviour
-{
+public class DialogueManager : MonoBehaviour{
+
     public static DialogueManager Instance;
 
     private DialogueData currentDialogue;
@@ -14,8 +14,7 @@ public class DialogueManager : MonoBehaviour
 
     public bool IsDialogueActive {  get { return isDialogueActive; } }
 
-    private void Awake()
-    {
+    private void Awake(){
         Instance = this;
     }
 
@@ -28,14 +27,13 @@ public class DialogueManager : MonoBehaviour
         currentNpc = npc;
         currentIndex = 0;
 
-        PlayerMovement.instance.IsFrozen = true;
+        PlayerMotor.Instance.IsFrozen = true;
         DialogueUI.Instance.Show();
 
         ShowCurrentLine();
     }
 
-    public void AdvanceDialogue()
-    {
+    public void AdvanceDialogue(){
         if (DialogueUI.Instance.IsTyping){
             DialogueUI.Instance.SkipTyping(currentDialogue.lines[currentIndex].message);
             return;
@@ -51,16 +49,14 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
-    private void ShowCurrentLine()
-    {
+    private void ShowCurrentLine(){
         DialogueUI.Instance.DisplayLine(currentDialogue.lines[currentIndex]);
     }
 
-    private void EndDialogue()
-    {
+    private void EndDialogue(){
         isDialogueActive = false;
         DialogueUI.Instance.Hide();
-        PlayerMovement.instance.IsFrozen = false;
+        PlayerMotor.Instance.IsFrozen = false;
 
         //currentNpc.IsInteracting = false;
         currentNpc.OnDialogueEnd();

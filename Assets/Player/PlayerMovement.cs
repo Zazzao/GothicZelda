@@ -2,6 +2,9 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 
+// THIS IS NO LONGER USED -- DELETE
+
+
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerMovement : MonoBehaviour
 {

@@ -19,10 +19,11 @@ public class RoomTransitionManager : MonoBehaviour
     public void StartTransition(Room fromRoom, Room toRoom, Vector2 newPlayerPos) {
         if (isTransitioning) return;
 
-        PlayerMovement player = PlayerMovement.instance;
-        player.IsFrozen = true;
-        player.GetComponent<SpriteRenderer>().enabled = false;
-        player.transform.position = newPlayerPos;
+        
+        //player.IsFrozen = true;
+        PlayerMotor.Instance.IsFrozen = true;
+        PlayerMotor.Instance.GetComponent<SpriteRenderer>().enabled = false;
+        PlayerMotor.Instance.transform.position = newPlayerPos;
 
         fromRoom.OnRoomExit();
 
@@ -39,9 +40,8 @@ public class RoomTransitionManager : MonoBehaviour
         
         currentRoom.OnRoomEnter();
 
-        PlayerMovement player = PlayerMovement.instance;
-        player.IsFrozen = false;
-        player.GetComponent<SpriteRenderer>().enabled = true;
+        PlayerMotor.Instance.IsFrozen = false;
+        PlayerMotor.Instance.GetComponent<SpriteRenderer>().enabled = true;
 
         //set cam state to player follow
         CameraFollow cam = Camera.main.GetComponent<CameraFollow>();
