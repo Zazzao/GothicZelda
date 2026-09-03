@@ -171,9 +171,8 @@ public class Enemy : MonoBehaviour{
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-
-            PlayerMovement player = collision.gameObject.GetComponent<PlayerMovement>();
-            player.TakeDamage(collisionDamage, this.gameObject.transform.position);
+            PlayerMotor.Instance.TakeDamage(collisionDamage, this.gameObject.transform.position);
+            
         }
     }
 

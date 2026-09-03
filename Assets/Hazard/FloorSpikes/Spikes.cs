@@ -1,19 +1,14 @@
 using UnityEngine;
 
-public class Spikes : MonoBehaviour
-{
+public class Spikes : MonoBehaviour{
 
     [SerializeField] private int damage = 5;
 
+    private void OnTriggerEnter2D(Collider2D collision){
 
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            PlayerMovement playerMovement = collision.gameObject.GetComponent<PlayerMovement>();
-            playerMovement.TakeDamage(damage,this.transform.position);
+        //DEV NOTE: THis logic ONLY hurts the player - should update to hit anything that "walks" onto it
+        if (!collision.gameObject.CompareTag("Player")) return;
+        PlayerMotor.Instance.TakeDamage(damage, this.transform.position);
             
-        }
     }
 }

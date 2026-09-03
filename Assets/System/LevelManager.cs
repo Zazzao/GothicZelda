@@ -7,7 +7,7 @@ public class LevelManager : MonoBehaviour
 
     public static LevelManager Instance;
 
-    private PlayerMovement player;
+    //private PlayerMovement player;
     private string pendingSpawnId;
 
 
@@ -26,7 +26,7 @@ public class LevelManager : MonoBehaviour
   
     void Start()
     {
-        player = FindFirstObjectByType<PlayerMovement>();
+        //player = FindFirstObjectByType<PlayerMovement>();
             
     }
 
@@ -39,7 +39,7 @@ public class LevelManager : MonoBehaviour
     private IEnumerator TransitionRoutine(string sceneName)
     {
         // 1. Freeze player
-        player.IsFrozen = true;
+        PlayerMotor.Instance.IsFrozen = true;
 
         // 2. Fade out
         // yield return FadeManager.Instance.FadeOut();
@@ -57,7 +57,7 @@ public class LevelManager : MonoBehaviour
         //yield return FadeManager.Instance.FadeIn();
 
         // 7. Unfreeze
-        player.IsFrozen = false;
+        PlayerMotor.Instance.IsFrozen = false;
     }
 
     private void PlacePlayerAtSpawn()
@@ -66,7 +66,7 @@ public class LevelManager : MonoBehaviour
 
         foreach (var spawn in spawns) { 
             if (spawn.Id == pendingSpawnId){
-                player.transform.position = spawn.transform.position;
+                PlayerMotor.Instance.transform.position = spawn.transform.position;
                 return;
             }
         }

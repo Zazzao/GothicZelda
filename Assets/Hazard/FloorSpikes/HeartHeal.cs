@@ -10,8 +10,7 @@ public class HeartHeal : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            PlayerMovement playerMovement = collision.gameObject.GetComponent<PlayerMovement>();
-            playerMovement.Heal(healAmount);
+            PlayerMotor.Instance.Heal(healAmount);
             GameObject.Destroy(this.gameObject);
             
 

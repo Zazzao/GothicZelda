@@ -6,7 +6,7 @@ public class Sign : MonoBehaviour, IInteractable
     [TextArea]
     [SerializeField] private string message;
 
-    private PlayerMovement player;
+    private GameObject player;
 
     private bool isInteracting = false;
 
@@ -14,7 +14,7 @@ public class Sign : MonoBehaviour, IInteractable
     {
         if (!collision.CompareTag("Player")) return;
 
-        player = collision.GetComponent<PlayerMovement>();
+        player = collision.gameObject;
         Interactable.Current = this;
     }
 
@@ -61,7 +61,7 @@ public class Sign : MonoBehaviour, IInteractable
         Vector2 signPos = transform.position;
 
         bool isBelow = playerPos.y < signPos.y;
-        bool facingNorth = player.CurrentFacing == ActorAnimator.FacingDirection.North;
+        bool facingNorth = PlayerMotor.Instance.CurrentFacing == ActorAnimator.FacingDirection.North;
 
         return isBelow && facingNorth;
     }
@@ -71,11 +71,11 @@ public class Sign : MonoBehaviour, IInteractable
         if (SignUI.Instance.IsOpen){
             isInteracting = false;
             SignUI.Instance.Hide();
-            player.IsFrozen = false;
+            PlayerMotor.Instance.IsFrozen = false;
         }
         else{
             isInteracting = true;
-            player.IsFrozen = true;
+            PlayerMotor.Instance.IsFrozen = true;
             SignUI.Instance.Show(message);
         }
 

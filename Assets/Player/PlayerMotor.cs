@@ -242,7 +242,7 @@ public class PlayerMotor : MonoBehaviour {
     }
 
     public void OnRoll() {
-        Debug.Log("roll input performed");
+        //Debug.Log("roll input performed");
 
         if (IsFrozen || playerMovementState == MovementState.Rolling || playerActionState == ActionState.Attacking) return;
         if (Stamina.Current < rollStaminaCost) return;

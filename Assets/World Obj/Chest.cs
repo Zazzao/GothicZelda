@@ -9,7 +9,7 @@ public class Chest : MonoBehaviour, IInteractable
     [SerializeField] private Sprite openSprite;
     [SerializeField] private AudioClip openSfx;
 
-    private PlayerMovement player;
+    private GameObject player;
     private bool isInteracting = false;
 
     private bool isOpened = false;
@@ -32,7 +32,7 @@ public class Chest : MonoBehaviour, IInteractable
         if (!AddItem_UI.Instance.IsOpen){
             //show msg and add items
             isInteracting = true;
-            player.IsFrozen = true;
+            PlayerMotor.Instance.IsFrozen = true;
             this.GetComponent<AudioSource>().PlayOneShot(openSfx);
             this.GetComponent<SpriteRenderer>().sprite = openSprite;
             AddItem_UI.Instance.Show(itemData.name,amount.ToString(),itemData.icon);
@@ -46,7 +46,7 @@ public class Chest : MonoBehaviour, IInteractable
             //close msg
             isInteracting = false;
             AddItem_UI.Instance.Hide();
-            player.IsFrozen = false;
+            PlayerMotor.Instance.IsFrozen = false;
             isOpened = true;
         }
 
@@ -64,7 +64,7 @@ public class Chest : MonoBehaviour, IInteractable
         Vector2 signPos = transform.position;
 
         bool isBelow = playerPos.y < signPos.y;
-        bool facingNorth = player.CurrentFacing == ActorAnimator.FacingDirection.North;
+        bool facingNorth = PlayerMotor.Instance.CurrentFacing == ActorAnimator.FacingDirection.North;
 
         return isBelow && facingNorth;
     
@@ -73,7 +73,7 @@ public class Chest : MonoBehaviour, IInteractable
     private void OnTriggerEnter2D(Collider2D collision){
         if (!collision.CompareTag("Player")) return;
 
-        player = collision.GetComponent<PlayerMovement>();
+        player = collision.gameObject;
         Interactable.Current = this;
     }
 
