@@ -51,6 +51,8 @@ public class PlayerMotor : MonoBehaviour {
     [SerializeField] private AudioClip hitSfx;
     [SerializeField] private AudioClip rollSfx;
 
+    [SerializeField] private float pitchVariance = 0.05f;
+
 
     public enum MovementMode{
         TopDown,
@@ -98,11 +100,11 @@ public class PlayerMotor : MonoBehaviour {
         InitializeSingleton();
         InitializeAttachedComponents();
 
-        //NOTE: THIS SHOULD BE MOVED
+        //NOTE: THIS SHOULD BE MOVED vvvv
         hp = maxHp;
         Stamina = new Vital("Stamina", 100, 15f, 0.75f);
-        FindAnyObjectByType<StaminaBarUI>().Bind(Stamina);
-
+        FindAnyObjectByType<StaminaBarUI>().Bind(Stamina); 
+        // TO BE MOVED ^^^
 
     }
 
@@ -269,6 +271,8 @@ public class PlayerMotor : MonoBehaviour {
 
     private void OnAttackStart(){
         EnterActionState(ActionState.Attacking);
+        float randomPitch = Random.Range(1.0f - pitchVariance, 1.0f + pitchVariance);
+        audioSource.pitch = randomPitch;
         audioSource.PlayOneShot(attackSfx);
         anim.PlayAttack(facing);
     }

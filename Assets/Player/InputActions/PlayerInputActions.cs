@@ -267,6 +267,24 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""Right"",
+                    ""type"": ""Button"",
+                    ""id"": ""4efbecc5-3aeb-4a46-b0eb-29551c609591"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Left"",
+                    ""type"": ""Button"",
+                    ""id"": ""23cb5fde-2fcc-4b35-85e2-5f23254de475"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""Down"",
                     ""type"": ""Button"",
                     ""id"": ""9ce50b27-e768-4d76-b21e-83ce7684c213"",
@@ -279,6 +297,33 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""name"": ""Select"",
                     ""type"": ""Button"",
                     ""id"": ""4f4bee94-14b7-412c-ae57-2ccbc4f89db9"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Cancel"",
+                    ""type"": ""Button"",
+                    ""id"": ""0dc0149b-4b4a-4662-b53f-120d5f9d5cc5"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""MenuLeft"",
+                    ""type"": ""Button"",
+                    ""id"": ""dc44c73c-3dd9-4c35-ba4c-8e9395441343"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""MenuRght"",
+                    ""type"": ""Button"",
+                    ""id"": ""0fa21cb8-37ed-4a46-806e-6af7068aba9e"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
@@ -305,6 +350,50 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Up"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c054ac7e-51c4-47ca-a070-8eb8482eb907"",
+                    ""path"": ""<Gamepad>/dpad/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Right"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3a8cbe5e-fb2f-4815-b2d7-af4c6b2559e9"",
+                    ""path"": ""<Gamepad>/leftStick/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Right"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""79493e3d-cd59-489f-9326-d2e492254a1a"",
+                    ""path"": ""<Gamepad>/dpad/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Left"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5832cbe4-c74e-4a28-9242-f3be322e1ea5"",
+                    ""path"": ""<Gamepad>/leftStick/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Left"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -340,6 +429,39 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""action"": ""Select"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1731b905-8ac3-45f1-b375-8a2469fac5c0"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard"",
+                    ""action"": ""Cancel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""aba2d9f2-12e2-4999-baf0-1d1cca7d2477"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MenuLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""06d93388-c175-4e64-b2a5-2f21dc1bc949"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MenuRght"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -367,8 +489,13 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         // Menu
         m_Menu = asset.FindActionMap("Menu", throwIfNotFound: true);
         m_Menu_Up = m_Menu.FindAction("Up", throwIfNotFound: true);
+        m_Menu_Right = m_Menu.FindAction("Right", throwIfNotFound: true);
+        m_Menu_Left = m_Menu.FindAction("Left", throwIfNotFound: true);
         m_Menu_Down = m_Menu.FindAction("Down", throwIfNotFound: true);
         m_Menu_Select = m_Menu.FindAction("Select", throwIfNotFound: true);
+        m_Menu_Cancel = m_Menu.FindAction("Cancel", throwIfNotFound: true);
+        m_Menu_MenuLeft = m_Menu.FindAction("MenuLeft", throwIfNotFound: true);
+        m_Menu_MenuRght = m_Menu.FindAction("MenuRght", throwIfNotFound: true);
     }
 
     ~@PlayerInputActions()
@@ -580,8 +707,13 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Menu;
     private List<IMenuActions> m_MenuActionsCallbackInterfaces = new List<IMenuActions>();
     private readonly InputAction m_Menu_Up;
+    private readonly InputAction m_Menu_Right;
+    private readonly InputAction m_Menu_Left;
     private readonly InputAction m_Menu_Down;
     private readonly InputAction m_Menu_Select;
+    private readonly InputAction m_Menu_Cancel;
+    private readonly InputAction m_Menu_MenuLeft;
+    private readonly InputAction m_Menu_MenuRght;
     /// <summary>
     /// Provides access to input actions defined in input action map "Menu".
     /// </summary>
@@ -598,6 +730,14 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         /// </summary>
         public InputAction @Up => m_Wrapper.m_Menu_Up;
         /// <summary>
+        /// Provides access to the underlying input action "Menu/Right".
+        /// </summary>
+        public InputAction @Right => m_Wrapper.m_Menu_Right;
+        /// <summary>
+        /// Provides access to the underlying input action "Menu/Left".
+        /// </summary>
+        public InputAction @Left => m_Wrapper.m_Menu_Left;
+        /// <summary>
         /// Provides access to the underlying input action "Menu/Down".
         /// </summary>
         public InputAction @Down => m_Wrapper.m_Menu_Down;
@@ -605,6 +745,18 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Menu/Select".
         /// </summary>
         public InputAction @Select => m_Wrapper.m_Menu_Select;
+        /// <summary>
+        /// Provides access to the underlying input action "Menu/Cancel".
+        /// </summary>
+        public InputAction @Cancel => m_Wrapper.m_Menu_Cancel;
+        /// <summary>
+        /// Provides access to the underlying input action "Menu/MenuLeft".
+        /// </summary>
+        public InputAction @MenuLeft => m_Wrapper.m_Menu_MenuLeft;
+        /// <summary>
+        /// Provides access to the underlying input action "Menu/MenuRght".
+        /// </summary>
+        public InputAction @MenuRght => m_Wrapper.m_Menu_MenuRght;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -634,12 +786,27 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Up.started += instance.OnUp;
             @Up.performed += instance.OnUp;
             @Up.canceled += instance.OnUp;
+            @Right.started += instance.OnRight;
+            @Right.performed += instance.OnRight;
+            @Right.canceled += instance.OnRight;
+            @Left.started += instance.OnLeft;
+            @Left.performed += instance.OnLeft;
+            @Left.canceled += instance.OnLeft;
             @Down.started += instance.OnDown;
             @Down.performed += instance.OnDown;
             @Down.canceled += instance.OnDown;
             @Select.started += instance.OnSelect;
             @Select.performed += instance.OnSelect;
             @Select.canceled += instance.OnSelect;
+            @Cancel.started += instance.OnCancel;
+            @Cancel.performed += instance.OnCancel;
+            @Cancel.canceled += instance.OnCancel;
+            @MenuLeft.started += instance.OnMenuLeft;
+            @MenuLeft.performed += instance.OnMenuLeft;
+            @MenuLeft.canceled += instance.OnMenuLeft;
+            @MenuRght.started += instance.OnMenuRght;
+            @MenuRght.performed += instance.OnMenuRght;
+            @MenuRght.canceled += instance.OnMenuRght;
         }
 
         /// <summary>
@@ -654,12 +821,27 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Up.started -= instance.OnUp;
             @Up.performed -= instance.OnUp;
             @Up.canceled -= instance.OnUp;
+            @Right.started -= instance.OnRight;
+            @Right.performed -= instance.OnRight;
+            @Right.canceled -= instance.OnRight;
+            @Left.started -= instance.OnLeft;
+            @Left.performed -= instance.OnLeft;
+            @Left.canceled -= instance.OnLeft;
             @Down.started -= instance.OnDown;
             @Down.performed -= instance.OnDown;
             @Down.canceled -= instance.OnDown;
             @Select.started -= instance.OnSelect;
             @Select.performed -= instance.OnSelect;
             @Select.canceled -= instance.OnSelect;
+            @Cancel.started -= instance.OnCancel;
+            @Cancel.performed -= instance.OnCancel;
+            @Cancel.canceled -= instance.OnCancel;
+            @MenuLeft.started -= instance.OnMenuLeft;
+            @MenuLeft.performed -= instance.OnMenuLeft;
+            @MenuLeft.canceled -= instance.OnMenuLeft;
+            @MenuRght.started -= instance.OnMenuRght;
+            @MenuRght.performed -= instance.OnMenuRght;
+            @MenuRght.canceled -= instance.OnMenuRght;
         }
 
         /// <summary>
@@ -757,6 +939,20 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnUp(InputAction.CallbackContext context);
         /// <summary>
+        /// Method invoked when associated input action "Right" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnRight(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Left" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnLeft(InputAction.CallbackContext context);
+        /// <summary>
         /// Method invoked when associated input action "Down" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
@@ -770,5 +966,26 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnSelect(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Cancel" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnCancel(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "MenuLeft" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnMenuLeft(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "MenuRght" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnMenuRght(InputAction.CallbackContext context);
     }
 }

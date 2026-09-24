@@ -181,6 +181,24 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "Right",
+                    "type": "Button",
+                    "id": "4efbecc5-3aeb-4a46-b0eb-29551c609591",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Left",
+                    "type": "Button",
+                    "id": "23cb5fde-2fcc-4b35-85e2-5f23254de475",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Down",
                     "type": "Button",
                     "id": "9ce50b27-e768-4d76-b21e-83ce7684c213",
@@ -193,6 +211,33 @@
                     "name": "Select",
                     "type": "Button",
                     "id": "4f4bee94-14b7-412c-ae57-2ccbc4f89db9",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Cancel",
+                    "type": "Button",
+                    "id": "0dc0149b-4b4a-4662-b53f-120d5f9d5cc5",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "MenuLeft",
+                    "type": "Button",
+                    "id": "dc44c73c-3dd9-4c35-ba4c-8e9395441343",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "MenuRght",
+                    "type": "Button",
+                    "id": "0fa21cb8-37ed-4a46-806e-6af7068aba9e",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -219,6 +264,50 @@
                     "processors": "",
                     "groups": "",
                     "action": "Up",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c054ac7e-51c4-47ca-a070-8eb8482eb907",
+                    "path": "<Gamepad>/dpad/right",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Right",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3a8cbe5e-fb2f-4815-b2d7-af4c6b2559e9",
+                    "path": "<Gamepad>/leftStick/right",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Right",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "79493e3d-cd59-489f-9326-d2e492254a1a",
+                    "path": "<Gamepad>/dpad/left",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Left",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5832cbe4-c74e-4a28-9242-f3be322e1ea5",
+                    "path": "<Gamepad>/leftStick/left",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Left",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -252,6 +341,39 @@
                     "processors": "",
                     "groups": "",
                     "action": "Select",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1731b905-8ac3-45f1-b375-8a2469fac5c0",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard",
+                    "action": "Cancel",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "aba2d9f2-12e2-4999-baf0-1d1cca7d2477",
+                    "path": "<Gamepad>/leftShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MenuLeft",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "06d93388-c175-4e64-b2a5-2f21dc1bc949",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MenuRght",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

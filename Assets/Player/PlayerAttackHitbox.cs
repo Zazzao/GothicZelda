@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerAttackHitbox : MonoBehaviour
+public class PlayerAttackHitBox : MonoBehaviour
 {
     [SerializeField] private int damage = 1;
     [SerializeField] private float knockbackForce = 6.0f;
