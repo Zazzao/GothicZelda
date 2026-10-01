@@ -1,19 +1,20 @@
 using TMPro;
 using UnityEngine;
-using UnityEngine.Audio;
 using UnityEngine.UI;
 
 
 namespace DensetsuEngine.Prototyping
 {
-    public class Test_CharGen_SelectName : MonoBehaviour {
+    public class Test_CharGen_SelectName : MonoBehaviour, IMenuNavigation {
 
+        //[SerializeField] private GameObject rootPanel;
+        private SubMenuState _subMenuState = SubMenuState.letterBox;
 
-        private MenuState _menuState = MenuState.letterBox;
-
+        [SerializeField] private GameObject rootPanel;
 
         [SerializeField] private TMP_Text playerNameTextBox;
         [SerializeField] private int playerNameMaxSize = 16;
+        [SerializeField] private Image playerCharaImage;
 
         [Header("Letter Box Selector")]
         [SerializeField] private Image selectorIcon;
@@ -58,189 +59,84 @@ namespace DensetsuEngine.Prototyping
             'y','z','[',']','-','?','!',' ',' ', ' ',
             '0','1','2','3','4','5','6','7','8','9'};
 
-        private enum MenuState
+        private enum SubMenuState
         {
+            none,
             letterBox,
             nextButton,
             backButton
         }
 
-        private void Awake()
-        {
+        private void Awake(){
             rectTransform = selectorIcon.GetComponent<RectTransform>();
-            MenuController = GetComponent<Test_CharacterSelectMenuController>();
+            MenuController = FindAnyObjectByType<Test_CharacterSelectMenuController>();
 
             letterboxGridItems = letterboxGridPanel.GetComponentsInChildren<TMP_Text>();
 
         }
 
-        private void Start()
-        {
-            EnterLetterBox();
-        }
-
         private void Update() {
-            if (_menuState == MenuState.letterBox)
-            {
+            if (_subMenuState == SubMenuState.letterBox){
                 PlayerNameTextBoxFlash();
             }
         }
 
-
-
-        public void OnSelectorMoveUp() {
-            switch (_menuState) {
-                case MenuState.letterBox:
-                    selectorPos.y--;
-                    UpdateLetterGridSelector();
-                    break;
-                case MenuState.nextButton:
-                    selectorPos.y = selectorMaxY - 1;
-                    selectorPos.x = selectorMaxX - 1;
-                    UpdateLetterGridSelector();
-                    ExitNextButton();
-                    EnterLetterBox();
-                    break;
-                case  MenuState.backButton:
-                    selectorPos.y = selectorMaxY - 1;
-                    selectorPos.x = 0;
-                    UpdateLetterGridSelector();
-                    ExitBackButton();
-                    EnterLetterBox();
-                    break;
-            }
-
-        }
-
-        public void OnSelectorMoveDown()
-        {
-            switch (_menuState) {
-                case MenuState.letterBox:
-                    if (selectorPos.y >= selectorMaxY - 1) {
-                        ExitLetterBox();
-                        if (selectorPos.x < 5) {
-                            EnterBackButton();
-                        }
-                        else{ 
-                            EnterNextButton();
-                        }
-                           
-                    }
-                    else {
-                        selectorPos.y++;
-                        UpdateLetterGridSelector();
-                    }
-                    break;
-                case MenuState.nextButton:
-                    selectorPos.y = 0;
-                    selectorPos.x = selectorMaxX-1;
-                    ExitNextButton();
-                    EnterLetterBox();
-                    UpdateLetterGridSelector();
-                    break;
-                    case MenuState.backButton:
-                break;
-            }
-        }
-
-        public void OnSelectorMoveLeft()
-        {
-            switch (_menuState) {
-                case MenuState.letterBox:
-                    selectorPos.x--;
-                    UpdateLetterGridSelector();
-                    break;
-                case MenuState.nextButton:
-                    ExitNextButton();
-                    EnterBackButton();  
-                    break;
-                case MenuState.backButton:
-                    break;
-            }
-
-        }
-        public void OnSelectorMoveRight()
-        {
-            switch (_menuState)
-            {
-                case MenuState.letterBox:
-                    selectorPos.x++;
-                    UpdateLetterGridSelector();
-                    break;
-                case MenuState.nextButton:
-                    break;
-                case MenuState.backButton:
-                    ExitBackButton();
-                    EnterNextButton();
-                    break;
-            }
-
-
-
-        }
-
-        public void OnSelect() {
-
-            switch (_menuState) {
-                case MenuState.letterBox:
-                    OnLetterboxGridSelect();
-                    break;
-                case MenuState.nextButton:
-                    break;
-                case MenuState.backButton:
-                    break;
-
-            }
-
-
-        }
-
-
+    
         private void OnLetterboxGridSelect() {
-            if (MenuController.playerName.Length > playerNameMaxSize)
-            {
-                MenuController.PlayAudioOneShot(Test_CharacterSelectMenuController.MenuAudioType.cancel);
-                return;
-            }
+           
 
             int id = selectorPos.x + (selectorPos.y * selectorMaxX);
-            //NOTE: id 59 = clear name
-            //NOTE: id 58 = delete letter
-            if (id == 59)
-            {
+            if (id == 59){ // Clear Name
                 MenuController.PlayAudioOneShot(Test_CharacterSelectMenuController.MenuAudioType.cancel);
                 MenuController.playerName = "";
             }
-            else if (id == 58)
-            {
+            else if (id == 58){ //Delete last letter
                 DeleteLetterInPlayerName();
             }
             else
             {
+                //add selected letter to name
+                if (MenuController.playerName.Length > playerNameMaxSize)
+                {
+                    MenuController.PlayAudioOneShot(Test_CharacterSelectMenuController.MenuAudioType.cancel);
+                    return;
+                }
+
                 MenuController.PlayAudioOneShot(Test_CharacterSelectMenuController.MenuAudioType.select);
                 MenuController.playerName += letterIds[id];
             }
 
 
-
-            MenuController.UpdatePlayerName();
+            playerNameTextBox.text = MenuController.playerName;
 
         }
 
-
-
-
-        public void OnCancel() {
-            if (_menuState == MenuState.letterBox) DeleteLetterInPlayerName();
+        private void OnNextButtonSelect() {
+            if (MenuController.playerName == "")
+            {
+                Debug.Log("no player name - please enter name");
+                MenuController.PlayAudioOneShot(Test_CharacterSelectMenuController.MenuAudioType.cancel);
+                return;
+            }
+            else if (MenuController.playerName.Length < 3)
+            {
+                Debug.Log("player name must be at least 3 letters");
+                MenuController.PlayAudioOneShot(Test_CharacterSelectMenuController.MenuAudioType.cancel);
+            }
+            else {
+                Debug.Log("player name accepted");
+                MenuController.PlayAudioOneShot(Test_CharacterSelectMenuController.MenuAudioType.bigSelect);
+                ExitSelectNameMenu();   
+            }
+        
         }
-
 
 
         private void DeleteLetterInPlayerName() {
             MenuController.PlayAudioOneShot(Test_CharacterSelectMenuController.MenuAudioType.cancel);
             if (MenuController.playerName.Length - 1 < 0) return;
             MenuController.playerName = MenuController.playerName.Remove(MenuController.playerName.Length - 1);
-            MenuController.UpdatePlayerName();
+            playerNameTextBox.text = MenuController.playerName;
         }
 
         private void UpdateLetterGridSelector() {
@@ -303,7 +199,7 @@ namespace DensetsuEngine.Prototyping
             }
 
             selectorIcon.enabled = true;
-            _menuState = MenuState.letterBox;
+            _subMenuState = SubMenuState.letterBox;
 
         }
 
@@ -318,7 +214,7 @@ namespace DensetsuEngine.Prototyping
 
 
         private void EnterNextButton() {
-            _menuState = MenuState.nextButton;
+            _subMenuState = SubMenuState.nextButton;
             nextButtonText.color = Color.red;
         }
 
@@ -327,12 +223,181 @@ namespace DensetsuEngine.Prototyping
         }
 
         private void EnterBackButton() {
-            _menuState = MenuState.backButton;
+            _subMenuState = SubMenuState.backButton;
             backButtonText.color = Color.red;
         }
         private void ExitBackButton() {
             backButtonText.color = Color.white;
         }
+
+
+
+
+        private void ExitSelectNameMenu(){
+            _subMenuState = SubMenuState.none;
+            StartCoroutine(MenuController.GoToNextMenu());
+        }
+
+
+
+        #region I Navigation Interface
+        public void OnNavUp()
+        {
+            switch (_subMenuState)
+            {
+                case SubMenuState.letterBox:
+                    selectorPos.y--;
+                    UpdateLetterGridSelector();
+                    break;
+                case SubMenuState.nextButton:
+                    selectorPos.y = selectorMaxY - 1;
+                    selectorPos.x = selectorMaxX - 1;
+                    UpdateLetterGridSelector();
+                    ExitNextButton();
+                    EnterLetterBox();
+                    break;
+                case SubMenuState.backButton:
+                    selectorPos.y = selectorMaxY - 1;
+                    selectorPos.x = 0;
+                    UpdateLetterGridSelector();
+                    ExitBackButton();
+                    EnterLetterBox();
+                    break;
+            }
+        }
+
+        public void OnNavDown()
+        {
+            switch (_subMenuState)
+            {
+                case SubMenuState.letterBox:
+                    if (selectorPos.y >= selectorMaxY - 1)
+                    {
+                        ExitLetterBox();
+                        if (selectorPos.x < 5)
+                        {
+                            EnterBackButton();
+                        }
+                        else
+                        {
+                            EnterNextButton();
+                        }
+
+                    }
+                    else
+                    {
+                        selectorPos.y++;
+                        UpdateLetterGridSelector();
+                    }
+                    break;
+                case SubMenuState.nextButton:
+                    selectorPos.y = 0;
+                    selectorPos.x = selectorMaxX - 1;
+                    ExitNextButton();
+                    EnterLetterBox();
+                    UpdateLetterGridSelector();
+                    break;
+                case SubMenuState.backButton:
+                    break;
+            }
+        }
+
+        public void OnNavLeft()
+        {
+            switch (_subMenuState)
+            {
+                case SubMenuState.letterBox:
+                    selectorPos.x--;
+                    UpdateLetterGridSelector();
+                    break;
+                case SubMenuState.nextButton:
+                    ExitNextButton();
+                    EnterBackButton();
+                    break;
+                case SubMenuState.backButton:
+                    break;
+            }
+        }
+
+        public void OnNavRight()
+        {
+            switch (_subMenuState)
+            {
+                case SubMenuState.letterBox:
+                    selectorPos.x++;
+                    UpdateLetterGridSelector();
+                    break;
+                case SubMenuState.nextButton:
+                    break;
+                case SubMenuState.backButton:
+                    ExitBackButton();
+                    EnterNextButton();
+                    break;
+            }
+        }
+
+        public void OnNavSelect()
+        {
+            switch (_subMenuState)
+            {
+                case SubMenuState.letterBox:
+                    OnLetterboxGridSelect();
+                    break;
+                case SubMenuState.nextButton:
+                    OnNextButtonSelect();
+                    break;
+                case SubMenuState.backButton:
+                    StartCoroutine(MenuController.GoToPrevMenu());
+                    break;
+
+            }
+        }
+
+        public void OnNavCancel()
+        {
+
+            switch (_subMenuState)
+            {
+                case SubMenuState.letterBox:
+                    DeleteLetterInPlayerName();
+                    break;
+                case SubMenuState.nextButton:
+                    selectorPos = Vector2Int.zero;
+                    UpdateLetterGridSelector();
+                    ExitNextButton();
+                    EnterLetterBox();
+                    break;
+                case SubMenuState.backButton:
+                    StartCoroutine(MenuController.GoToPrevMenu());
+                    break;
+            }
+
+
+             
+        }
+
+        public void LoadMenu()
+        {
+            
+            playerCharaImage.sprite = MenuController.playerCharaImage;
+            
+            selectorPos = Vector2Int.zero;
+            ExitBackButton();
+            ExitNextButton();
+            EnterLetterBox();
+            Vector2Int startPos = new Vector2Int(24, -24);
+            rectTransform.anchoredPosition = new Vector2(startPos.x + (selectorPos.x * moveDisX), startPos.y - +(selectorPos.y * moveDisY));
+            _subMenuState = SubMenuState.letterBox;
+            rootPanel.gameObject.SetActive(true);
+        }
+
+        public void UnloadMenu()
+        {
+            rootPanel.gameObject.SetActive(false);
+        }
+
+        #endregion
+
 
     }
 }

@@ -1,7 +1,9 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+
 
 
 
@@ -14,59 +16,63 @@ namespace DensetsuEngine.Prototyping
     {
 
         [Header("MenuStates")]
-        [SerializeField] private MenuState menuState = MenuState.none;
+        //[SerializeField] private MenuState menuState = MenuState.none;
+        [SerializeField] private GameObject[] MenuPanels;
+
+        [SerializeField] private CanvasGroup blkOverlay;
+        [SerializeField] private float fadeDuration = 0.35f;
 
 
         [Header("PlayerStats")]
         public string playerName = "Hiro";
         [SerializeField] private TMP_Text playerNameTextBox;
+        [SerializeField] public Sprite playerCharaImage;
+        [SerializeField] private int playerHp;
+        [SerializeField] private int playerMp;
+        [SerializeField] private int playerSp;
 
-        [Header("TitleMenuVar")]
-        [SerializeField] private Image[] titleMenuButtons;
 
 
-        
-        [Header("Letter Grid Vars")]
-        [SerializeField] private Image selectorIcon;
-        [SerializeField] private Vector2Int selectorPos;
-        [SerializeField] private int selectorMaxX;
-        [SerializeField] private int selectorMaxY;
+        [Header("Menu Sfx")]
         [SerializeField] private AudioClip selectorMoveSfx;
         [SerializeField] private AudioClip selectSfx;
+        [SerializeField] private AudioClip bigSelectSfx;
         [SerializeField] private AudioClip cancelSfx;
+        private AudioSource audioSource;
 
 
-        private char[] letterIds =
-            {'A','B','C','D','E','F','G','H','I','J',
-            'K','L','M','N','O','P','Q','R','S','T',
-            'U','V','W','X','Y','Z','a','b','c','d',
-            'e','f','g','h','i','j','k','l','m','n',
-            'o','p','q','r','s','t','u','v','w','x',
-            'y','z','[',']','-','?','!','_',' ', ' ',
-            '0','1','2','3','4','5','6','7','8','9'};
+        [Header("I navigation list")]
+        [SerializeField] MonoBehaviour[] menuNavigations;
+        private int menuNavIndex = 0;
+        private IMenuNavigation curMenuNav;
 
-        AudioSource audioSource;
 
         private PlayerInputActions controls;
 
+        [Header("Game Data")]
+        [SerializeField] private StartingClassInfo[] startingClasses;
 
-        public enum MenuState { 
+
+        private bool canNavigateMenu = true;
+
+        public enum MenuState {
             none,
+            title,
             selectClass,
             selectHeirloom,
             selectName,
             confirm
         }
 
-        public enum MenuAudioType { 
+        public enum MenuAudioType {
             none,
             select,
+            bigSelect,
             cancel,
             move
-        
+
         }
 
-        private Test_CharGen_SelectName selectNameMenu; 
 
 
         #region On Enable/Disable
@@ -82,7 +88,7 @@ namespace DensetsuEngine.Prototyping
         #endregion
 
 
-        void Awake(){
+        void Awake() {
             audioSource = GetComponent<AudioSource>();
 
             controls = new PlayerInputActions();
@@ -92,55 +98,97 @@ namespace DensetsuEngine.Prototyping
             controls.Menu.Left.performed += OnLeftPerformed;
             controls.Menu.Right.performed += OnRightPerformed;
             controls.Menu.Select.performed += OnSelectPerformed;
-            controls.Menu.Cancel.performed += OnCancelPerformed;    
-
-            selectNameMenu = GetComponent<Test_CharGen_SelectName>();
-
-
+            controls.Menu.Cancel.performed += OnCancelPerformed;
 
 
         }
 
-        private void Start(){
-           // UpdatePlayerName();
+        private void Start() {
+            curMenuNav = MenuPanels[menuNavIndex].GetComponent<IMenuNavigation>();
+            curMenuNav.LoadMenu();
         }
 
 
 
-        void Update() {
 
+        #region Controller inputs 
+        private void OnUpPerformed(InputAction.CallbackContext context) {
+            if (!canNavigateMenu) return;
+            curMenuNav.OnNavUp();
+        }
+        private void OnDownPerformed(InputAction.CallbackContext context) {
+            if (!canNavigateMenu) return;
+            curMenuNav.OnNavDown();
+        }
+        private void OnLeftPerformed(InputAction.CallbackContext context) {
+            if (!canNavigateMenu) return;
+            curMenuNav.OnNavLeft();
+        }
+        private void OnRightPerformed(InputAction.CallbackContext context) {
+            if (!canNavigateMenu) return;
+            curMenuNav.OnNavRight();
+        }
+
+        private void OnSelectPerformed(InputAction.CallbackContext context) {
+            if (!canNavigateMenu) return;
+            curMenuNav.OnNavSelect();
+        }
+        private void OnCancelPerformed(InputAction.CallbackContext context) {
+            if (!canNavigateMenu) return;
+            curMenuNav.OnNavCancel();
+        }
+        #endregion
+
+
+
+
+        public IEnumerator GoToNextMenu() {
+
+            canNavigateMenu = false;
+            yield return StartCoroutine(Fade(blkOverlay, 1.0f)); // fade to blk
+            curMenuNav.UnloadMenu();
+            menuNavIndex++;
+            curMenuNav = MenuPanels[menuNavIndex].GetComponent<IMenuNavigation>();
+            curMenuNav.LoadMenu();
+            yield return StartCoroutine(Fade(blkOverlay, 0.0f)); // fade to menu
+            canNavigateMenu = true;
+
+        }
+
+        public IEnumerator GoToPrevMenu() {
+            canNavigateMenu = false;
+            yield return StartCoroutine(Fade(blkOverlay, 1.0f)); // fade to blk
+            curMenuNav.UnloadMenu();
+            menuNavIndex--;
+            curMenuNav = MenuPanels[menuNavIndex].GetComponent<IMenuNavigation>();
+            curMenuNav.LoadMenu();
+            yield return StartCoroutine(Fade(blkOverlay, 0.0f)); // fade to menu
+            canNavigateMenu = true;
 
         }
 
 
-        private void OnUpPerformed(InputAction.CallbackContext context){
-            selectNameMenu.OnSelectorMoveUp();
-        }
-        private void OnDownPerformed(InputAction.CallbackContext context){
-            selectNameMenu.OnSelectorMoveDown();
-        }
-        private void OnLeftPerformed(InputAction.CallbackContext context){
-            selectNameMenu.OnSelectorMoveLeft();
-        }
-        private void OnRightPerformed(InputAction.CallbackContext context){
-            selectNameMenu.OnSelectorMoveRight();
+        private IEnumerator Fade(CanvasGroup canvasGroup, float targetAlpha)
+        {
+            canvasGroup.blocksRaycasts = true;
 
-        }
+            while (!Mathf.Approximately(canvasGroup.alpha, targetAlpha))
+            {
+                canvasGroup.alpha = Mathf.MoveTowards(
+                    canvasGroup.alpha,
+                    targetAlpha,
+                    (1f / fadeDuration) * Time.unscaledDeltaTime
+                );
 
-        private void OnSelectPerformed(InputAction.CallbackContext context){
+                yield return null;
+            }
 
-            selectNameMenu.OnSelect();
-
-        }
-        private void OnCancelPerformed(InputAction.CallbackContext context){
-            selectNameMenu.OnCancel();
-
+            canvasGroup.alpha = targetAlpha;
+            canvasGroup.blocksRaycasts = targetAlpha > 0f;
         }
 
-        public void UpdatePlayerName() {
-            //playerNameTextBox.text = playerName + " _";
-            playerNameTextBox.text = playerName;
-        }
+
+
 
 
 
@@ -149,6 +197,10 @@ namespace DensetsuEngine.Prototyping
                 case MenuAudioType.select:
                     audioSource.volume = 0.5f;
                     audioSource.PlayOneShot(selectSfx);
+                    break;
+                case MenuAudioType.bigSelect:
+                    audioSource.volume = 0.5f;
+                    audioSource.PlayOneShot(bigSelectSfx);
                     break;
                 case MenuAudioType.cancel:
                     audioSource.volume = 0.35f;
@@ -160,11 +212,40 @@ namespace DensetsuEngine.Prototyping
                     break;
                 default:
                     break;
-            
+
             }
         }
 
+        public int GetStartingClassesSize() { 
+            return startingClasses.Length;
+        }
 
+        public StartingClassInfo GetClassInfo(int i) { 
+            return startingClasses[i];
+        }
+
+        [System.Serializable]
+        public struct StartingClassInfo {
+            [SerializeField] public string className;
+            [SerializeField] public Sprite classCharaImage_Sq;
+            [TextArea(4, 20)]
+            [SerializeField] public string classDesc;
+            [SerializeField] public Sprite classCharaImage;
+            [SerializeField] public int startingHp;
+            [SerializeField] public int startingMp;
+            [SerializeField] public int startingSp;
+            [SerializeField] public string startingName;
+        }
+
+        [System.Serializable]
+        public struct HeirloomItemInfo
+        {
+            [SerializeField] private string itemName;
+            [TextArea(4, 20)]
+            [SerializeField] private string itemDesc;
+            [SerializeField] private Sprite itemIcon;
+            
+        }
 
 
     }

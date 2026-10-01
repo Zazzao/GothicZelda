@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: b173cc7eff3c46b4f97a7dd28de4320a
+guid: 4f46be649e58a8842a3eecd331899012
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 4545354719701964909
-    second: Annebelle_0
+      213: 8764351468000648399
+    second: token_1 (3)_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Annebelle_0
+      name: token_1 (3)_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 667
-        height: 979
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: d681bf50908541f30800000000000000
-      internalID: 4545354719701964909
+      spriteID: fcc1ad0893b31a970800000000000000
+      internalID: 8764351468000648399
       vertices: []
       indices: 
       edges: []
@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      token_1 (3)_0: 8764351468000648399
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
