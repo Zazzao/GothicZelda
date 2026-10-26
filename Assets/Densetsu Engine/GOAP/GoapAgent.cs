@@ -33,7 +33,7 @@ namespace DensetsuEngine.GOAP {
 
         //testing
         public bool IsMoving => enemy.HasPath; //to-do: this is not getting set so its always false
-        Enemy enemy;
+        Enemy_OLD enemy;
 
         private GameObject target;
         private Vector2 destination;
@@ -64,7 +64,7 @@ namespace DensetsuEngine.GOAP {
         private void Awake(){
             
             gPlanner = new GoapPlanner();
-            enemy = GetComponent<Enemy>();
+            enemy = GetComponent<Enemy_OLD>();
 
         }
 
@@ -110,13 +110,13 @@ namespace DensetsuEngine.GOAP {
 
             // Action: Wander Around
             actions.Add(new AgentAction.Builder("Wander Around")
-                .WithStrategy(new WanderStrategy(GetComponent<Enemy>(), 8))
+                .WithStrategy(new WanderStrategy(GetComponent<Enemy_OLD>(), 8))
                 .AddEffect(beliefs["AgentMoving"])
                 .Build());
 
             //Action: MoveToEatingPosition
             actions.Add(new AgentAction.Builder("MoveToEatingPosition")
-                .WithStrategy(new MoveStrategy(GetComponent<Enemy>(),(Vector2)foodPile.position))
+                .WithStrategy(new MoveStrategy(GetComponent<Enemy_OLD>(),(Vector2)foodPile.position))
                 .AddEffect(beliefs["AgentAtFoodPile"])
                 .Build());
 

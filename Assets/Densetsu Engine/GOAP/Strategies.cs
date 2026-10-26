@@ -52,12 +52,12 @@ namespace DensetsuEngine.GOAP {
 
     public class MoveStrategy : IActionStrategy
     {
-        readonly Enemy enemy;
+        readonly Enemy_OLD enemy;
         readonly Vector2 destination;
         public bool CanPerform => !Complete;
         public bool Complete => enemy.ReachEndOfPath;
 
-        public MoveStrategy(Enemy enemy, Vector2 destination)
+        public MoveStrategy(Enemy_OLD enemy, Vector2 destination)
         {
             this.enemy = enemy;
             this.destination = destination;
@@ -74,7 +74,7 @@ namespace DensetsuEngine.GOAP {
         
         //i dont have pathfind added yet
         //readonly NavMeshAgent agent;
-        readonly Enemy enemy;
+        readonly Enemy_OLD enemy;
         readonly float wanderRadius;
 
         public bool CanPerform => !Complete;
@@ -82,7 +82,7 @@ namespace DensetsuEngine.GOAP {
 
         public bool Complete => enemy.ReachEndOfPath;
 
-        public WanderStrategy(Enemy enemy, float wanderRadius) { 
+        public WanderStrategy(Enemy_OLD enemy, float wanderRadius) { 
             //this.agent = agent;
             this.enemy = enemy;
             this.wanderRadius = wanderRadius;

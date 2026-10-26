@@ -15,6 +15,7 @@ namespace DensetsuEngine.Prototyping
         [SerializeField] private TMP_Text playerNameTextBox;
         [SerializeField] private int playerNameMaxSize = 16;
         [SerializeField] private Image playerCharaImage;
+        [SerializeField] private TMP_Text playerClassName;
 
         [Header("Letter Box Selector")]
         [SerializeField] private Image selectorIcon;
@@ -379,7 +380,8 @@ namespace DensetsuEngine.Prototyping
         public void LoadMenu()
         {
             
-            playerCharaImage.sprite = MenuController.playerCharaImage;
+            playerCharaImage.sprite = MenuController.GetClassInfo(MenuController.playerClass).classCharaImage_Sq;
+            playerClassName.text = "Class: " + MenuController.GetClassInfo(MenuController.playerClass).className;
             
             selectorPos = Vector2Int.zero;
             ExitBackButton();

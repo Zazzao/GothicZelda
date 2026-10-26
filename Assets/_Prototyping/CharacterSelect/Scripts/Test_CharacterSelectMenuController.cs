@@ -26,10 +26,12 @@ namespace DensetsuEngine.Prototyping
         [Header("PlayerStats")]
         public string playerName = "Hiro";
         [SerializeField] private TMP_Text playerNameTextBox;
-        [SerializeField] public Sprite playerCharaImage;
+        //[SerializeField] public Sprite playerCharaImage;
         [SerializeField] private int playerHp;
         [SerializeField] private int playerMp;
         [SerializeField] private int playerSp;
+        [SerializeField] public int playerClass;
+        [SerializeField] public int playerHeirloom;
 
 
 
@@ -51,7 +53,7 @@ namespace DensetsuEngine.Prototyping
 
         [Header("Game Data")]
         [SerializeField] private StartingClassInfo[] startingClasses;
-
+        [SerializeField] private HeirloomItemInfo[] startingHeirlooms;
 
         private bool canNavigateMenu = true;
 
@@ -72,6 +74,9 @@ namespace DensetsuEngine.Prototyping
             move
 
         }
+
+
+        
 
 
 
@@ -235,15 +240,26 @@ namespace DensetsuEngine.Prototyping
             [SerializeField] public int startingMp;
             [SerializeField] public int startingSp;
             [SerializeField] public string startingName;
+            [SerializeField] public string classOptionTitle;
+            [SerializeField] public SubClassOptionInfo[] subClassOptions;
         }
+
+        [System.Serializable]
+        public struct SubClassOptionInfo {
+            [SerializeField] public string optionName;
+            [SerializeField] public Sprite optionIcon;
+            [TextArea(4, 20)]
+            [SerializeField] public string optionDesc;
+        }
+
 
         [System.Serializable]
         public struct HeirloomItemInfo
         {
-            [SerializeField] private string itemName;
+            [SerializeField] public string itemName;
             [TextArea(4, 20)]
-            [SerializeField] private string itemDesc;
-            [SerializeField] private Sprite itemIcon;
+            [SerializeField] public string itemDesc;
+            [SerializeField] public Sprite itemIcon;
             
         }
 
